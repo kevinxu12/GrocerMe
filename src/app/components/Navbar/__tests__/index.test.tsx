@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import { Navbar } from '..';
+import { NavBar } from '..';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => {
@@ -16,7 +16,7 @@ jest.mock('react-i18next', () => ({
 
 describe('<Navbar  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<Navbar />);
+    const loadingIndicator = render(<NavBar />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
