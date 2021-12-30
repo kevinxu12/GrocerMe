@@ -17,8 +17,15 @@ Based off create-react-app, react-boilerplate github [See Here](https://github.c
 
 ### Instructions
 
-See package.json for notable dev tools like linting, prettifier, unit tests
+#### Frontend
+- Run `cd client`
+- Run `npm start` or `npm run lint:fix` or `npm run lint` for relevant commands.
+#### Backend
+- Run `cd server`
+- Run `npm start`
+- In dev, the frontend will be on localhost:8080 and backend will be '/api/(route)'
 
 ### TO DOs
 
-- Set up backend
+- Set up OAuth
+- Clean up testing code
