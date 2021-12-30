@@ -7,6 +7,7 @@ import { CHANGE_USERNAME } from './constants';
  * @return {object} An action object with a type of CHANGE_USERNAME
  */
 const changeUsername = username => {
+  console.log(`Called action ${username}`);
   return {
     type: CHANGE_USERNAME,
     username,
