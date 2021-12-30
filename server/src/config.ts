@@ -1,4 +1,7 @@
 // Mapper for environment variables
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
+
 export const environment = process.env.NODE_ENV;
 export const port = process.env.PORT;
 
