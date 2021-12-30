@@ -1,14 +1,8 @@
-import express, { Request, Response, NextFunction } from 'express';
-import Logger from './core/Logger';
+import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { corsUrl, environment } from './config';
-import './database'; // initialize database
+import { corsUrl } from './config';
 import routesV1 from './routes/v1';
-
-process.on('uncaughtException', (e) => {
-  Logger.error(e);
-});
 
 const app = express();
 
@@ -17,6 +11,6 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true, parameterLimit: 5
 app.use(cors({ origin: corsUrl, optionsSuccessStatus: 200 }));
 
 // Routes
-app.use('/v1', routesV1);
+app.use('/api/', routesV1);
 
 export default app;
