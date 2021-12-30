@@ -17,7 +17,8 @@ import 'sanitize.css/sanitize.css';
 
 // Import root app
 import { App } from 'app';
-
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { persistStore } from 'redux-persist';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { configureAppStore } from 'store/configureStore';
@@ -28,15 +29,18 @@ import reportWebVitals from 'reportWebVitals';
 import './locales/i18n';
 
 const store = configureAppStore();
+const persistor = persistStore(store);
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
-    <HelmetProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </HelmetProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <HelmetProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </HelmetProvider>
+    </PersistGate>
   </Provider>,
   MOUNT_NODE,
 );

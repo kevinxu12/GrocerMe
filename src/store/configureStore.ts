@@ -1,8 +1,11 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, CombinedState } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-
+// import createEngine from 'redux-storage-engine-localstorage';
 import { createReducer } from './reducers';
 import thunk from 'redux-thunk';
+// import { reviver } from './localstorage';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export function configureAppStore(initialState = {}) {
   /* eslint-disable */
@@ -13,14 +16,28 @@ export function configureAppStore(initialState = {}) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [sagaMiddleware, thunk];
+  // const reducer = storage.reducer(createReducer());
+  const rootReducer = createReducer();
+  // const engine = createEngine('my-save-key', reviver);
+  // const middleware = storage.createMiddleware(engine);
+  const middlewares = [sagaMiddleware, thunk, ]; //middleware];
+  
+  const persistConfig = {
+  key: 'root',
+  storage: storage,
+  };
 
+  const pReducer = persistReducer<CombinedState<{ home: never; }>, any>(persistConfig, rootReducer);
+  
   const enhancers = [applyMiddleware(...middlewares)];
   const store = createStore(
-    createReducer(),
+    pReducer,
     initialState,
     composeEnhancers(...enhancers),
   );
+
+  // const load = storage.createLoader(engine);
+  // load(store);
 
   // const reduxSagaMonitorOptions = {};
   // const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);

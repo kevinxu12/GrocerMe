@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 function GoogleButton() {
   const handleLogin = async googleData => {
-    // TO DO
+    console.log('Clicked');
   };
   return (
     <GoogleLogin

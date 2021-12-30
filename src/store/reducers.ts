@@ -15,6 +15,5 @@ export function createReducer(injectedReducers: InjectedReducersType = {}) {
     home: homeReducer,
     ...injectedReducers,
   });
-
   return rootReducer;
 }

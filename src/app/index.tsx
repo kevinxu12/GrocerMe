@@ -12,8 +12,9 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/global-styles';
 import { themes } from './../styles/themes/themes';
 import HomePage from './pages/HomePage';
-// import { LoginPage } from './pages/LoginPage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
+import PrivateRoute from './components/PrivateRoute';
+import TestPage from './pages/TestPage';
 
 export function App() {
   const theme = themes.default;
@@ -22,7 +23,7 @@ export function App() {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          {/* <Route exact path="/login" component={LoginPage} /> */}
+          <PrivateRoute exact path="/test" component={TestPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <GlobalStyle />

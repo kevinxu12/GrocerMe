@@ -8,15 +8,13 @@
  */
 
 import produce from 'immer';
+import { Constants } from 'utils/constants';
 import { CHANGE_USERNAME } from './constants';
 
-const DUMMY_USERNAME = 'DUMMY';
-const DUMMY_TEST = 'TEST';
-
 // The initial state of the App
+// const storagedata = JSON.parse(localStorage.getItem("data"));
 export const initialState = {
-  username: DUMMY_USERNAME,
-  test: DUMMY_TEST,
+  username: Constants.DEFAULT_STRING,
 };
 
 /* eslint-disable default-case, no-param-reassign */

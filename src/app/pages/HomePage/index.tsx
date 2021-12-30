@@ -11,14 +11,15 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectUsername, makeSelectTest } from './selectors';
 import changeUsername from './actions';
 import OAuthButton from 'app/components/OAuthButton';
+import { Constants } from 'utils/constants';
+// import { Constants } from 'utils/constants';
 
 interface HomePageProps {
   username: string;
-  onChangeUsername: () => void;
+  onChangeUsernameToDefault: () => void;
 }
 
 const HomePage = (props: HomePageProps) => {
-  console.log(props.username);
   return (
     <PageWrapper>
       <div className="container-center-horizontal">
@@ -41,10 +42,10 @@ const HomePage = (props: HomePageProps) => {
               </Description>
             </Heading>
             <OverlapGroup2>
-              {/* <Button onClick={props.onChangeUsername}>
-                "Request Early Access"
-              </Button> */}
               <OAuthButton />
+              <div onClick={props.onChangeUsernameToDefault}>
+                Click Here to Clear to Change Username to Default
+              </div>
             </OverlapGroup2>
           </OverlapGroup3>
         </div>
@@ -65,7 +66,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: () => dispatch(changeUsername('dummy value')),
+    onChangeUsernameToDefault: () => {
+      dispatch(changeUsername(Constants.DEFAULT_STRING));
+    },
   };
 }
 
