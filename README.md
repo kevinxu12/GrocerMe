@@ -17,13 +17,20 @@ Based off create-react-app, react-boilerplate github [See Here](https://github.c
 
 ### Instructions
 
+- Create a `.env` file in `server` with the following lines of code
+```
+PORT=8080
+CORS=*
+```
+
 #### Frontend
+
 - Run `cd client`
 - Run `npm start` or `npm run lint:fix` or `npm run lint` for relevant commands.
 #### Backend
 - Run `cd server`
 - Run `npm start`
-- In dev, the frontend will be on localhost:8080 and backend will be '/api/(route)'
+- In dev, the frontend will be on `PORT` and backend will be `PORT/api/(route)`
 
 ### TO DOs
 
