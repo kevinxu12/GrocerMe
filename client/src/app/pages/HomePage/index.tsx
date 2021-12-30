@@ -2,17 +2,14 @@ import React, { ComponentType, memo } from 'react';
 import styled from 'styled-components/macro';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import PropTypes from 'prop-types';
 
 import { NavBar } from 'app/components/Navbar';
 import { PageWrapper } from 'app/components/PageWrapper';
 import { StyledConstants } from 'styles/StyleConstants';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectUsername, makeSelectTest } from './selectors';
+import { makeSelectUsername } from './selectors';
 import changeUsername from './actions';
 import OAuthButton from 'app/components/OAuthButton';
-import { Constants } from 'utils/constants';
-// import { Constants } from 'utils/constants';
 
 interface HomePageProps {
   username: string;
@@ -54,20 +51,14 @@ const HomePage = (props: HomePageProps) => {
   );
 };
 
-HomePage.propTypes = {
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
-};
-
 const mapStateToProps = createStructuredSelector({
   username: makeSelectUsername(),
-  test: makeSelectTest(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onChangeUsernameToDefault: () => {
-      dispatch(changeUsername(Constants.DEFAULT_STRING));
+      dispatch(changeUsername('HI'));
     },
   };
 }

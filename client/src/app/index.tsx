@@ -11,7 +11,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/global-styles';
 import { themes } from './../styles/themes/themes';
-import HomePage from './pages/HomePage';
+import { HomePage } from './pages/HomePage/loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import PrivateRoute from './components/PrivateRoute';
 import TestPage from './pages/TestPage';

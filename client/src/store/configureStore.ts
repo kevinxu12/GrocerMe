@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 // import { reviver } from './localstorage';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { RootState } from 'types/RootState';
 
 export function configureAppStore(initialState = {}) {
   /* eslint-disable */
@@ -27,7 +28,7 @@ export function configureAppStore(initialState = {}) {
   storage: storage,
   };
 
-  const pReducer = persistReducer<CombinedState<{ home: never; }>, any>(persistConfig, rootReducer);
+  const pReducer = persistReducer<CombinedState<RootState>, any>(persistConfig, rootReducer);
   
   const enhancers = [applyMiddleware(...middlewares)];
   const store = createStore(

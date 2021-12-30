@@ -10,6 +10,7 @@ import { InjectedReducersType } from 'utils/types/injector-typings';
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */
+
 export function createReducer(injectedReducers: InjectedReducersType = {}) {
   const rootReducer = combineReducers({
     home: homeReducer,
