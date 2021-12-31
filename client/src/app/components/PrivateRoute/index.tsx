@@ -6,7 +6,7 @@ import { Constants } from 'utils/constants';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = useSelector((state: RootState) =>
-    state ? state.auth.username : true,
+    state ? state.auth.username : Constants.DEFAULT_STRING,
   );
   return (
     <Route
