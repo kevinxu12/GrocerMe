@@ -51,3 +51,10 @@ Ask `kevinxu12` to fill in rest of `.env` variables specified in `.conig` files.
 
 - Set up OAuth
 - Clean up testing code
+
+#### Helpful
+
+- Delete branches after merging
+- Used Stack PRs
+- Update `README.md` in each PR
+- Run `npx depcheck` to update `package.json`

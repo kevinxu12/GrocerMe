@@ -34,6 +34,7 @@
     "lint-staged": "^12.1.4"
   },
   "dependencies": {
+    "depcheck": "^1.4.2",
     "prettier": "^2.5.1"
   }
 }
