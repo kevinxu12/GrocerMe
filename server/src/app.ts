@@ -4,6 +4,9 @@ import cors from 'cors';
 import { corsUrl } from './config';
 import routesV1 from './routes/v1';
 
+require('./database');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-var-requires
+const s3Client = require('./aws/s3');
 const app = express();
 
 app.use(bodyParser.json({ limit: '10mb' }));

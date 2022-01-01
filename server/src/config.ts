@@ -11,6 +11,11 @@ export const db = {
   port: process.env.DB_PORT || '',
   user: process.env.DB_USER || '',
   password: process.env.DB_USER_PWD || '',
+  host_name: process.env.DB_HOST_NAME || '',
+};
+export const aws = {
+  access_key_id: process.env.S3_ACCESS_KEY_ID || '',
+  secret_access_key: process.env.S3_SECRET_ACCESS_KEY || '',
 };
 
 export const corsUrl = process.env.CORS_URL;
