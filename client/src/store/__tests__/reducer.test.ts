@@ -1,5 +1,6 @@
 import { createReducer } from '../reducers';
 import { Reducer } from '@reduxjs/toolkit';
+import { initialState } from 'store/auth/reducer';
 
 describe('reducer', () => {
   it('should inject reducers', () => {
@@ -14,7 +15,7 @@ describe('reducer', () => {
 
   it('should return identity reducers when empty', () => {
     const reducer = createReducer() as Reducer<any, any>;
-    const state = { a: 1 };
+    const state = { auth: initialState };
     const newState = reducer(state, '');
     expect(newState).toBe(state);
   });

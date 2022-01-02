@@ -9,6 +9,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-import { ActionType } from 'types/actions';
+import { ActionType } from './../../types/actions';
 
-export const CHANGE_USERNAME: ActionType = 'my-app/HomePage/CHANGE_USERNAME';
+export const CHANGE_USERNAME: ActionType = 'client/store/auth/CHANGE_USERNAME';
+export const LOGOUT: ActionType = 'client/store/auth/LOGOUT';

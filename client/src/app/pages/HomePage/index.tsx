@@ -1,29 +1,17 @@
-import React, { ComponentType, memo } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { NavBar } from 'app/components/Navbar';
 import { PageWrapper } from 'app/components/PageWrapper';
 import { StyledConstants } from 'styles/StyleConstants';
-import { createStructuredSelector } from 'reselect';
-import { makeSelectUsername } from './selectors';
-import changeUsername from './actions';
 import OAuthButton from 'app/components/OAuthButton';
 
-interface HomePageProps {
-  username: string;
-  onChangeUsernameToDefault: () => void;
-}
-
-const HomePage = (props: HomePageProps) => {
+export function HomePage() {
   return (
     <PageWrapper>
       <div className="container-center-horizontal">
         <div className="home-landingscreen">
           <OverlapGroup3>
             <OverlapGroup1>
-              <NavBar />
               <BlobShape1>
                 <img
                   src="https://i.ibb.co/Hp5G1G4/blob-shape-1.png"
@@ -34,38 +22,18 @@ const HomePage = (props: HomePageProps) => {
             <Heading>
               <Title>Need Groceries?</Title>
               <Description>
-                Buy Groceries Quick, and get them even quicker for{' '}
-                {props.username}!
+                Buy Groceries Quick, and get them even quicker!
               </Description>
             </Heading>
             <OverlapGroup2>
               <OAuthButton />
-              <div onClick={props.onChangeUsernameToDefault}>
-                Click Here to Clear to Change Username to Default
-              </div>
             </OverlapGroup2>
           </OverlapGroup3>
         </div>
       </div>
     </PageWrapper>
   );
-};
-
-const mapStateToProps = createStructuredSelector({
-  username: makeSelectUsername(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onChangeUsernameToDefault: () => {
-      dispatch(changeUsername('HI'));
-    },
-  };
 }
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default compose<ComponentType>(withConnect, memo)(HomePage);
 
 const OverlapGroup3 = styled.div`
   width: 1384px;

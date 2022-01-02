@@ -5,7 +5,7 @@ describe('makeSelectUsername', () => {
   it('should select the username', () => {
     const username = 'mxstbr';
     const mockedState = {
-      home: {
+      auth: {
         username,
       },
     };

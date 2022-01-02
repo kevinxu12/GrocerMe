@@ -8,4 +8,8 @@ export interface ChangeUsernamePayload {
   username: String;
 }
 
-export type HomeAction = Action<ChangeUsernamePayload>;
+export type ChangeUsernameAction = Action<ChangeUsernamePayload>;
+
+export type LogoutAction = Action<{}>;
+
+export type AuthAction = LogoutAction | ChangeUsernameAction;

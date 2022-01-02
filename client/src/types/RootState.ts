@@ -4,9 +4,9 @@
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
   You have to declare them here manually
 */
-export interface HomeState {
+export interface AuthState {
   username: String;
 }
 export interface RootState {
-  home: HomeState; // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
+  auth: AuthState; // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

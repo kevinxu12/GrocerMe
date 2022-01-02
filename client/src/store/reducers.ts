@@ -3,9 +3,9 @@
  */
 
 import { combineReducers } from 'redux';
-import homeReducer from 'app/pages/HomePage/reducer';
 
 import { InjectedReducersType } from 'utils/types/injector-typings';
+import authReducer from './auth/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -13,7 +13,7 @@ import { InjectedReducersType } from 'utils/types/injector-typings';
 
 export function createReducer(injectedReducers: InjectedReducersType = {}) {
   const rootReducer = combineReducers({
-    home: homeReducer,
+    auth: authReducer,
     ...injectedReducers,
   });
   return rootReducer;

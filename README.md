@@ -54,6 +54,7 @@ Ask `kevinxu12` to fill in rest of `.env` variables specified in `.conig` files.
 
 #### Helpful
 
+- Run `npm run generate`
 - Delete branches after merging
 - Used Stack PRs
 - Update `README.md` in each PR

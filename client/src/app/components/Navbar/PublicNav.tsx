@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { StyledConstants } from 'styles/StyleConstants';
 
-export function Nav() {
+export function PublicNav() {
   return (
     <NavLinks>
       <Wrapper>
@@ -17,10 +17,10 @@ export function Nav() {
 }
 
 const NavLinks = styled.div`
-  width: 60%;
+  width: 70%;
   height: 10%;
   align-self: center;
-  margin-left: 603px;
+  margin-left: 40%;
   margin-bottom: 1px;
   display: flex;
   align-items: flex-start;
