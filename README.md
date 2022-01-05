@@ -52,6 +52,23 @@ Ask `kevinxu12` to fill in rest of `.env` variables specified in `.conig` files.
 - Set up OAuth
 - Clean up testing code
 
+#### Style
+
+- Put static constants or urls in the corresponding `client/constants` or `server/constants` file.
+  Instead of
+
+```
+<img url="test-url.png"/>
+```
+
+We can use
+
+```
+<img url={Constants.TEST_URL}/>
+```
+
+where `Constants` is defined in the top-level, corresponding `constants` file.
+
 #### Helpful
 
 - Run `npm run generate`

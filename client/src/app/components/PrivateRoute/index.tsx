@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { RootState } from 'types';
+import { Constants } from 'utils/constants';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = useSelector((state: RootState) =>
@@ -10,9 +11,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
-      }
+      render={props => {
+        return isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={Constants.HOME_URL} />
+        );
+      }}
     />
   );
 };

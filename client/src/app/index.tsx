@@ -17,6 +17,7 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import TestPage from './pages/TestPage';
 import { NavBar } from './components/Navbar';
+import { Constants } from 'utils/constants';
 
 export function App() {
   const theme = themes.default;
@@ -25,8 +26,8 @@ export function App() {
       <ThemeProvider theme={theme}>
         <NavBar />
         <Switch>
-          <PublicRoute exact path="/" component={HomePage} />
-          <PrivateRoute exact path="/test" component={TestPage} />
+          <PublicRoute exact path={Constants.HOME_URL} component={HomePage} />
+          <PrivateRoute exact path={Constants.TEST_URL} component={TestPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <GlobalStyle />
