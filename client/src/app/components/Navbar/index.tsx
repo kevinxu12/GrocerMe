@@ -17,15 +17,16 @@ export function NavBar() {
   const isAuthenticated = useSelector((state: RootState) =>
     state ? state.auth.username : true,
   );
-  // const isAuthenticated = false;
-  return !isAuthenticated ? (
+  return (
     <Wrapper>
-      <Logo />
-      <PublicNav />
-    </Wrapper>
-  ) : (
-    <Wrapper>
-      <PrivateNav />
+      {!isAuthenticated ? (
+        <>
+          <Logo />
+          <PublicNav />
+        </>
+      ) : (
+        <PrivateNav />
+      )}
     </Wrapper>
   );
 }
