@@ -1,3 +1,7 @@
+/**
+ * @file Main backend App
+ * @author Kevin Xu
+ */
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';

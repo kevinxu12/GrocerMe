@@ -1,4 +1,7 @@
-// Mapper for environment variables
+/**
+ * @file Mapper for environment variables
+ * @author Kevin Xu
+ */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 

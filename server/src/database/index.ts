@@ -1,3 +1,7 @@
+/**
+ * @file Connection-related Routes to Mongoose, File initailizes mongoose connection
+ * @author Kevin Xu
+ */
 import mongoose from 'mongoose';
 import { db } from '../config';
 
