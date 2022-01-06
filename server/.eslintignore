@@ -6,3 +6,7 @@ node_modules/
 build/
 dist/
 tools/
+
+**/*.test.js
+**/*.test.ts
+**/*.test.tsx
