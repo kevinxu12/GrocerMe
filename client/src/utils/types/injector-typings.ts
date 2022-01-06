@@ -1,3 +1,7 @@
+/**
+ * @file Types for injectors
+ * @author Kevin Xu
+ */
 import { RootState } from 'types';
 import { Saga } from 'redux-saga';
 import { SagaInjectionModes } from 'redux-injectors';

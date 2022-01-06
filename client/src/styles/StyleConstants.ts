@@ -1,3 +1,7 @@
+/**
+ * @file Style Constants for the frontend
+ * @author Kevin Xu
+ */
 export enum StyledConstants {
   NAV_BAR_HEIGHT = '4rem',
   FONT_SIZE_M = '18px',

@@ -1,3 +1,7 @@
+/**
+ * @file Component for HomePage
+ * @author Kevin Xu
+ */
 import React from 'react';
 import styled from 'styled-components/macro';
 
@@ -6,6 +10,9 @@ import { StyledConstants } from 'styles/StyleConstants';
 import OAuthButton from 'app/components/OAuthButton';
 import { Constants } from 'utils/constants';
 
+/**
+ * @returns {React.FC} Homepage Component
+ */
 export function HomePage() {
   return (
     <PageWrapper>

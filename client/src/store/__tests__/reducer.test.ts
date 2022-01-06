@@ -4,6 +4,10 @@ import { initialState } from 'store/auth/reducer';
 
 describe('reducer', () => {
   it('should inject reducers', () => {
+    /**
+     * @param s
+     * @param a
+     */
     const dummyReducer = (s = {}, a) => 'dummyResult';
     const reducer = createReducer({ test: dummyReducer } as any) as Reducer<
       any,

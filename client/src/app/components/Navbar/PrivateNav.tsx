@@ -1,3 +1,7 @@
+/**
+ * @file Component for Navbar shown for logged-in users
+ * @author Kevin Xu
+ */
 import React, { ComponentType, memo, useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import * as FaIcons from 'react-icons/fa';
@@ -7,13 +11,22 @@ import './custom.scss';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { logout } from 'store/auth/actions';
+import { AppDispatch } from 'index';
 
 interface PrivateNavPropsType {
   onLogout: () => void;
 }
 
+/**
+ * @param {object} props props passed
+ * @param {Function} props.onLogout logout function
+ * @returns {React.ElementType} Private Navbar Component
+ */
 const PrivateNav = (props: PrivateNavPropsType) => {
   const [sidebar, setSidebar] = useState(false);
+  /**
+   * @returns {boolean} whether to show side bar or not
+   */
   const showSidebar = () => setSidebar(!sidebar);
   const SidebarProps = {
     open: sidebar,
@@ -42,8 +55,17 @@ const PrivateNav = (props: PrivateNavPropsType) => {
   );
 };
 
+/**
+ * Maps dispatch functions to component props
+ *
+ * @param {AppDispatch} dispatch the dispatch object from redux
+ * @returns {object} Object passed to props containing redux dispatch functions
+ */
 function mapDispatchToProps(dispatch) {
   return {
+    /**
+     * Dispatches a logout action
+     */
     onLogout: () => {
       dispatch(logout());
     },

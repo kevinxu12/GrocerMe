@@ -1,8 +1,15 @@
+/**
+ * @file Component for NotFound endpoints
+ * @author Kevin Xu
+ */
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { P } from './P';
 import { Helmet } from 'react-helmet-async';
 
+/**
+ * @returns {React.ElementType} Component for 404 Not Found
+ */
 export function NotFoundPage() {
   return (
     <>

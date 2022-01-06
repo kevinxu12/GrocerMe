@@ -23,7 +23,7 @@ Based off create-react-app, react-boilerplate github [See Here](https://github.c
 
 ### Instructions
 
-- Create a `.env` file in `server` with the following lines of code
+- Create a `.env` file in `server` in the `main` branch with the following lines of code
 
 ```
 PORT=8080

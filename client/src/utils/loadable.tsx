@@ -1,3 +1,7 @@
+/**
+ * @file Utils to lazy load components
+ * @author Kevin Xu
+ */
 import React, { lazy, Suspense } from 'react';
 
 interface Opts {
@@ -5,6 +9,12 @@ interface Opts {
 }
 type Unpromisify<T> = T extends Promise<infer P> ? P : never;
 
+/**
+ * @param {Function} importFunc The default module to import
+ * @param {Function} selectorFunc Func that extracts component from module
+ * @param {Opts} opts The fallback component to render
+ * @returns {Function} Lazy loader function
+ */
 export const lazyLoad = <
   T extends Promise<any>,
   U extends React.ComponentType<any>,
@@ -16,6 +26,9 @@ export const lazyLoad = <
   let lazyFactory: () => Promise<{ default: U }> = importFunc;
 
   if (selectorFunc) {
+    /**
+     * @returns {Function} Extracts component from module
+     */
     lazyFactory = () =>
       importFunc().then(module => ({ default: selectorFunc(module) }));
   }

@@ -1,6 +1,7 @@
 /**
  *
- * App
+ * @file App
+ * @author Kevin Xu
  *
  * This component is the skeleton around the actual pages, and should only
  * contain code that should be seen on all pages. (e.g. navigation bar)
@@ -19,6 +20,9 @@ import TestPage from './pages/TestPage';
 import { NavBar } from './components/Navbar';
 import { Constants } from 'utils/constants';
 
+/**
+ * @returns {React.FC} Frontend App for the project
+ */
 export function App() {
   const theme = themes.default;
   return (

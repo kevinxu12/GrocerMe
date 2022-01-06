@@ -1,3 +1,7 @@
+/**
+ * @file Types for redux actions
+ * @author Kevin Xu
+ */
 export type ActionType = String;
 export interface Action<P> {
   type: ActionType;

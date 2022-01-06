@@ -1,3 +1,7 @@
+/**
+ * @file Global Style guide for the frontend
+ * @author Kevin Xu
+ */
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`

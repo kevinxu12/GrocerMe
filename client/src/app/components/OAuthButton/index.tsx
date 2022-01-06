@@ -1,6 +1,16 @@
+/**
+ * @file Component for Google OAuth. In Progress
+ * @author Kevin Xu
+ */
 import React from 'react';
 import GoogleLogin from 'react-google-login';
+/**
+ * @returns {React.ElementType} Returns a google oauth button
+ */
 function GoogleButton() {
+  /**
+   * @param {object} googleData the data returned from oauth api
+   */
   const handleLogin = async googleData => {
     console.log('Clicked');
   };

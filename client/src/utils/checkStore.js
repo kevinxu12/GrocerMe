@@ -1,8 +1,14 @@
+/**
+ * @file Class containig validating function for store
+ * @author Kevin Xu
+ */
 import { conformsTo, isFunction, isObject } from 'lodash';
 import invariant from 'invariant';
 
 /**
  * Validate the shape of redux store
+ *
+ * @param {any} store the redux store object
  */
 export default function checkStore(store) {
   const shape = {

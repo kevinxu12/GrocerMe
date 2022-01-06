@@ -1,5 +1,6 @@
 /**
- * Asynchronously loads the component for NotFoundPage
+ * @file Asynchronously loads component for NotFoundPage
+ * @author Kevin Xu
  */
 
 import { lazyLoad } from 'utils/loadable';

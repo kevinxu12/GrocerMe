@@ -1,5 +1,6 @@
-/*
- * Media queries utility
+/**
+ * @file Media queries utility
+ * @author Kevin Xu
  */
 
 import {
@@ -27,6 +28,7 @@ export const sizes = {
 // Iterate through the sizes and create a media template
 export const media = (Object.keys(sizes) as Array<keyof typeof sizes>).reduce(
   (acc, label) => {
+    // eslint-disable-next-line jsdoc/require-returns, jsdoc/require-jsdoc
     acc[label] = (first: any, ...interpolations: any[]) => css`
       @media (min-width: ${sizes[label]}px) {
         ${css(first, ...interpolations)}

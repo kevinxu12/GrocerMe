@@ -1,13 +1,19 @@
+/**
+ * @file Class configuring the redux store
+ * @author Kevin Xu
+ */
 import { createStore, applyMiddleware, compose, CombinedState } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-// import createEngine from 'redux-storage-engine-localstorage';
 import { createReducer } from './reducers';
 import thunk from 'redux-thunk';
-// import { reviver } from './localstorage';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { RootState } from 'types/RootState';
 
+/**
+ * @param {object} initialState the initial state of the store. Default to an empty object
+ * @returns {object} the redux store for this specific project
+ */
 export function configureAppStore(initialState = {}) {
   /* eslint-disable */
   let composeEnhancers =
@@ -41,33 +47,6 @@ export function configureAppStore(initialState = {}) {
     initialState,
     composeEnhancers(...enhancers),
   );
-
-  // const load = storage.createLoader(engine);
-  // load(store);
-
-  // const reduxSagaMonitorOptions = {};
-  // const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
-  // const { run: runSaga } = sagaMiddleware;
-
-  // // Create the store with saga middleware
-  // const middlewares = [sagaMiddleware];
-
-  // const enhancers = [
-  //   createInjectorsEnhancer({
-  //     createReducer,
-  //     runSaga,
-  //   }),
-  // ] as StoreEnhancer[];
-
-  // const store = configureStore({
-  //   reducer: createReducer(),
-  //   middleware: [...getDefaultMiddleware(), ...middlewares],
-  //   devTools:
-  //     /* istanbul ignore next line */
-  //     process.env.NODE_ENV !== 'production' ||
-  //     process.env.PUBLIC_URL.length > 0,
-  //   enhancers,
-  // });
-
+  
   return store;
 }

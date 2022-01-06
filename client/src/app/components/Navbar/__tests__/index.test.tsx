@@ -1,3 +1,7 @@
+/**
+ * @file Testing Navbar component
+ * @author Kevin Xu
+ */
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -6,10 +10,19 @@ import { NavBar } from '..';
 import { initialState } from 'store/auth/reducer';
 
 jest.mock('react-i18next', () => ({
+  /**
+   * @returns an object that mocks react-18next
+   */
   useTranslation: () => {
     return {
+      /**
+       * @param {str} str a string to be translated
+       */
       t: str => str,
       i18n: {
+        /**
+         * @returns object that throws i18n mocked promise
+         */
         changeLanguage: () => new Promise(() => {}),
       },
     };
