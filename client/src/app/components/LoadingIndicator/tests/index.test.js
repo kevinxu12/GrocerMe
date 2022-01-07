@@ -1,3 +1,7 @@
+/**
+ * @file Testing base loading indicator component
+ * @author Kevin Xu
+ */
 import React from 'react';
 import renderer from 'react-test-renderer';
 import 'jest-styled-components';

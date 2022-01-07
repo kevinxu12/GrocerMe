@@ -1,3 +1,8 @@
+/**
+ * @file Typing for the rootstate of the redux store
+ * @author Kevin Xu
+ */
+
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 

@@ -1,7 +1,14 @@
+/**
+ * @file Component for Navbar shown for non-logged-in users
+ * @author Kevin Xu
+ */
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { StyledConstants } from 'styles/StyleConstants';
 
+/**
+ * @returns {React.FC} Component for public navbar
+ */
 export function PublicNav() {
   return (
     <NavLinks>

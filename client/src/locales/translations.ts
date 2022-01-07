@@ -1,3 +1,7 @@
+/**
+ * @file Not sure what this is tbh
+ * @author Kevin Xu
+ */
 import { ConvertedToObjectType, TranslationJsonType } from './types';
 
 /**
@@ -12,6 +16,11 @@ export const translations: ConvertedToObjectType<TranslationJsonType> =
  * but values are strings concatenated according to syntax.
  * This is helpful when using the JSON file keys and still having the intellisense support
  * along with type-safety
+ */
+/**
+ * @param {any} json any json
+ * @param {translations} objToConvertTo Translations object to conver to
+ * @param {string} current current language?
  */
 export const convertLanguageJsonToObject = (
   json: any,

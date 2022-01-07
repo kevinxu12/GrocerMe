@@ -1,13 +1,19 @@
+/**
+ * @file File for reducer injectors
+ * @author Kevin Xu
+ */
 import invariant from 'invariant';
 import { isEmpty, isFunction, isString } from 'lodash';
-
-import checkStore from './checkStore';
 import { createReducer } from '../store/reducers';
 
-export function injectReducerFactory(store, isValid) {
+/**
+ * A factory which given a store creates an injectReducer function for that store
+ *
+ * @param {any} store the redux store object to inject into
+ * @returns {Function} a function instance that puts a reducer into a key
+ */
+export function injectReducerFactory(store) {
   return function injectReducer(key, reducer) {
-    if (!isValid) checkStore(store);
-
     invariant(
       isString(key) && !isEmpty(key) && isFunction(reducer),
       '(app/utils...) injectReducer: Expected `reducer` to be a reducer function',
@@ -25,9 +31,14 @@ export function injectReducerFactory(store, isValid) {
   };
 }
 
+/**
+ * Creates the injector factory for a given store
+ *
+ * @param {any} store the redux store object
+ * TO DO - this should be typed to the return type of configureStore in the future
+ * @returns {object} Returns the injectorReducer for the given store
+ */
 export default function getInjectors(store) {
-  checkStore(store);
-
   return {
     injectReducer: injectReducerFactory(store, true),
   };

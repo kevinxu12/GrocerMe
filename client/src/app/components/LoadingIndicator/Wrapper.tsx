@@ -1,3 +1,7 @@
+/**
+ * @file Wrapper file for loading component
+ * @author Kevin Xu
+ */
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

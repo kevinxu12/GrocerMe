@@ -1,3 +1,7 @@
+/**
+ * @file Main entry point into the backend
+ * @author Kevin Xu
+ */
 import path from 'path';
 import { port } from './config';
 import app from './app';

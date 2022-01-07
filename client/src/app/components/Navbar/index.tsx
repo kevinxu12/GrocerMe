@@ -1,7 +1,6 @@
 /**
- *
- * Navbar
- *
+ * @file Navbar Home Component
+ * @author Kevin Xu
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
@@ -13,6 +12,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'types';
 import PrivateNav from './PrivateNav';
 
+/**
+ * @returns {React.FC} Returns navbar component
+ */
 export function NavBar() {
   const isAuthenticated = useSelector((state: RootState) =>
     state ? state.auth.username : true,

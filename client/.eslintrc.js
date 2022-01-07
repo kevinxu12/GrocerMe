@@ -1,3 +1,6 @@
+/** 
+@file Frontend Eslint preferences
+ */
 const fs = require('fs');
 const path = require('path');
 
@@ -6,10 +9,24 @@ const prettierOptions = JSON.parse(
 );
 
 module.exports = {
-  extends: ['react-app', 'prettier'],
+  extends: ['react-app', 'prettier', 'plugin:jsdoc/recommended'],
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
+    'jsdoc/require-file-overview': ['error'],
+    'jsdoc/require-jsdoc': [
+      'error',
+      {
+        require: {
+          ArrowFunctionExpression: true,
+          ClassDeclaration: true,
+          ClassExpression: true,
+          FunctionDeclaration: true,
+          FunctionExpression: true,
+          MethodDefinition: true,
+        },
+      },
+    ],
   },
   overrides: [
     {

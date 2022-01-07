@@ -1,3 +1,7 @@
+/**
+ * @file Testing wrapper component
+ * @author Kevin Xu
+ */
 import React from 'react';
 import { render } from '@testing-library/react';
 

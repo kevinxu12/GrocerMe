@@ -1,3 +1,7 @@
+/**
+ * @file Test route without middleware
+ * @author Kevin Xu
+ */
 import express from 'express';
 import { SuccessMsgResponse } from '../../../core/ApiResponse';
 import asyncHandler from '../../../helpers/asyncHandler';

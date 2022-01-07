@@ -23,14 +23,24 @@ Based off create-react-app, react-boilerplate github [See Here](https://github.c
 
 ### Instructions
 
-- Create a `.env` file in `server` with the following lines of code
+- Create a `.env` file in `server` in the `main` branch with the following lines of code
 
 ```
 PORT=8080
 CORS=*
+AWS
+# mongo
+DB_NAME=
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_USER_PWD=
+DB_HOST_NAME=
+S3_ACCESS_KEY_ID=
+S3_SECRET_ACCESS_KEY=
 ```
 
-Ask `kevinxu12` to fill in rest of `.env` variables specified in `.conig` files.
+Ask `kevinxu12` to fill in rest of `.env` variables specified in `.config` files.
 
 - Run `npm install` in the base directory
 
@@ -70,6 +80,7 @@ We can use
 where `Constants` is defined in the top-level, corresponding `constants` file.
 
 - Link relevant issues in PR descriptions and vice versa, so that github can clean up issues.
+- Pre-commit hooks require `es-lint` to pass basic requirements. See more information online
 
 #### Helpful
 

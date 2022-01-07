@@ -1,3 +1,7 @@
+/**
+ * @file Styled Component for P
+ * @author Kevin Xu
+ */
 import styled from 'styled-components/macro';
 
 export const P = styled.p`

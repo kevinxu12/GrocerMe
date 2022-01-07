@@ -1,3 +1,7 @@
+/**
+ * @file Top-level config of AWS
+ * @author Kevin Xu
+ */
 import AWS from 'aws-sdk';
 import { aws } from '../config';
 

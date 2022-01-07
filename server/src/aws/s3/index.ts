@@ -1,3 +1,7 @@
+/**
+ * @file Generating S3 client with base AWS config
+ * @author Kevin Xu
+ */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const s3 = require('@auth0/s3');
 import AWS from '../';

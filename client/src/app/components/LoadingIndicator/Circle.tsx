@@ -1,3 +1,7 @@
+/**
+ * @file Circle component for Loading Indicator
+ * @author Kevin Xu
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
@@ -14,6 +18,12 @@ const circleFadeDelay = keyframes`
   }
 `;
 
+/**
+ * @param {object} props - props
+ * @param {number} props.rotate - degrees to rotate by
+ * @param {number} props.delay - delay in translation
+ * @returns {React.FC} Circle object
+ */
 const Circle = props => {
   const CirclePrimitive = styled.div`
     width: 100%;

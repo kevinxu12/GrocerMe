@@ -1,3 +1,7 @@
+/**
+ * @file Base test for App.tsx file
+ * @author Kevin Xu
+ */
 import * as React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 

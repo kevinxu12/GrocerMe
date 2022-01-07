@@ -1086,6 +1086,15 @@
   "resolved" "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.5.tgz"
   "version" "0.7.5"
 
+"@es-joy/jsdoccomment@0.14.2":
+  "integrity" "sha512-812igKXDcLEdkwUbJvnhzMy88dBBiDeaf3mMF1jnQwclIObu5UQB8ow1KAvDRN1FQqpB+IsZnpmRA0jZ6KGt3g=="
+  "resolved" "https://registry.npmjs.org/@es-joy/jsdoccomment/-/jsdoccomment-0.14.2.tgz"
+  "version" "0.14.2"
+  dependencies:
+    "comment-parser" "1.3.0"
+    "esquery" "^1.4.0"
+    "jsdoc-type-pratt-parser" "2.0.2"
+
 "@eslint/eslintrc@^1.0.5":
   "integrity" "sha512-BLxsnmK3KyPunz5wmCCpqy0YelEoxxGmH73Is+Z74oOTMtExcjkr3dDR6quwrjh1YspA8DH9gnX1o069KiS9AQ=="
   "resolved" "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-1.0.5.tgz"
@@ -3705,6 +3714,11 @@
   "resolved" "https://registry.npmjs.org/commander/-/commander-8.3.0.tgz"
   "version" "8.3.0"
 
+"comment-parser@1.3.0":
+  "integrity" "sha512-hRpmWIKgzd81vn0ydoWoyPoALEOnF4wt8yKD35Ib1D6XC2siLiYaiqfGkYrunuKdsXGwpBpHU3+9r+RVw2NZfA=="
+  "resolved" "https://registry.npmjs.org/comment-parser/-/comment-parser-1.3.0.tgz"
+  "version" "1.3.0"
+
 "common-path-prefix@^3.0.0":
   "integrity" "sha512-QE33hToZseCH3jS0qN96O/bSh3kaw/h+Tq7ngyY9eWDUnTlTNUyqfqvCXioLe5Na5jFsL78ra/wuBU4iuEgd4w=="
   "resolved" "https://registry.npmjs.org/common-path-prefix/-/common-path-prefix-3.0.0.tgz"
@@ -4870,6 +4884,21 @@
   "version" "25.3.2"
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
+
+"eslint-plugin-jsdoc@37.5.1":
+  "integrity" "sha512-WMv/Na5QdpMQao1MR3SgYpGFi2PSrhh/JljlErQru9ZYXf1j9oQVIVCELQV7jcyqKQ/svPqCyU8eMhet9dzP+w=="
+  "resolved" "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-37.5.1.tgz"
+  "version" "37.5.1"
+  dependencies:
+    "@es-joy/jsdoccomment" "0.14.2"
+    "comment-parser" "1.3.0"
+    "debug" "^4.3.3"
+    "escape-string-regexp" "^4.0.0"
+    "esquery" "^1.4.0"
+    "jsdoc-type-pratt-parser" "^2.0.2"
+    "regextras" "^0.8.0"
+    "semver" "^7.3.5"
+    "spdx-expression-parse" "^3.0.1"
 
 "eslint-plugin-jsx-a11y@^6.5.1":
   "integrity" "sha512-sVCFKX9fllURnXT2JwLN5Qgo24Ug5NF6dxhkmxsMEUZhXRcGg+X3e1JbJ84YePQKBl5E0ZjAH5Q4rkdcGY99+g=="
@@ -7411,6 +7440,11 @@
   "version" "4.1.0"
   dependencies:
     "argparse" "^2.0.1"
+
+"jsdoc-type-pratt-parser@^2.0.2", "jsdoc-type-pratt-parser@2.0.2":
+  "integrity" "sha512-gXN5CxeaI9WtYQYzpOO/CtTRfZppQlKxXRTIm73JuAX6kOGTQ7iZ0e+YB+b2m7Fk+gTYYxRtE1nqje7H6dqv8w=="
+  "resolved" "https://registry.npmjs.org/jsdoc-type-pratt-parser/-/jsdoc-type-pratt-parser-2.0.2.tgz"
+  "version" "2.0.2"
 
 "jsdom@^16.6.0":
   "integrity" "sha512-u9Smc2G1USStM+s/x1ru5Sxrl6mPYCbByG1U/hUmqaVsm4tbNyS7CicOSRyuGQYZhTu0h84qkZZQ/I+dzizSVw=="
@@ -10292,6 +10326,11 @@
     "unicode-match-property-ecmascript" "^2.0.0"
     "unicode-match-property-value-ecmascript" "^2.0.0"
 
+"regextras@^0.8.0":
+  "integrity" "sha512-k519uI04Z3SaY0fLX843MRXnDeG2+vHOFsyhiPZvNLe7r8rD2YNRjq4BQLZZ0oAr2NrtvZlICsXysGNFPGa3CQ=="
+  "resolved" "https://registry.npmjs.org/regextras/-/regextras-0.8.0.tgz"
+  "version" "0.8.0"
+
 "registry-auth-token@3.3.2":
   "integrity" "sha512-JL39c60XlzCVgNrO+qq68FoNb56w/m7JYvGR2jT5iR1xBrUA3Mfx5Twk5rqTThPmQKMWydGmq8oFtDlxfrmxnQ=="
   "resolved" "https://registry.npmjs.org/registry-auth-token/-/registry-auth-token-3.3.2.tgz"
@@ -11153,7 +11192,7 @@
   "resolved" "https://registry.npmjs.org/spdx-exceptions/-/spdx-exceptions-2.3.0.tgz"
   "version" "2.3.0"
 
-"spdx-expression-parse@^3.0.0":
+"spdx-expression-parse@^3.0.0", "spdx-expression-parse@^3.0.1":
   "integrity" "sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q=="
   "resolved" "https://registry.npmjs.org/spdx-expression-parse/-/spdx-expression-parse-3.0.1.tgz"
   "version" "3.0.1"

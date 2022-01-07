@@ -1,6 +1,13 @@
+/**
+ * @file Logo Component
+ * @author Kevin Xu
+ */
 import * as React from 'react';
 import styled from 'styled-components/macro';
 
+/**
+ * @returns {React.FC} a component wrapping Logo
+ */
 export function Logo() {
   return (
     <Wrapper>

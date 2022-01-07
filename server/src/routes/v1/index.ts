@@ -1,3 +1,8 @@
+/**
+ * @file Main router handler
+ * @author Kevin Xu
+ */
+
 import express from 'express';
 
 import test from './test';
