@@ -14,9 +14,8 @@ import { GlobalStyle } from './../styles/global-styles';
 import { themes } from './../styles/themes/themes';
 import { HomePage } from './pages/HomePage/loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
-import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
-import TestPage from './pages/TestPage';
+import TestSocketPage from './pages/TestSocketPage';
 import { NavBar } from './components/Navbar';
 import { Constants } from 'utils/constants';
 
@@ -31,7 +30,11 @@ export function App() {
         <NavBar />
         <Switch>
           <PublicRoute exact path={Constants.HOME_URL} component={HomePage} />
-          <PrivateRoute exact path={Constants.TEST_URL} component={TestPage} />
+          <Route
+            exact
+            path={Constants.TEST_SOCKET_URL}
+            component={TestSocketPage}
+          />
           <Route component={NotFoundPage} />
         </Switch>
         <GlobalStyle />

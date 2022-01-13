@@ -21,7 +21,7 @@ import { App } from 'app';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistStore } from 'redux-persist';
 import { HelmetProvider } from 'react-helmet-async';
-
+import { socket, SocketContext } from 'utils/socket';
 import { configureAppStore } from 'store/configureStore';
 
 // Initialize languages
@@ -34,13 +34,15 @@ const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <HelmetProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </HelmetProvider>
-    </PersistGate>
+    <SocketContext.Provider value={socket}>
+      <PersistGate loading={null} persistor={persistor}>
+        <HelmetProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </HelmetProvider>
+      </PersistGate>
+    </SocketContext.Provider>
   </Provider>,
   MOUNT_NODE,
 );
