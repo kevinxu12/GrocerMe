@@ -38,6 +38,13 @@ DB_USER_PWD=
 DB_HOST_NAME=
 S3_ACCESS_KEY_ID=
 S3_SECRET_ACCESS_KEY=
+FRONT_END_URL=http://localhost:3000
+```
+
+- Create a `.env` file in `client` in the `main` branch with the following lines of code
+
+```
+PUBLIC_DEV_URL='http://localhost:8080'
 ```
 
 Ask `kevinxu12` to fill in rest of `.env` variables specified in `.config` files.
@@ -85,6 +92,7 @@ where `Constants` is defined in the top-level, corresponding `constants` file.
 #### Helpful
 
 - Run `npm run generate` to generate new components on the frontend
+- Run `npm start` from `client` in one terminal tab, and `npm start` from `server` tab to develop faster.
 - Delete remote branches after merging in the console
 - Use Stacked PRs if necessary
 - Update `README.md` actively
