@@ -11,15 +11,19 @@ function GoogleButton() {
   /**
    * @param {object} googleData the data returned from oauth api
    */
-  const handleLogin = async googleData => {
+  const handleLogin = googleData => {
     console.log('Clicked');
   };
   return (
     <GoogleLogin
       clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID || 'N/A'}
       buttonText="Log in with Google"
-      onSuccess={handleLogin}
-      onFailure={handleLogin}
+      onSuccess={response => {
+        handleLogin(response);
+      }}
+      onFailure={response => {
+        handleLogin(response);
+      }}
       cookiePolicy={'single_host_origin'}
     />
   );
