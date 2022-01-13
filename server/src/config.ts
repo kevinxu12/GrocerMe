@@ -7,6 +7,7 @@ require('dotenv').config();
 
 export const environment = process.env.NODE_ENV;
 export const port = process.env.PORT;
+export const front_end_url = process.env.FRONT_END_URL;
 
 export const db = {
   name: process.env.DB_NAME || '',
