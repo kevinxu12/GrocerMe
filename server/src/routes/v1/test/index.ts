@@ -13,8 +13,8 @@ router.get(
   asyncHandler(async (req, res) => {
     const test_payload = { hi: 'hi' };
     req.app
-      .get('io')
-      .clientManager.getAllClients()
+      .get('clientManager')
+      .getAllClients()
       .map((client: Socket) => {
         client.emit('test', test_payload);
       });

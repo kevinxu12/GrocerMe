@@ -13,9 +13,9 @@ import { RootState } from 'types';
 import PrivateNav from './PrivateNav';
 
 /**
- * @returns {React.FC} Returns navbar component
+ * @returns {React.ReactElement} Returns navbar component
  */
-export function NavBar() {
+export function NavBar(): React.ReactElement {
   const isAuthenticated = useSelector((state: RootState) =>
     state ? state.auth.username : true,
   );

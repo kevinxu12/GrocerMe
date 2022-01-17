@@ -10,6 +10,7 @@ import { SocketAsyncWrapper, SocketContext } from 'utils/socket';
  */
 const TestSocketPage = () => {
   const socket = useContext(SocketContext);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setTest] = useState<Object>({});
   useEffect(() => {
     /**

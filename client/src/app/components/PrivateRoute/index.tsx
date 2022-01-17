@@ -3,9 +3,7 @@
  * @author Kevin Xu
  */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { RootState } from 'types';
 import { Constants } from 'utils/constants';
 
 /**
@@ -13,10 +11,11 @@ import { Constants } from 'utils/constants';
  * @param {React.ElementType} root0.component component to return if authenticated
  * @returns {React.ElementType} either a Redirect or the component passed in props
  */
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = useSelector((state: RootState) =>
-    state ? state.auth.username : Constants.DEFAULT_STRING,
-  );
+const PrivateRoute = ({
+  component: Component,
+  isAuthenticated,
+  ...rest
+}): React.ReactElement => {
   return (
     <Route
       {...rest}

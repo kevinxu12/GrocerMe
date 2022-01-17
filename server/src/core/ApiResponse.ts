@@ -54,7 +54,9 @@ abstract class ApiResponse {
    * @returns {Response} Final, new Response object, with desired status in header and ApiResponse as body
    */
   public send(res: Response): Response {
-    return this.prepare<ApiResponse>(res, this);
+    const response = this.prepare<ApiResponse>(res, this);
+    console.log(response);
+    return response;
   }
 
   /**

@@ -1,5 +1,7 @@
-/** 
-@file Backend Eslint preferences
+/**
+ * @file Backend Eslint preferences
+ * Maybe we should make the eslint on the server and client consistent, maybe not.
+ * @author Kevin Xu
  */
 module.exports = {
   rules: {

@@ -10,9 +10,9 @@ import Wrapper from './Wrapper';
 /**
  * Returns loading indicator
  *
- * @returns {React.FC} LoadingIndicator Object
+ * @returns {React.ReactElement} LoadingIndicator Object
  */
-export function LoadingIndicator() {
+export function LoadingIndicator(): React.ReactElement {
   return (
     <>
       <Wrapper>

@@ -1,5 +1,7 @@
-/** 
-@file Frontend Eslint preferences
+/**
+ * @file Frontend Eslint preferences
+ * Maybe we should make the eslint on the server and client consistent, maybe not.
+ * @author Kevin Xu
  */
 const fs = require('fs');
 const path = require('path');

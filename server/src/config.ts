@@ -1,13 +1,14 @@
 /**
- * @file Mapper for environment variables
+ * @file Key Environment Variables
+ * TO DO - some of these variables (in the future) may or should be dynamically calculated. We should figure out a way to clean this up.
  * @author Kevin Xu
  */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
-export const environment = process.env.NODE_ENV;
-export const port = process.env.PORT;
-export const front_end_url = process.env.FRONT_END_URL;
+export const environment = process.env.NODE_ENV || process.env.IS_STAGING || 'development';
+export const port = process.env.PORT || 'frontend';
+export const front_end_dev_cors_url = process.env.FRONT_END_DEV_CORS_URL;
 
 export const db = {
   name: process.env.DB_NAME || '',
@@ -23,3 +24,9 @@ export const aws = {
 };
 
 export const corsUrl = process.env.CORS_URL;
+
+export const google = {
+  client_id: process.env.GOOGLE_CLIENT_ID || '',
+  client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
+  callback_url: process.env.GOOGLE_CALLBACK_URL || '', // this can be calculated in future
+};

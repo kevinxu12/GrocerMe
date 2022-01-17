@@ -3,29 +3,28 @@
  * @author Kevin Xu
  */
 import React from 'react';
-import GoogleLogin from 'react-google-login';
+import generateServerUrl from 'utils/url';
 /**
  * @returns {React.ElementType} Returns a google oauth button
  */
 function GoogleButton() {
   /**
-   * @param {object} googleData the data returned from oauth api
+   *
+   * @param {React.MouseEvent<HTMLElement>} ev Click event
    */
-  const handleLogin = googleData => {
-    console.log('Clicked');
+  const handleLogin = async (ev: React.MouseEvent<HTMLElement>) => {
+    ev.preventDefault();
+    window.open(generateServerUrl('/google'), '_self');
   };
+
   return (
-    <GoogleLogin
-      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID || 'N/A'}
-      buttonText="Log in with Google"
-      onSuccess={response => {
-        handleLogin(response);
+    <button
+      onClick={e => {
+        handleLogin(e);
       }}
-      onFailure={response => {
-        handleLogin(response);
-      }}
-      cookiePolicy={'single_host_origin'}
-    />
+    >
+      Sign with Google
+    </button>
   );
 }
 
