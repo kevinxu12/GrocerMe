@@ -18,23 +18,35 @@ import PublicRoute from './components/PublicRoute';
 import TestSocketPage from './pages/TestSocketPage';
 import { NavBar } from './components/Navbar';
 import { Constants } from 'utils/constants';
+import Dashboard from './pages/Dashboard';
+import { useSelector } from 'react-redux';
+import { RootState } from 'types';
 
 /**
  * @returns {React.FC} Frontend App for the project
  */
 export function App() {
   const theme = themes.default;
+  const isAuthenticated = useSelector((state: RootState) =>
+    state ? state.auth.username : true,
+  );
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <NavBar />
         <Switch>
-          <PublicRoute exact path={Constants.HOME_URL} component={HomePage} />
+          <PublicRoute
+            isAuthenticated={isAuthenticated}
+            exact
+            path={Constants.HOME_URL}
+            component={HomePage}
+          />
           <Route
             exact
             path={Constants.TEST_SOCKET_URL}
             component={TestSocketPage}
           />
+          <Route exact path={Constants.USER_HOME} component={Dashboard} />
           <Route component={NotFoundPage} />
         </Switch>
         <GlobalStyle />

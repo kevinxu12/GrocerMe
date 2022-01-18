@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet-async';
 /**
  * @returns {React.ElementType} Component for 404 Not Found
  */
-export function NotFoundPage() {
+export function NotFoundPage(): React.ReactElement {
   return (
     <>
       <Helmet>

@@ -7,9 +7,9 @@ import styled from 'styled-components/macro';
 import { StyledConstants } from 'styles/StyleConstants';
 
 /**
- * @returns {React.FC} Component for public navbar
+ * @returns {React.ReactElement} Component for public navbar
  */
-export function PublicNav() {
+export function PublicNav(): React.ReactElement {
   return (
     <NavLinks>
       <Wrapper>

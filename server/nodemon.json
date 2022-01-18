@@ -1,7 +1,7 @@
 {
   "events": {
-    "restart": "kill-port 80080",
+    "restart": "kill-port 8080",
     "crash": "kill-port 8080"
   },
-  "delay": "1500"
+  "delay": "100"
 }

@@ -37,6 +37,7 @@ const authReducer = (
         draft.username = (action as ChangeUsernameAction).payload.username;
         break;
       case LOGOUT:
+        console.log('Calling logout, clearing state');
         return initialState;
     }
   });

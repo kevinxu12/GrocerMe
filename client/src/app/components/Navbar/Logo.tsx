@@ -6,9 +6,9 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 
 /**
- * @returns {React.FC} a component wrapping Logo
+ * @returns {React.ReactElement} a component wrapping Logo
  */
-export function Logo() {
+export function Logo(): React.ReactElement {
   return (
     <Wrapper>
       <Title>Grocer + Me</Title>
