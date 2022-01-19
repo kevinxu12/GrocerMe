@@ -10,4 +10,5 @@ export enum Constants {
   USER_HOME = '/dashboard',
   TEST_SOCKET_URL = '/test_socket',
   ADMIN_HOME = '/admin',
+  DEFAULT_DEV_URL = 'http://localhost:8000',
 }

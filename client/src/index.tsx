@@ -21,20 +21,19 @@ import { App } from 'app';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistStore } from 'redux-persist';
 import { HelmetProvider } from 'react-helmet-async';
-import { socket, SocketContext } from 'utils/socket';
 import { configureAppStore } from 'store/configureStore';
 
 // Initialize languages
 import './locales/i18n';
+import { SocketProvider } from 'context/SocketContext';
 
 const store = configureAppStore();
-export type AppDispatch = typeof store.dispatch;
 const persistor = persistStore(store);
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
-    <SocketContext.Provider value={socket}>
+    <SocketProvider>
       <PersistGate loading={null} persistor={persistor}>
         <HelmetProvider>
           <React.StrictMode>
@@ -42,7 +41,7 @@ ReactDOM.render(
           </React.StrictMode>
         </HelmetProvider>
       </PersistGate>
-    </SocketContext.Provider>
+    </SocketProvider>
   </Provider>,
   MOUNT_NODE,
 );

@@ -5,10 +5,11 @@
 import { io, Socket } from 'socket.io-client';
 import React from 'react';
 import { socket_url } from './config';
-// hard coded and should be fixed
-const DEFAULT_DEV_URL = 'http://localhost:8000';
-export const socket = io(socket_url || DEFAULT_DEV_URL) || null;
+import { Constants } from './constants';
+
+export const socket = io(socket_url || Constants.DEFAULT_DEV_URL) || null;
 export const SocketContext = React.createContext<Socket | null>(null);
+
 /**
  * @param { Socket } socket the socket we are wrapping
  * @param {string} event socket event message string to listen for
@@ -22,6 +23,7 @@ export function SocketAsyncWrapper<T>(
     socket ? socket.on(event, (data: T) => resolve(data)) : resolve(null),
   );
 }
+
 /**
  * @param {Socket} socket the socket we are wrapping
  * @param {string} event Socket event message string to listen for
