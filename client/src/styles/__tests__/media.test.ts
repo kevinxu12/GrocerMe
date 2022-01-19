@@ -6,7 +6,7 @@ describe('media', () => {
     const mediaQuery = media.small`color:red;`.join('');
     const cssVersion = css`
       @media (min-width: ${sizes.small}px) {
-        color: red;
+        color:red;
       }
     `.join('');
     expect(mediaQuery).toEqual(cssVersion);
