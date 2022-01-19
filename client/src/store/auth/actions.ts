@@ -2,18 +2,24 @@
  * @file Auth Actions
  * @author Kevin Xu
  */
-import { ChangeUsernameAction, LogoutAction } from './../../types/actions';
-import { CHANGE_USERNAME, LOGOUT } from './constants';
+import { Role } from 'types/rest';
+import { ChangeAuthAction, LogoutAction } from './../../types/actions';
+import { CHANGE_AUTH, LOGOUT } from './constants';
 /**
- * Changes the input field of the form
+ * Changes the logged-in user in the reducer
  *
- * @param  {string} username The new text of the input field
- * @returns {object} An action object with a type of CHANGE_USERNAME
+ * @param  {object} props props
+ * @param {string} props.username The new email of the logged-in user
+ * @param {Role[]} props.roles Te new roles of the logged-in user
+ * @returns {object} An action object with a type of CHANGE_AUTH
  */
-export const changeUsername = (username: String): ChangeUsernameAction => ({
-  type: CHANGE_USERNAME,
+export const changeAuth = (props: {
+  username: string;
+  roles?: Role[];
+}): ChangeAuthAction => ({
+  type: CHANGE_AUTH,
   payload: {
-    username,
+    ...props,
   },
 });
 
@@ -29,4 +35,4 @@ export const logout = (): LogoutAction => {
   };
 };
 
-export default changeUsername;
+export default changeAuth;

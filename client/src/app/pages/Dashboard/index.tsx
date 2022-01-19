@@ -2,32 +2,39 @@
  * @file A Home page for logged-in users, both consumers and suppliers
  * @author Kevin Xu
  */
-import React, { ComponentType, Dispatch, memo, useEffect } from 'react';
+import React, { ComponentType, Dispatch, memo } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import changeUsername, { logout } from 'store/auth/actions';
-import { StatusCode } from 'types/rest';
+import changeAuth, { logout } from 'store/auth/actions';
+import { Role, StatusCode, User } from 'types/rest';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { useHistory } from 'react-router-dom';
 import generateServerUrl from 'utils/url';
-import { ChangeUsernameAction, LogoutAction } from 'types/actions';
+import { ChangeAuthAction, LogoutAction } from 'types/actions';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectRoles, makeSelectUsername } from 'store/auth/selectors';
+import useDeepCompareEffect from 'use-deep-compare-effect';
 
 interface DashboardPropsType {
-  changeUsername: (email) => void;
+  changeAuth: (email: string, roles?: Role[]) => void;
   logout: () => void;
+  username: string;
+  roles: Role[];
 }
 
 /**
  * Generate a dashboard React element. This should be the landing page for a logged-in, non-first-time user
  *
  * @param {object} props props passed
- * @param {Function} props.changeUsername check if logged in, if so store email into redux
+ * @param {Function} props.changeAuth check if logged in, if so store email into redux
  * @param {Function} props.logout logout the user from redux
+ * @param {string} props.username the username of logged-in user in redux, if this exists
+ * @param {Role[]} props.roles the roles of logged-in user in redux, if this exists
  * @returns {React.ReactElement} Dashboard Component
  */
 const Dashboard = (props: DashboardPropsType): React.ReactElement => {
   const history = useHistory();
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     /**
      * Test function to listen to a socket thats emitted
      */
@@ -36,11 +43,12 @@ const Dashboard = (props: DashboardPropsType): React.ReactElement => {
         generateServerUrl('/loggedIn'),
         { withCredentials: true },
       );
-      const responseBody = response.data;
+      const responseBody: AxiosResponse['data'] = response.data;
       if (responseBody.statusCode === StatusCode.SUCCESS) {
-        console.log(responseBody);
-        if (responseBody.data) {
-          props.changeUsername(responseBody.data.email);
+        const user: User = responseBody.data;
+        if (user) {
+          console.log('changing props');
+          props.changeAuth(user.email, user.roles);
         } else {
           props.logout();
           history.push('/');
@@ -48,9 +56,17 @@ const Dashboard = (props: DashboardPropsType): React.ReactElement => {
       }
     }
     checkLogin();
-  }, [history, props]);
+  }, [props.username, props.roles]);
   return <div>Sample Dashboard</div>;
 };
+
+/**
+ * Maps redux store values to component props
+ */
+const mapStateToProps = createStructuredSelector({
+  username: makeSelectUsername(),
+  roles: makeSelectRoles(),
+});
 
 /**
  * Maps dispatch functions to component props
@@ -59,16 +75,17 @@ const Dashboard = (props: DashboardPropsType): React.ReactElement => {
  * @returns {object} Object passed to props containing redux dispatch functions
  */
 function mapDispatchToProps(
-  dispatch: Dispatch<ChangeUsernameAction | LogoutAction>,
+  dispatch: Dispatch<ChangeAuthAction | LogoutAction>,
 ) {
   return {
     /**
-     * Stores email of logged-in user as username in redux
+     * Stores info of logged-in user in redux
      *
-     * @param {string} email the email to set as username
+     * @param {string} email the email of the logged-in user
+     * @param {Role[]} roles the optional-roles of the logged-in user
      */
-    changeUsername: email => {
-      dispatch(changeUsername(email));
+    changeAuth: (email: string, roles?: Role[]) => {
+      dispatch(changeAuth({ username: email, roles }));
     },
     /**
      * Logs out a user if no email returned from redux (session object is expired)
@@ -79,6 +96,6 @@ function mapDispatchToProps(
   };
 }
 
-const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose<ComponentType>(withConnect, memo)(Dashboard);

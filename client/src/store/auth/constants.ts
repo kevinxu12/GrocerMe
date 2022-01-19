@@ -11,5 +11,5 @@
 
 import { ActionType } from './../../types/actions';
 
-export const CHANGE_USERNAME: ActionType = 'client/store/auth/CHANGE_USERNAME';
+export const CHANGE_AUTH: ActionType = 'client/store/auth/CHANGE_AUTH';
 export const LOGOUT: ActionType = 'client/store/auth/LOGOUT';

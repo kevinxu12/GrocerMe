@@ -4,6 +4,7 @@
  */
 import axios from 'axios';
 import { GenericThunkAction } from 'types/actions';
+import { timeout } from 'utils/request';
 import generateServerUrl from 'utils/url';
 import { logout } from './actions';
 
@@ -17,5 +18,6 @@ export const logoutWithThunk = (): GenericThunkAction => async dispatch => {
     withCredentials: true,
   });
   console.log(response);
+  timeout(100);
   dispatch(logout());
 };

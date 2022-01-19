@@ -12,11 +12,18 @@ import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { logoutWithThunk } from 'store/auth/thunk';
 import { GenericThunkDispatch } from 'types/actions';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectRoles } from 'store/auth/selectors';
+import { Role, RoleCode } from 'types/rest';
+import { isRoleCodeIncluded } from 'utils/auth';
+import useDeepCompareEffect from 'use-deep-compare-effect';
 
 interface PrivateNavDispatchType {
   onLogout: () => void;
 }
-interface PrivateNavPropsType extends PrivateNavDispatchType {}
+interface PrivateNavPropsType extends PrivateNavDispatchType {
+  roles: Role[];
+}
 
 /**
  * @param {object} props props passed
@@ -25,10 +32,18 @@ interface PrivateNavPropsType extends PrivateNavDispatchType {}
  */
 const PrivateNav = (props: PrivateNavPropsType): React.ReactElement => {
   const [sidebar, setSidebar] = useState(false);
+  const [isSupplier, setIsSupplier] = useState(false);
   /**
    * @returns {boolean} whether to show side bar or not
    */
   const showSidebar = () => setSidebar(!sidebar);
+
+  useDeepCompareEffect(() => {
+    setIsSupplier(
+      props.roles ? isRoleCodeIncluded(RoleCode.SUPPLIER, props.roles) : false,
+    );
+  }, [props.roles]);
+
   const SidebarProps = {
     open: sidebar,
   };
@@ -44,16 +59,28 @@ const PrivateNav = (props: PrivateNavPropsType): React.ReactElement => {
             <MenuItem icon={<AiIcons.AiFillHome />}>Home</MenuItem>
             <MenuItem
               icon={<AiIcons.AiOutlineLogout />}
-              onClick={props.onLogout}
+              onClick={async () => {
+                await props.onLogout();
+              }}
             >
               Logout
             </MenuItem>
+            {isSupplier && (
+              <MenuItem icon={<AiIcons.AiFillDashboard />}>
+                {' '}
+                Supplier Home{' '}
+              </MenuItem>
+            )}
           </Menu>
         </ProSidebar>
       </Sidebar>
     </Wrapper>
   );
 };
+
+const mapStateToProps = createStructuredSelector({
+  roles: makeSelectRoles(),
+});
 
 /**
  * Maps dispatch functions to component props
@@ -74,7 +101,7 @@ function mapDispatchToProps(
   };
 }
 
-const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose<ComponentType>(withConnect, memo)(PrivateNav);
 

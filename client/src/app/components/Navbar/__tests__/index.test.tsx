@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { NavBar } from '..';
 import { initialState } from 'store/auth/reducer';
+import { Role } from 'types/rest';
+import { AuthState } from 'types/RootState';
 
 jest.mock('react-i18next', () => ({
   /**
@@ -30,11 +32,11 @@ jest.mock('react-i18next', () => ({
 }));
 
 describe('<Navbar  />', () => {
-  const state = { auth: initialState };
   const mockStore = configureStore();
   let store;
 
   it('should match snapshot', () => {
+    const state = { auth: initialState };
     store = mockStore(state);
     const loadingIndicator = render(
       <Provider store={store}>

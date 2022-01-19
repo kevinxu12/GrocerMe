@@ -4,10 +4,11 @@
  */
 import React from 'react';
 import generateServerUrl from 'utils/url';
+import GoogleButton from 'react-google-button';
 /**
  * @returns {React.ElementType} Returns a google oauth button
  */
-function GoogleButton() {
+function OAuthButton() {
   /**
    *
    * @param {React.MouseEvent<HTMLElement>} ev Click event
@@ -18,14 +19,14 @@ function GoogleButton() {
   };
 
   return (
-    <button
+    <GoogleButton
       onClick={e => {
         handleLogin(e);
       }}
     >
       Sign with Google
-    </button>
+    </GoogleButton>
   );
 }
 
-export default GoogleButton;
+export default OAuthButton;

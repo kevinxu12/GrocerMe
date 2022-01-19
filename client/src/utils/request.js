@@ -37,3 +37,13 @@ function checkStatus(response) {
 export default function request(url, options) {
   return fetch(url, options).then(checkStatus).then(parseJSON);
 }
+
+/**
+ * Timeout for some length
+ *
+ * @param {*} ms time of delay
+ * @returns {*} Promise of a timeout
+ */
+export function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

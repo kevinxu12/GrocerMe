@@ -3,6 +3,8 @@
  * @author Kevin Xu
  */
 
+import { Role } from './rest';
+
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -11,6 +13,7 @@
 */
 export interface AuthState {
   username: String;
+  roles: Role[];
 }
 export interface RootState {
   auth: AuthState; // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
