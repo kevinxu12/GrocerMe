@@ -4,7 +4,6 @@
  */
 import React, { ComponentType, memo, useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import styled from 'styled-components/macro';
 import './custom.scss';
@@ -17,6 +16,7 @@ import { makeSelectRoles } from 'store/auth/selectors';
 import { Role, RoleCode } from 'types/rest';
 import { isRoleCodeIncluded } from 'utils/auth';
 import useDeepCompareEffect from 'use-deep-compare-effect';
+import { StyledConstants } from 'styles/StyleConstants';
 
 interface PrivateNavDispatchType {
   onLogout: () => void;
@@ -31,12 +31,7 @@ interface PrivateNavPropsType extends PrivateNavDispatchType {
  * @returns {React.ElementType} Private Navbar Component
  */
 const PrivateNav = (props: PrivateNavPropsType): React.ReactElement => {
-  const [sidebar, setSidebar] = useState(false);
   const [isSupplier, setIsSupplier] = useState(false);
-  /**
-   * @returns {boolean} whether to show side bar or not
-   */
-  const showSidebar = () => setSidebar(!sidebar);
 
   useDeepCompareEffect(() => {
     setIsSupplier(
@@ -44,37 +39,29 @@ const PrivateNav = (props: PrivateNavPropsType): React.ReactElement => {
     );
   }, [props.roles]);
 
-  const SidebarProps = {
-    open: sidebar,
-  };
+  console.log('rendering the sidebar');
   return (
-    <Wrapper>
-      <Icon>
-        <FaIcons.FaBars onClick={showSidebar} />
-      </Icon>
-      <Sidebar {...SidebarProps}>
-        <ProSidebar>
-          <Menu>
-            <MenuItem icon={<AiIcons.AiOutlineClose />} onClick={showSidebar} />
-            <MenuItem icon={<AiIcons.AiFillHome />}>Home</MenuItem>
-            <MenuItem
-              icon={<AiIcons.AiOutlineLogout />}
-              onClick={async () => {
-                await props.onLogout();
-              }}
-            >
-              Logout
+    <Sidebar>
+      <ProSidebar>
+        <Menu>
+          <MenuItem icon={<AiIcons.AiFillHome />}>Home</MenuItem>
+          {isSupplier && (
+            <MenuItem icon={<AiIcons.AiFillDashboard />}>
+              {' '}
+              Supplier Home{' '}
             </MenuItem>
-            {isSupplier && (
-              <MenuItem icon={<AiIcons.AiFillDashboard />}>
-                {' '}
-                Supplier Home{' '}
-              </MenuItem>
-            )}
-          </Menu>
-        </ProSidebar>
-      </Sidebar>
-    </Wrapper>
+          )}
+          <MenuItem
+            icon={<AiIcons.AiOutlineLogout />}
+            onClick={async () => {
+              await props.onLogout();
+            }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+      </ProSidebar>
+    </Sidebar>
   );
 };
 
@@ -105,28 +92,13 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose<ComponentType>(withConnect, memo)(PrivateNav);
 
-const Icon = styled.div`
-  min-height: 5%;
-  min-width: 5%;
-`;
-
 const Sidebar = styled.nav`
-  display: none;
-  ${({ open }: any) =>
-    open &&
-    `
-    width: 20%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0%;
-    `}
-`;
-
-const Wrapper = styled.nav`
+  width: ${StyledConstants.SIDE_BAR_WIDTH};
+  height: 100%;
   display: flex;
-  margin-right: -1rem;
-  width: 100%;
+  justify-content: center;
+  overscroll: hidden;
+  position: fixed;
+  top: 0;
+  left: 0%;
 `;

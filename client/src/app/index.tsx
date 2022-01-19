@@ -22,6 +22,7 @@ import { Dashboard } from './pages/Dashboard/loadable';
 import { useSelector } from 'react-redux';
 import { RootState } from 'types';
 import PrivateRoute from './components/PrivateRoute';
+import './app.css';
 
 /**
  * @returns {React.ReactElement} Frontend App for the project
@@ -33,27 +34,29 @@ export function App() {
     roles: useSelector((state: RootState) => state.auth.roles),
   };
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <NavBar />
-        <Switch>
-          <PublicRoute
-            auth={auth}
-            exact
-            path={Constants.HOME_URL}
-            component={HomePage}
-          />
-          <PrivateRoute
-            auth={auth}
-            exact
-            path={Constants.TEST_SOCKET_URL}
-            component={TestSocketPage}
-          />
-          <Route exact path={Constants.USER_HOME} component={Dashboard} />
-          <Route component={NotFoundPage} />
-        </Switch>
-        <GlobalStyle />
-      </ThemeProvider>
-    </BrowserRouter>
+    <div>
+      <NavBar />
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <Switch>
+            <PublicRoute
+              auth={auth}
+              exact
+              path={Constants.HOME_URL}
+              component={HomePage}
+            />
+            <PrivateRoute
+              auth={auth}
+              exact
+              path={Constants.TEST_SOCKET_URL}
+              component={TestSocketPage}
+            />
+            <Route exact path={Constants.USER_HOME} component={Dashboard} />
+            <Route component={NotFoundPage} />
+          </Switch>
+          <GlobalStyle />
+        </ThemeProvider>
+      </BrowserRouter>
+    </div>
   );
 }

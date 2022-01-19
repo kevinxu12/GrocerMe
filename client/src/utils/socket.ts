@@ -7,7 +7,13 @@ import React from 'react';
 import { socket_url } from './config';
 import { Constants } from './constants';
 
-export const socket = io(socket_url || Constants.DEFAULT_DEV_URL) || null;
+export const socket =
+  io(socket_url || Constants.DEFAULT_DEV_URL, {
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+    reconnectionAttempts: 5,
+  }) || null;
 export const SocketContext = React.createContext<Socket | null>(null);
 
 /**

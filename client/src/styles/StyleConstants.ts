@@ -11,4 +11,6 @@ export enum StyledConstants {
   INTER = 'Inter',
   MONTSERRAT = 'Montserrat',
   NOVA_BOLD = 'Proxima Nova-Bold',
+  SIDE_BAR_WIDTH = '15%',
+  SIDE_BAR_WIDTH_PADDING = '20%',
 }

@@ -27,7 +27,7 @@ const NavLinks = styled.div`
   width: 70%;
   height: 10%;
   align-self: center;
-  margin-left: 40%;
+  margin-left: 45%;
   margin-bottom: 1px;
   display: flex;
   align-items: flex-start;

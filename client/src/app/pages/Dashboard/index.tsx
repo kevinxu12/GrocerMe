@@ -14,6 +14,7 @@ import { ChangeAuthAction, LogoutAction } from 'types/actions';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectRoles, makeSelectUsername } from 'store/auth/selectors';
 import useDeepCompareEffect from 'use-deep-compare-effect';
+import { Wrapper } from 'app/components/PrivateWrapper';
 
 interface DashboardPropsType {
   changeAuth: (email: string, roles?: Role[]) => void;
@@ -57,7 +58,7 @@ const Dashboard = (props: DashboardPropsType): React.ReactElement => {
     }
     checkLogin();
   }, [props.username, props.roles]);
-  return <div>Sample Dashboard</div>;
+  return <Wrapper>Sample Dashboard</Wrapper>;
 };
 
 /**

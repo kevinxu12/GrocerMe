@@ -20,16 +20,18 @@ export function NavBar(): React.ReactElement {
     state ? state.auth.username : true,
   );
   return (
-    <Wrapper>
+    <div>
       {!isAuthenticated ? (
         <>
-          <Logo />
-          <PublicNav />
+          <Wrapper>
+            <Logo />
+            <PublicNav />
+          </Wrapper>
         </>
       ) : (
         <PrivateNav />
       )}
-    </Wrapper>
+    </div>
   );
 }
 

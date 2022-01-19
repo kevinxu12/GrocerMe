@@ -8,6 +8,7 @@ import { isPathAuthenticated } from 'utils/auth';
 import { Constants } from 'utils/constants';
 import { initialState } from 'store/auth/reducer';
 import useDeepCompareEffect from 'use-deep-compare-effect';
+import { Wrapper } from '../PrivateWrapper';
 
 /**
  * @param {...any} root0 props to pass to component if authenticated
@@ -30,13 +31,14 @@ const PrivateRoute = ({
     setIsAuthenticated(isPathAuthenticated(path, auth.roles));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.roles, auth.username]);
-
   return (
     <Route
       {...rest}
       render={props => {
         return isAuthenticated ? (
-          <Component {...props} />
+          <Wrapper>
+            <Component {...props} />
+          </Wrapper>
         ) : (
           <Redirect to={Constants.HOME_URL} />
         );
