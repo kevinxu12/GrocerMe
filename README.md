@@ -24,6 +24,9 @@ Our Senior Design Project
 - S3
 - Cookie Session
 - Passport.js
+- Winston
+- Morgan
+- Github Workflows
 
 ## Instructions
 
@@ -90,6 +93,18 @@ This is probably the fastest method of testing where the client and server are o
 - Run `npm run build`
 - Run `npm start` to launch dev environment.
 - The frontend and backend will be on `localhost:8080`
+
+### Backend Logging
+
+- Import the `logger` client from `app` and use anyone of
+
+```
+logger.info
+logger.http
+logger.warn
+logger.debug
+logger.error
+```
 
 ### TO DOs
 

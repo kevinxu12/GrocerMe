@@ -55,7 +55,6 @@ abstract class ApiResponse {
    */
   public send(res: Response): Response {
     const response = this.prepare<ApiResponse>(res, this);
-    console.log(response);
     return response;
   }
 
