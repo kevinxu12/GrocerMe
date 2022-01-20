@@ -3,11 +3,14 @@
  * @author Kevin Xu
  */
 import { Socket } from 'socket.io';
+import User from './../models/User';
 
 export type ClientManagerType = {
   addClient: (client: Socket) => void;
   removeClient: (client: Socket) => void;
   getAllClients: () => Socket[];
+  registerLogin: (user: User, client: Socket) => void;
+  getClientByUser: (user: User | undefined) => Socket | null;
 };
 
 /**
@@ -20,6 +23,7 @@ export type ClientManagerType = {
 export default function ClientManager() {
   // mapping of all connected socket clients
   const clients = new Map();
+  const username_clients = new Map();
 
   /**
    * Register a socket client into manager
@@ -47,9 +51,36 @@ export default function ClientManager() {
   function getAllClients(): Socket[] {
     return Array.from(clients.values());
   }
+
+  /**
+   * Registers a user to a client
+   *
+   * @param {User} user the logged in user
+   * @param {Socket} client logged in user's client
+   */
+  function registerLogin(user: User, client: Socket) {
+    const username = user.email; // unique
+    username_clients.set(username, client);
+  }
+
+  /**
+   * Gets a client by user
+   *
+   * @param {User | undefined} user the logged in user
+   * @returns {Socket | null} the client corresponding to the user, null if no client or user specified
+   */
+  function getClientByUser(user: User | undefined) {
+    if (!user) {
+      return null;
+    }
+    return username_clients.get(user.email) || null;
+  }
+
   return {
     addClient,
     removeClient,
     getAllClients,
+    registerLogin,
+    getClientByUser,
   };
 }

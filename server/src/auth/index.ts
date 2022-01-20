@@ -10,12 +10,13 @@ import User from './../models/User';
 import { Types } from 'mongoose';
 import { Profile } from 'passport-google-oauth20';
 import { google } from './../config';
+import { logger } from './../app';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const DEFAULT_ROLE = RoleCode.CONSUMER;
 
-console.log('Initializing passport');
+logger.info('Initializing passport');
 
 export type parsedGoogleProfile = {
   googleId: string;
@@ -62,7 +63,7 @@ passport.use(
       if (existingEmailUser) {
         return done(null, existingEmailUser);
       }
-      console.log(`Creating a new user with email ${parsedProfile.email}`);
+      logger.info(`Creating a new user with email ${parsedProfile.email}`);
       const newUser = await UserRepo.create(
         {
           name: parsedProfile.name,

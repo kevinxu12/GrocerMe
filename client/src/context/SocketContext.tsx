@@ -22,13 +22,16 @@ function SocketProvider({ children }: SocketProviderProps) {
 }
 
 /**
- * Wrapper for useContext for socket
+ * Wrapper for useContext for socket. Fetches the stored socket
+ *
+ * @returns {Socket} the socket stored in the context
  */
 function useSocket() {
   const context = React.useContext(SocketContext);
   if (context === undefined) {
     throw new Error('useSocket must be within a SocketProvider');
   }
+  return context;
 }
 
 export { SocketProvider, useSocket };

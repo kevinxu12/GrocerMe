@@ -3,7 +3,6 @@
  * @author Kevin Xu
  */
 import { io, Socket } from 'socket.io-client';
-import React from 'react';
 import { socket_url } from './config';
 import { Constants } from './constants';
 
@@ -14,7 +13,6 @@ export const socket =
     reconnectionDelayMax: 5000,
     reconnectionAttempts: 5,
   }) || null;
-export const SocketContext = React.createContext<Socket | null>(null);
 
 /**
  * @param { Socket } socket the socket we are wrapping

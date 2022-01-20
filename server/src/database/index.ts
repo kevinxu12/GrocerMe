@@ -3,6 +3,7 @@
  * @author Kevin Xu
  */
 import mongoose from 'mongoose';
+import { logger } from './../app';
 import { db } from '../config';
 
 // Build the connection string
@@ -21,38 +22,38 @@ const options = {
   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
 };
 
-console.debug(dbURI);
+logger.debug(dbURI);
 
 // Create the database connection
 mongoose
   .connect(dbURI, options)
   .then(() => {
-    console.info('Mongoose connection done');
+    logger.info('Mongoose connection done');
   })
   .catch((e) => {
-    console.info('Mongoose connection error');
-    console.error(e);
+    logger.info('Mongoose connection error');
+    logger.error(e);
   });
 
 // CONNECTION EVENTS
 // When successfully connected
 mongoose.connection.on('connected', () => {
-  console.info('Mongoose default connection open to ' + dbURI);
+  logger.info('Mongoose default connection open to ' + dbURI);
 });
 
 // If the connection throws an error
 mongoose.connection.on('error', (err) => {
-  console.error('Mongoose default connection error: ' + err);
+  logger.error('Mongoose default connection error: ' + err);
 });
 
 // When the connection is disconnected
 mongoose.connection.on('disconnected', () => {
-  console.info('Mongoose default connection disconnected');
+  logger.info('Mongoose default connection disconnected');
 });
 
 process.on('SIGINT', function () {
   mongoose.connection.close(function () {
-    console.log('Mongoose default connection disconnected through app termination');
+    logger.info('Mongoose default connection disconnected through app termination');
     process.exit(0);
   });
 });

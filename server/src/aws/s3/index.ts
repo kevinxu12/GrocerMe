@@ -4,6 +4,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const s3 = require('@auth0/s3');
+import { logger } from './../../app';
 import AWS from '../';
 
 /* eslint-disable jsdoc/require-returns-type */
@@ -22,6 +23,6 @@ export function initializeS3Client() {
     multipartUploadSize: 15728640, // this is the default (15 MB)
   };
   const client = s3.createClient(options);
-  console.log('S3 client successfully instantiated');
+  logger.info('S3 client successfully instantiated');
   return client;
 }

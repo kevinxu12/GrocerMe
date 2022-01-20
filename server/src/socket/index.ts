@@ -7,6 +7,8 @@ import { Server, Socket } from 'socket.io';
 import { createServer } from 'http';
 import { Application } from 'express';
 import { port, front_end_dev_cors_url } from './../config';
+import User from '~/models/User';
+import { logger } from './../app';
 
 export type InternalSocketObjType = {
   clientManager: ClientManagerType;
@@ -31,12 +33,17 @@ export function initalizeSocket(app: Application) {
   const clientManager = ClientManager();
 
   io.on('connection', function (client: Socket) {
-    console.log('client connected...', client.id);
+    logger.info('client connected...', client.id);
     // in the future we'll need a client manager like `
     clientManager.addClient(client);
+
+    client.on('login', function (data: User) {
+      logger.info('Calling register login');
+      clientManager.registerLogin(data, client);
+    });
   });
 
   httpServer.listen(port);
-  console.log(`Socket listening to ${port}`);
+  logger.info(`Socket listening to ${port}`);
   return { clientManager, io };
 }
