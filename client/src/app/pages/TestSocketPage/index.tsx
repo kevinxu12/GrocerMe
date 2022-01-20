@@ -2,14 +2,15 @@
  * @file A Testing Landing Page
  * @author Kevin Xu
  */
-import React, { useContext, useEffect, useState } from 'react';
-import { SocketAsyncWrapper, SocketContext } from 'utils/socket';
+import { useSocket } from 'context/SocketContext';
+import React, { useEffect, useState } from 'react';
+import { SocketAsyncWrapper } from 'utils/socket';
 
 /**
  * @returns {React.FC} Login Page Component
  */
 const TestSocketPage = () => {
-  const socket = useContext(SocketContext);
+  const socket = useSocket();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setTest] = useState<Object>({});
   useEffect(() => {

@@ -15,6 +15,7 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectRoles, makeSelectUsername } from 'store/auth/selectors';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { Wrapper } from 'app/components/PrivateWrapper';
+import { useSocket } from 'context/SocketContext';
 
 interface DashboardPropsType {
   changeAuth: (email: string, roles?: Role[]) => void;
@@ -35,6 +36,7 @@ interface DashboardPropsType {
  */
 const Dashboard = (props: DashboardPropsType): React.ReactElement => {
   const history = useHistory();
+  const socket = useSocket();
   useDeepCompareEffect(() => {
     /**
      * Test function to listen to a socket thats emitted
@@ -45,11 +47,13 @@ const Dashboard = (props: DashboardPropsType): React.ReactElement => {
         { withCredentials: true },
       );
       const responseBody: AxiosResponse['data'] = response.data;
+      console.log(responseBody);
       if (responseBody.statusCode === StatusCode.SUCCESS) {
         const user: User = responseBody.data;
         if (user) {
-          console.log('changing props');
+          console.log('Found a logged in user. Now logging in');
           props.changeAuth(user.email, user.roles);
+          socket.emit('login', user);
         } else {
           props.logout();
           history.push('/');

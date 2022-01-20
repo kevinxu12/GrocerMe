@@ -4,7 +4,6 @@
  */
 import axios from 'axios';
 import { GenericThunkAction } from 'types/actions';
-import { timeout } from 'utils/request';
 import generateServerUrl from 'utils/url';
 import { logout } from './actions';
 
@@ -14,10 +13,8 @@ import { logout } from './actions';
  * @returns {GenericThunkAction} Function that runs an asynchronous dispatch
  */
 export const logoutWithThunk = (): GenericThunkAction => async dispatch => {
-  const response = await axios.get(generateServerUrl('/logout'), {
+  await axios.get(generateServerUrl('/logout'), {
     withCredentials: true,
   });
-  console.log(response);
-  timeout(100);
   dispatch(logout());
 };
