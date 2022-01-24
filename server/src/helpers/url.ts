@@ -2,7 +2,7 @@
  * @file generate url helpers
  * @author Kevin Xu
  */
-import { environment, front_end_dev_cors_url } from './../config';
+import { environment, front_end_dev_cors_url } from '@src/config';
 
 /**
  * Generate the correct frontend server url path to call an endpoint, given a relative path

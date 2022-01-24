@@ -2,10 +2,10 @@
  * @file A helper client for all things related to the User model. The client is used before all else
  * @author Kevin Xu
  */
-import User, { UserModel } from './../models/User';
+import User, { UserModel } from '@src/models/User';
 import { Types } from 'mongoose';
-import Role, { RoleCode, RoleModel } from './../models/Role';
-import { InternalError } from './../core/ApiError';
+import Role, { RoleCode, RoleModel } from '@src/models/Role';
+import { InternalError } from '@src/core/ApiError';
 
 /**
  * The User client.
