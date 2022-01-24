@@ -4,12 +4,12 @@
  */
 import express from 'express';
 import passport from 'passport';
-import generateClientUrl from './../../../helpers/url';
-import { SuccessResponse } from './../../../core/ApiResponse';
-import User from './../../../models/User';
+import generateClientUrl from '@src/helpers/url';
+import { SuccessResponse } from '@src/core/ApiResponse';
+import User from '@src/models/User';
 
 // authenticate passport
-require('./../../../auth');
+require('@src/auth');
 
 const router = express.Router();
 

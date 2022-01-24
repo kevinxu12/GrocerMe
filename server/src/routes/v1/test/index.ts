@@ -4,11 +4,11 @@
  */
 import express from 'express';
 import { Socket } from 'socket.io';
-import User from './../../../models/User';
-import { SuccessMsgResponse } from '../../../core/ApiResponse';
-import asyncHandler from '../../../helpers/asyncHandler';
-import { ClientManagerType } from './../../../socket/ClientManager';
-import { logger } from './../../../app';
+import User from '@src/models/User';
+import { SuccessMsgResponse } from '@src/core/ApiResponse';
+import asyncHandler from '@src/helpers/asyncHandler';
+import { ClientManagerType } from '@src/socket/ClientManager';
+import { logger } from '@src/app';
 const router = express.Router();
 router.get(
   '/',

@@ -3,19 +3,21 @@
  * @file Main backend App
  * @author Kevin Xu
  */
+// Note that the module alias probably won't work with Jest. We will need relative file paths with Jest.
+import 'module-alias/register';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
-import { front_end_dev_cors_url } from './config';
-import logger from './core/logger';
+import { front_end_dev_cors_url } from '@src/config';
+import logger from '@src/core/logger';
 export { logger };
 
-import routesV1 from './routes/v1';
-import { initalizeSocket as initializeSocket, InternalSocketObjType } from './socket';
+import routesV1 from '@src/routes/v1';
+import { initalizeSocket as initializeSocket, InternalSocketObjType } from '@src/socket';
 import passport from 'passport';
-import { initializeS3Client } from './aws/s3';
-import morgan from './core/morgan';
+import { initializeS3Client } from '@src/aws/s3';
+import morgan from '@src/core/morgan';
 
 // initialize the mongo database
 require('./database');

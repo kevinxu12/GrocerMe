@@ -2,13 +2,13 @@
  * @file Create a singular backend server
  * @author Kevin Xu
  */
-import ClientManager, { ClientManagerType } from './ClientManager';
+import ClientManager, { ClientManagerType } from '@src/socket/ClientManager';
 import { Server, Socket } from 'socket.io';
 import { createServer } from 'http';
 import { Application } from 'express';
-import { port, front_end_dev_cors_url } from './../config';
-import User from '~/models/User';
-import { logger } from './../app';
+import { port, front_end_dev_cors_url } from '@src/config';
+import User from '@src/models/User';
+import { logger } from '@src/app';
 
 export type InternalSocketObjType = {
   clientManager: ClientManagerType;

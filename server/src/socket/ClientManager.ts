@@ -3,7 +3,7 @@
  * @author Kevin Xu
  */
 import { Socket } from 'socket.io';
-import User from './../models/User';
+import User from '@src/models/User';
 
 export type ClientManagerType = {
   addClient: (client: Socket) => void;

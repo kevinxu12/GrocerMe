@@ -3,14 +3,14 @@
  * @author Kevin Xu
  */
 import passport from 'passport';
-import { RoleCode } from './../models/Role';
-import { BadRequestError } from './../core/ApiError';
-import UserRepo from './../repository/UserRepo';
-import User from './../models/User';
+import { RoleCode } from '@src/models/Role';
+import { BadRequestError } from '@src/core/ApiError';
+import UserRepo from '@src/repository/UserRepo';
+import User from '@src/models/User';
 import { Types } from 'mongoose';
 import { Profile } from 'passport-google-oauth20';
-import { google } from './../config';
-import { logger } from './../app';
+import { google } from '@src/config';
+import { logger } from '@src/app';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
