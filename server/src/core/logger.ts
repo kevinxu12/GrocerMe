@@ -23,30 +23,30 @@ const logLevels = {
 /**
  * Format meta into a string object. This may include any number of kwargs that is captured by meta.
  *
- * @param {any} meta raw metta object
+ * @param {any} splat raw metta object
  * @returns {string} formatted meta string
  */
-const formatMeta = (meta: any): string => {
+const formatSplat = (splat: any): string => {
   // You can format the splat yourself
-  const splat = meta[Symbol.for('splat')];
   if (splat && splat.length) {
     return splat.length === 1 ? JSON.stringify(splat[0]) : JSON.stringify(splat);
   }
   return '';
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const customFormatWithSplat = format.printf(
-  ({ timestamp, level, message, label = '', ...meta }) =>
-    `[${timestamp}] ${level}\t ${label} : ${message} ${formatMeta(meta)}`,
-);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const customFormat = format.printf(({ timestamp, level, message, label = '' }) => {
-  return `[${timestamp}] ${level}\t ${label} : ${message}`;
+const customFormatWithSplat = format.printf((info) => {
+  if (info instanceof Error) {
+    return `${info.timestamp} [${info.label}] ${info.level}: ${info.message} ${
+      info.stack
+    } ${formatSplat(info.splat)}`;
+  }
+  return `[${info.timestamp}] ${info.level}\t ${info.label} : ${info.message} ${formatSplat(
+    info.splat,
+  )}`;
 });
 
 const alignColorsAndTime = format.combine(
+  format.errors({ stack: true }),
   format.colorize({
     all: true,
   }),
@@ -61,12 +61,8 @@ const alignColorsAndTime = format.combine(
 
 const logger = createLogger({
   levels: logLevels.levels,
-  transports: [
-    new transports.Console({
-      level: 'http',
-      format: alignColorsAndTime,
-    }),
-  ],
+  format: alignColorsAndTime,
+  transports: [new transports.Console({})],
 });
 addColors(logLevels.colors);
 
