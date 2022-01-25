@@ -11,6 +11,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-types': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'jsdoc/require-file-overview': 2,
+    'prettier/prettier': 'warn',
     'jsdoc/require-jsdoc': [
       'error',
       {
