@@ -21,6 +21,7 @@ import morgan from '@src/core/morgan';
 
 // initialize the mongo database
 require('./database');
+require('./mail');
 // initialize the s3 client
 const s3client = initializeS3Client();
 

@@ -55,6 +55,9 @@ GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 GOOGLE_CALLBACK_URL=/google/callback
 
+GOOGLE_MAIL_NAME=
+GOOGLE_MAIL_PASSWORD=
+
 ```
 
 - Create a `.env` file in `client` in the `main` branch with the following lines of code

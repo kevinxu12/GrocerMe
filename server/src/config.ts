@@ -29,4 +29,7 @@ export const google = {
   client_id: process.env.GOOGLE_CLIENT_ID || '',
   client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
   callback_url: process.env.GOOGLE_CALLBACK_URL || '', // this can be calculated in future
+  refresh_token: process.env.GOOGLE_REFRESH_TOKEN || '',
+  mail_name: process.env.GOOGLE_MAIL_NAME || '',
+  mail_password: process.env.GOOGLE_MAIL_PASSWORD || '',
 };

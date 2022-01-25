@@ -9,9 +9,10 @@ import { SuccessMsgResponse } from '@src/core/ApiResponse';
 import asyncHandler from '@src/helpers/asyncHandler';
 import { ClientManagerType } from '@src/socket/ClientManager';
 import { logger } from '@src/app';
+import { sendInternalEmail } from '@src/mail';
 const router = express.Router();
 router.get(
-  '/',
+  '/socket',
   asyncHandler(async (req, res) => {
     const test_payload = { hi: 'hi' };
     const clientManager: ClientManagerType = req.app.get('clientManager');
@@ -25,4 +26,19 @@ router.get(
     new SuccessMsgResponse('Test success').send(res);
   }),
 );
+
+router.get(
+  '/email',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  asyncHandler(async (req, res) => {
+    const options = {
+      to: 'xukevin@sas.upenn.edu',
+      subject: 'test',
+      text: 'text',
+    };
+    await sendInternalEmail(options);
+    new SuccessMsgResponse('Test email success').send(res);
+  }),
+);
+
 export default router;
