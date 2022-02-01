@@ -1,21 +1,22 @@
 /**
  * @file A Home page for logged-in users, both consumers and suppliers
+ * Dashboard is not a private route, because dashboard will refresh periodically to check if the user is still logged in or not.
  * @author Kevin Xu
  */
 import React, { ComponentType, Dispatch, memo } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import changeAuth, { logout } from 'store/auth/actions';
-import { Role, StatusCode, User } from 'types/rest';
+import { Role, User } from 'types/rest';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { useHistory } from 'react-router-dom';
-import generateServerUrl from 'utils/url';
 import { ChangeAuthAction, LogoutAction } from 'types/actions';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectRoles, makeSelectUsername } from 'store/auth/selectors';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { Wrapper } from 'app/components/PrivateWrapper';
 import { useSocket } from 'context/SocketContext';
+import { Api, parseAxiosSuccessResponse } from 'utils/request';
 
 interface DashboardPropsType {
   changeAuth: (email: string, roles?: Role[]) => void;
@@ -34,7 +35,12 @@ interface DashboardPropsType {
  * @param {Role[]} props.roles the roles of logged-in user in redux, if this exists
  * @returns {React.ReactElement} Dashboard Component
  */
-const Dashboard = (props: DashboardPropsType): React.ReactElement => {
+const Dashboard = ({
+  changeAuth,
+  logout,
+  username,
+  roles,
+}: DashboardPropsType): React.ReactElement => {
   const history = useHistory();
   const socket = useSocket();
   useDeepCompareEffect(() => {
@@ -42,26 +48,19 @@ const Dashboard = (props: DashboardPropsType): React.ReactElement => {
      * Test function to listen to a socket thats emitted
      */
     async function checkLogin(): Promise<void> {
-      const response: AxiosResponse = await axios.get(
-        generateServerUrl('/loggedIn'),
-        { withCredentials: true },
-      );
-      const responseBody: AxiosResponse['data'] = response.data;
-      console.log(responseBody);
-      if (responseBody.statusCode === StatusCode.SUCCESS) {
-        const user: User = responseBody.data;
-        if (user) {
-          console.log('Found a logged in user. Now logging in');
-          props.changeAuth(user.email, user.roles);
-          socket.emit('login', user);
-        } else {
-          props.logout();
-          history.push('/');
-        }
+      const response: AxiosResponse = await Api.get('/loggedin');
+      const user = parseAxiosSuccessResponse<User>(response);
+      console.log(user);
+      if (user == null) {
+        logout();
+        history.push('/');
+        return;
       }
+      changeAuth(user.email, user.roles);
+      socket.emit('login', user);
     }
     checkLogin();
-  }, [props.username, props.roles]);
+  }, [username, roles]);
   return <Wrapper>Sample Dashboard</Wrapper>;
 };
 

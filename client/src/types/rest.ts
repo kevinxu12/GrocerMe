@@ -1,5 +1,6 @@
 /**
- * @file Backend types for the types in the REST API. These will probably grow stale as the api's change, so maye we should think of a better way to keep the frontend and backend types synced
+ * @file Backend types for the types in the REST API.
+ * These will probably grow stale as the api's change, so maye we should think of a better way to keep the frontend and backend types synced
  * @author Kevin Xu
  */
 export interface Role {
@@ -15,6 +16,18 @@ export interface User {
   name: string;
   email: string;
 }
+
+export interface SupplierRequest {
+  _id: string;
+  requester?: User;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+  active: boolean;
+  email: string;
+  approvedBy?: string;
+}
+
 export interface SuccessResponse<T> {
   statusCode: string;
   message: string;
@@ -32,4 +45,10 @@ export enum RoleCode {
   CONSUMER = 'CONSUMER',
   SUPPLIER = 'SUPPLIER',
   ADMIN = 'ADMIN',
+}
+
+export enum RequestStatus {
+  REJECTED = 'REJECTED',
+  ACCEPTED = 'ACCEPTED',
+  AWAITING = 'AWAITING',
 }

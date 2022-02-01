@@ -30,7 +30,6 @@ const schema = new Schema(
       required: true,
       unique: true,
       trim: true,
-      select: false, // check what this does
     },
     firstTime: {
       type: Schema.Types.Boolean,
@@ -45,17 +44,14 @@ const schema = new Schema(
         },
       ],
       required: true,
-      select: false,
     },
     createdAt: {
       type: Date,
       required: true,
-      select: false,
     },
     updatedAt: {
       type: Date,
       required: true,
-      select: false,
     },
   },
   {

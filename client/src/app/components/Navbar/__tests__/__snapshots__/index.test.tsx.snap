@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Navbar  /> should match snapshot 1`] = `
+exports[`<Navbar  /> should match snapshot for Navbar 1`] = `
 .c1 {
   width: 30%;
   display: -webkit-box;

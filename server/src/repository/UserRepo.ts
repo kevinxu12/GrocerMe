@@ -6,6 +6,7 @@ import User, { UserModel } from '@src/models/User';
 import { Types } from 'mongoose';
 import Role, { RoleCode, RoleModel } from '@src/models/Role';
 import { InternalError } from '@src/core/ApiError';
+import { logger } from '@src/app';
 
 /**
  * The User client.
@@ -19,14 +20,27 @@ export default class UserRepo {
    */
   public static findById(id: Types.ObjectId): Promise<User | null> {
     return UserModel.findOne({ _id: id })
-      .select('+email +roles')
       .populate({
         path: 'roles',
-        match: { status: true },
       })
       .lean<User>()
       .exec();
   }
+
+  /**
+   * Updates a user by email
+   *
+   * @param {string} email email to match and update by
+   * @param {any} new_attrs attributes to override
+   */
+  public static async updateByEmail(email: string, new_attrs: any) {
+    await UserModel.findOneAndUpdate(
+      { email: email },
+      { $set: new_attrs },
+      { new: true, runValidators: true },
+    );
+  }
+
   /**
    * Searches for a Mongoose User within Atlas by their email
    *
@@ -35,11 +49,8 @@ export default class UserRepo {
    */
   public static findByEmail(email: string): Promise<User | null> {
     return UserModel.findOne({ email: email })
-      .select('+email +roles')
       .populate({
         path: 'roles',
-        match: { status: true },
-        select: { code: 1 },
       })
       .lean<User>()
       .exec();
@@ -58,7 +69,7 @@ export default class UserRepo {
     if (!role) {
       if (roleCode in RoleCode) {
         role = await RoleModel.create({ code: roleCode } as Role);
-        console.log(`Creating a new role with role ${roleCode}`);
+        logger.info(`Creating a new role with role ${roleCode}`);
       } else {
         throw new InternalError('Role must be defined');
       }

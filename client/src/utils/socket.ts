@@ -1,5 +1,5 @@
 /**
- * @file Socket helpers
+ * @file Helpers for socket.js
  * @author Kevin Xu
  */
 import { io, Socket } from 'socket.io-client';

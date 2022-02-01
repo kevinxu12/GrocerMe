@@ -11,4 +11,6 @@ export enum Constants {
   TEST_SOCKET_URL = '/test_socket',
   ADMIN_HOME = '/admin',
   DEFAULT_DEV_URL = 'http://localhost:8000',
+  SUPPLIER_HOME = '/supplier',
+  TEST_USERNAME = 'test_username',
 }

@@ -1,12 +1,12 @@
 /**
- * @file Generate auth related helpers
+ * @file Generate authentication related helpers
  * @author Kevin Xu
  */
 
 import { Role, RoleCode } from 'types/rest';
 import { Constants } from './constants';
 
-const ALL_PATHS = [Constants.TEST_SOCKET_URL];
+const ALL_PATHS = [Constants.TEST_SOCKET_URL, Constants.SUPPLIER_HOME];
 const ADMIN_PATHS = [Constants.ADMIN_HOME, ...ALL_PATHS];
 const CONSUMER_PATHS = [Constants.USER_HOME, ...ALL_PATHS];
 const SUPPLIER_PATHS = [Constants.USER_HOME, ...ALL_PATHS];

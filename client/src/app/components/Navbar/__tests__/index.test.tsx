@@ -3,13 +3,10 @@
  * @author Kevin Xu
  */
 import * as React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { NavBar } from '..';
 import { initialState } from 'store/auth/reducer';
-import { Role } from 'types/rest';
-import { AuthState } from 'types/RootState';
+import { MockStoreWrapper } from 'utils/test';
+import { RootState } from 'types/RootState';
 
 jest.mock('react-i18next', () => ({
   /**
@@ -32,17 +29,9 @@ jest.mock('react-i18next', () => ({
 }));
 
 describe('<Navbar  />', () => {
-  const mockStore = configureStore();
-  let store;
-
-  it('should match snapshot', () => {
-    const state = { auth: initialState };
-    store = mockStore(state);
-    const loadingIndicator = render(
-      <Provider store={store}>
-        <NavBar />
-      </Provider>,
-    );
-    expect(loadingIndicator.container.firstChild).toMatchSnapshot();
+  const mockStoreWrapper = new MockStoreWrapper<RootState>({auth: initialState});
+  it('should match snapshot for Navbar', () => {
+    const nb = mockStoreWrapper.renderComponentWithProvider(<NavBar/>)
+    expect(nb.container.firstChild).toMatchSnapshot();
   });
 });

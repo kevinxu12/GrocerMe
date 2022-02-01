@@ -12,17 +12,19 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './../styles/global-styles';
 import { themes } from './../styles/themes/themes';
-import { HomePage } from './pages/HomePage/loadable';
+import { HomePage } from './pages/Landing/loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import PublicRoute from './components/PublicRoute';
 import TestSocketPage from './pages/TestSocketPage';
 import { NavBar } from './components/Navbar';
 import { Constants } from 'utils/constants';
-import { Dashboard } from './pages/Dashboard/loadable';
+import { Dashboard } from './pages/Consumer/loadable';
 import { useSelector } from 'react-redux';
 import { RootState } from 'types';
 import PrivateRoute from './components/PrivateRoute';
+import SupplierRouter from './pages/Supplier';
 import './app.css';
+import { AdminDashboard } from './pages/Admin';
 
 /**
  * @returns {React.ReactElement} Frontend App for the project
@@ -35,8 +37,8 @@ export function App() {
   };
   return (
     <div>
-      <NavBar />
       <BrowserRouter>
+        <NavBar />
         <ThemeProvider theme={theme}>
           <Switch>
             <PublicRoute
@@ -50,6 +52,18 @@ export function App() {
               exact
               path={Constants.TEST_SOCKET_URL}
               component={TestSocketPage}
+            />
+            <PrivateRoute
+              auth={auth}
+              exact
+              path={Constants.SUPPLIER_HOME}
+              component={SupplierRouter}
+            />
+            <PrivateRoute
+              auth={auth}
+              exact
+              path={Constants.ADMIN_HOME}
+              component={AdminDashboard}
             />
             <Route exact path={Constants.USER_HOME} component={Dashboard} />
             <Route component={NotFoundPage} />

@@ -6,14 +6,14 @@ import React, { useState } from 'react';
 import { Route, Redirect, useLocation } from 'react-router-dom';
 import { isPathAuthenticated } from 'utils/auth';
 import { Constants } from 'utils/constants';
-import { initialState } from 'store/auth/reducer';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { Wrapper } from '../PrivateWrapper';
+import { AuthState } from 'types/RootState';
 
 /**
  * @param {...any} root0 props to pass to component if authenticated
  * @param {React.ElementType} root0.component component to return if authenticated
- * @param {initialState} root0.auth the auth object containing username and roles
+ * @param {AuthState} root0.auth the auth object containing username and roles
  * @returns {React.ElementType} either a Redirect or the component passed in props
  */
 const PrivateRoute = ({
@@ -27,10 +27,9 @@ const PrivateRoute = ({
     isPathAuthenticated(path, auth.roles),
   );
   useDeepCompareEffect(() => {
-    console.log(path);
     setIsAuthenticated(isPathAuthenticated(path, auth.roles));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.roles, auth.username]);
+  }, [auth]);
   return (
     <Route
       {...rest}

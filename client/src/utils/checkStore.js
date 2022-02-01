@@ -1,5 +1,5 @@
 /**
- * @file Class containig validating function for store
+ * @file validate the redux store
  * @author Kevin Xu
  */
 import { conformsTo, isFunction, isObject } from 'lodash';

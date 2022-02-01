@@ -2,7 +2,7 @@
  * @file Component for Navbar shown for logged-in users
  * @author Kevin Xu
  */
-import React, { ComponentType, memo, useState } from 'react';
+import React, { ComponentType, memo } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import * as AiIcons from 'react-icons/ai';
 import styled from 'styled-components/macro';
@@ -15,8 +15,9 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectRoles } from 'store/auth/selectors';
 import { Role, RoleCode } from 'types/rest';
 import { isRoleCodeIncluded } from 'utils/auth';
-import useDeepCompareEffect from 'use-deep-compare-effect';
 import { StyledConstants } from 'styles/StyleConstants';
+import { Link } from 'react-router-dom';
+import { Constants } from 'utils/constants';
 
 interface PrivateNavDispatchType {
   onLogout: () => void;
@@ -28,33 +29,33 @@ interface PrivateNavPropsType extends PrivateNavDispatchType {
 /**
  * @param {object} props props passed
  * @param {Function} props.onLogout logout function
+ * @param {Role[]} props.roles the roles of the currently logged in user
  * @returns {React.ElementType} Private Navbar Component
  */
-const PrivateNav = (props: PrivateNavPropsType): React.ReactElement => {
-  const [isSupplier, setIsSupplier] = useState(false);
-
-  useDeepCompareEffect(() => {
-    setIsSupplier(
-      props.roles ? isRoleCodeIncluded(RoleCode.SUPPLIER, props.roles) : false,
-    );
-  }, [props.roles]);
-
-  console.log('rendering the sidebar');
+const PrivateNav = ({
+  roles,
+  onLogout,
+}: PrivateNavPropsType): React.ReactElement => {
+  const isAdmin = isRoleCodeIncluded(RoleCode.ADMIN, roles);
   return (
     <Sidebar>
       <ProSidebar>
         <Menu>
           <MenuItem icon={<AiIcons.AiFillHome />}>Home</MenuItem>
-          {isSupplier && (
-            <MenuItem icon={<AiIcons.AiFillDashboard />}>
-              {' '}
-              Supplier Home{' '}
+          {isAdmin ? (
+            <MenuItem icon={<AiIcons.AiFillCrown />}>
+              Admin Dashboard <Link to={Constants.ADMIN_HOME} />{' '}
             </MenuItem>
+          ) : (
+            <div />
           )}
+          <MenuItem icon={<AiIcons.AiFillDashboard />}>
+            Supplier Home <Link to={Constants.SUPPLIER_HOME} />
+          </MenuItem>
           <MenuItem
             icon={<AiIcons.AiOutlineLogout />}
             onClick={async () => {
-              await props.onLogout();
+              await onLogout();
             }}
           >
             Logout
