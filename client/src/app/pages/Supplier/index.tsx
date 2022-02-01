@@ -1,18 +1,15 @@
 /**
- * @file Supplier Route is a top-level component that routes to the correct component depending
- * on whether a user is a supplier or not
- * If a user is a supplier, route to a "Supplier Dashboard" Component
- * Else, route to a "Not Supplier" Component
+ * @file Supplier Route is a top-level component for the pages that show on the /supplier tab
  * @author Kevin Xu
  */
 import { compose } from '@reduxjs/toolkit';
-import React, { memo, useState } from 'react';
+import SnackbarComponent from 'app/components/SnackbarComponent';
+import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectRoles } from 'store/auth/selectors';
-import { Role, RoleCode } from 'types/rest';
-import { isRoleCodeIncluded } from 'utils/auth';
-import { NotSupplier } from './NotSupplier';
+import { Role } from 'types/rest';
+import { Supplier } from './Supplier';
 
 export interface SupplierHomePropTypes {
   roles: Role[];
@@ -26,10 +23,7 @@ export interface SupplierHomePropTypes {
 const SupplierRoute = ({
   roles,
 }: SupplierHomePropTypes): React.ReactElement => {
-  const [isSupplier] = useState(isRoleCodeIncluded(RoleCode.SUPPLIER, roles));
-  return (
-    <div>{isSupplier ? <div> Hello Supplier </div> : <NotSupplier />}</div>
-  );
+  return <SnackbarComponent roles={roles} component={Supplier} />;
 };
 
 const mapStateToProps = createStructuredSelector({

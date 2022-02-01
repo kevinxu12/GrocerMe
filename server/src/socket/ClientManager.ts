@@ -10,7 +10,7 @@ export type ClientManagerType = {
   removeClient: (client: Socket) => void;
   getAllClients: () => Socket[];
   registerLogin: (user: User, client: Socket) => void;
-  getClientByUser: (user: User | undefined) => Socket | null;
+  getClientByEmail: (email: string) => Socket | null;
 };
 
 /**
@@ -66,14 +66,11 @@ export default function ClientManager() {
   /**
    * Gets a client by user
    *
-   * @param {User | undefined} user the logged in user
+   * @param {string} email the email to search for
    * @returns {Socket | null} the client corresponding to the user, null if no client or user specified
    */
-  function getClientByUser(user: User | undefined) {
-    if (!user) {
-      return null;
-    }
-    return username_clients.get(user.email) || null;
+  function getClientByEmail(email: string) {
+    return username_clients.get(email) || null;
   }
 
   return {
@@ -81,6 +78,6 @@ export default function ClientManager() {
     removeClient,
     getAllClients,
     registerLogin,
-    getClientByUser,
+    getClientByEmail,
   };
 }

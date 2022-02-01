@@ -1,14 +1,16 @@
 /**
- * @file Admin Dashboard
+ * @file Admin dashboard Home component
  * @author Kevin Xu
  */
+
+import SnackbarComponent from 'app/components/SnackbarComponent';
 import React from 'react';
+import { SupplierRequestDashboard } from './SupplierRequest';
 
 /**
- * Render a dummy Admin Dashboard Component
  *
- * @returns {React.ReactElement} Admin Dashboard Component
+ * @returns {React.ReactElement} Admin Dashboard
  */
 export const AdminDashboard = (): React.ReactElement => {
-  return <div> Placeholder. Please make a dashboard eventually </div>;
+  return <SnackbarComponent component={SupplierRequestDashboard} />;
 };

@@ -3,8 +3,7 @@
  * @author Kevin Xu
  */
 /* eslint-disable jsdoc/require-returns-type */
-import axios, { AxiosResponse } from 'axios';
-import generateServerUrl from './url';
+import { AxiosResponse } from 'axios';
 
 /**
  * Parses a raw axios response to fetch data stored within our custom SuccessResponse
@@ -13,9 +12,13 @@ import generateServerUrl from './url';
  * @returns Custom data stored in the SuccessResponse, else Null
  */
 export function parseAxiosSuccessResponse<T>(
-  response: AxiosResponse,
+  response: AxiosResponse | undefined,
 ): T | null {
-  if (response.status === 204 || response.status === 205) {
+  if (
+    response === undefined ||
+    response.status === 204 ||
+    response.status === 205
+  ) {
     return null;
   }
   const responseData = response.data;
@@ -49,34 +52,4 @@ export function checkStatus(response) {
  */
 export function timeout(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-/**
- * An Api client wrapper around axios. Use this instead of calling axios directly
- */
-export class Api {
-  /**
-   * Wrapper around axios.get
-   *
-   * @param {string} url the raw url string
-   * @returns {AxiosResponse} axiosResponse
-   */
-  public static async get(url: string) {
-    return await axios.get(generateServerUrl(url), { withCredentials: true });
-  }
-
-  /**
-   * Wrapper around axios.post
-   *
-   * TO DO, we should probably type the request body, instead of using ANY in the future.
-   *
-   * @param {string} url raw url string
-   * @param {any} body Post object
-   * @returns {AxiosResponse} axiosResponse
-   */
-  public static async post(url: string, body: any = {}) {
-    return await axios.post(generateServerUrl(url), body, {
-      withCredentials: true,
-    });
-  }
 }

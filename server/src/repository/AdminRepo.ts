@@ -13,6 +13,8 @@ import UserRepo from './UserRepo';
  */
 export default class AdminRepo {
   /**
+   * Creates a new supplier request for a user
+   *
    * @param {User} user The user object in the session
    * @returns {Promise} The new supplier request created
    */
@@ -28,6 +30,7 @@ export default class AdminRepo {
     });
   }
   /**
+   * Find all supplier requests
    *
    * @returns {Promise} returns all supplier requests
    */
@@ -39,6 +42,8 @@ export default class AdminRepo {
   }
 
   /**
+   * Find a supplier request by email
+   *
    * @param {string} email the email to search a request by
    * @returns {Promise} returns a supplier request if matches
    */
@@ -47,5 +52,23 @@ export default class AdminRepo {
       .populate({ path: 'requester' })
       .lean<SupplierRequest>()
       .exec();
+  }
+
+  /**
+   * Updates a supplier request by email
+   *
+   * @param {string} email email to match and update by
+   * @param {any} new_attrs attributes to override
+   * @returns {Promise} updated Supplier Request
+   */
+  public static async updateByEmail(
+    email: string,
+    new_attrs: any,
+  ): Promise<SupplierRequest | null> {
+    return await SupplierRequestModel.findOneAndUpdate(
+      { email: email },
+      { $set: new_attrs },
+      { new: true, runValidators: true },
+    );
   }
 }

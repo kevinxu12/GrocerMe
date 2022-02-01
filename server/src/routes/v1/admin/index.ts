@@ -5,11 +5,12 @@
  */
 import { SuccessResponse } from '@src/core/ApiResponse';
 import asyncHandler from '@src/helpers/asyncHandler';
+import { RequestStatus } from '@src/helpers/model';
 import SupplierRequest from '@src/models/SupplierRequest';
 import User from '@src/models/User';
 import AdminRepo from '@src/repository/AdminRepo';
 import express from 'express';
-import { newSupplierRequest } from './Admin';
+import * as Logic from './logic';
 
 const router = express.Router();
 
@@ -49,13 +50,38 @@ router.get(
   }),
 );
 
+router.post(
+  '/acceptSupplierRequest',
+  asyncHandler(async (req, res) => {
+    const requester_email = req.body.email;
+    const supplierRequest = await Logic.acceptSupplierRequestLogic(requester_email);
+    return new SuccessResponse<SupplierRequest | null>(
+      'Created a new supplier request',
+      supplierRequest as SupplierRequest,
+    ).send(res);
+  }),
+);
+
+router.post(
+  '/rejectSupplierRequest',
+  asyncHandler(async (req, res) => {
+    const supplierRequest = await AdminRepo.updateByEmail(req.body.email, {
+      status: RequestStatus.REJECTED,
+    });
+    return new SuccessResponse<SupplierRequest | null>(
+      'Created a new supplier request',
+      supplierRequest as SupplierRequest,
+    ).send(res);
+  }),
+);
+
 /**
  * Creates a new supplier request
  */
 router.post(
   '/newSupplierRequest',
   asyncHandler(async (req, res) => {
-    const supplierRequest = await newSupplierRequest(req.user as User);
+    const supplierRequest = await Logic.newSupplierRequest(req.user as User);
     return new SuccessResponse<SupplierRequest | null>(
       'Created a new supplier request',
       supplierRequest as SupplierRequest,

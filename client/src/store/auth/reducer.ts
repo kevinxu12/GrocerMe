@@ -40,7 +40,6 @@ const authReducer = (
         if (payload.roles) {
           draft.roles = payload.roles;
         }
-        console.log(draft);
         break;
       case LOGOUT:
         console.log('Calling logout, clearing state');

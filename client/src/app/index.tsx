@@ -25,6 +25,7 @@ import PrivateRoute from './components/PrivateRoute';
 import SupplierRouter from './pages/Supplier';
 import './app.css';
 import { AdminDashboard } from './pages/Admin';
+import RefreshPrivateRoute from './components/RefreshPrivateRoute';
 
 /**
  * @returns {React.ReactElement} Frontend App for the project
@@ -65,7 +66,11 @@ export function App() {
               path={Constants.ADMIN_HOME}
               component={AdminDashboard}
             />
-            <Route exact path={Constants.USER_HOME} component={Dashboard} />
+            <RefreshPrivateRoute
+              exact
+              path={Constants.USER_HOME}
+              component={Dashboard}
+            />
             <Route component={NotFoundPage} />
           </Switch>
           <GlobalStyle />

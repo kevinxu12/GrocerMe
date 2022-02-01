@@ -15,6 +15,10 @@ export const socket =
   }) || null;
 
 /**
+ * For now we don't really need this helper
+ * But if for some reason we don't want to use socket.on(..., handler)
+ * And want 'await socket.on(message)' we can use this
+ *
  * @param { Socket } socket the socket we are wrapping
  * @param {string} event socket event message string to listen for
  * @returns {Promise} data

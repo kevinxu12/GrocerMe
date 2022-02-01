@@ -6,10 +6,11 @@
 import { Role, RoleCode } from 'types/rest';
 import { Constants } from './constants';
 
-const ALL_PATHS = [Constants.TEST_SOCKET_URL, Constants.SUPPLIER_HOME];
-const ADMIN_PATHS = [Constants.ADMIN_HOME, ...ALL_PATHS];
-const CONSUMER_PATHS = [Constants.USER_HOME, ...ALL_PATHS];
-const SUPPLIER_PATHS = [Constants.USER_HOME, ...ALL_PATHS];
+const NO_ROLE_PATHS = [Constants.HOME_URL, Constants.TEST_SOCKET_URL];
+const ALL_ROLE_PATHS = [Constants.SUPPLIER_HOME, Constants.USER_HOME];
+const ADMIN_PATHS = [Constants.ADMIN_HOME];
+const CONSUMER_PATHS = [];
+const SUPPLIER_PATHS = [];
 const role_path_object = {
   ADMIN: ADMIN_PATHS,
   CONSUMER: CONSUMER_PATHS,
@@ -28,8 +29,13 @@ export const isPathAuthenticated = (path: string, roles: Role[]): boolean => {
     .filter((role: Role) => role.status)
     .map((role: Role) => role.code);
   // Admin, Supplier
-  const all_paths = role_codes.map(code => role_path_object[code]);
-  const all_available_paths: string[] = [].concat(...all_paths);
+  let all_paths = role_codes.map(code => role_path_object[code]);
+  if (roles.length > 0) {
+    all_paths = all_paths.concat(ALL_ROLE_PATHS);
+  }
+  const all_available_paths: string[] = NO_ROLE_PATHS.concat(
+    [].concat(...all_paths),
+  );
   return all_available_paths.includes(path);
 };
 
