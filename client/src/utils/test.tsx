@@ -94,3 +94,12 @@ export class MockStoreWrapper<T> {
     return render(<Provider store={store}>{component}</Provider>);
   }
 }
+
+/**
+ * Test Component for class
+ *
+ * @returns {React.ReactElement} Test Component
+ */
+export const TestComponent = (): React.ReactElement => {
+  return <div> Test </div>;
+};

@@ -6,6 +6,7 @@
  * @author Kevin Xu
  */
 import { compose } from '@reduxjs/toolkit';
+import SnackbarComponent from 'app/components/SnackbarComponent';
 import React, { memo, useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -28,7 +29,13 @@ const SupplierRoute = ({
 }: SupplierHomePropTypes): React.ReactElement => {
   const [isSupplier] = useState(isRoleCodeIncluded(RoleCode.SUPPLIER, roles));
   return (
-    <div>{isSupplier ? <div> Hello Supplier </div> : <NotSupplier />}</div>
+    <div>
+      {isSupplier ? (
+        <div> Hello Supplier </div>
+      ) : (
+        <SnackbarComponent component={NotSupplier} />
+      )}
+    </div>
   );
 };
 

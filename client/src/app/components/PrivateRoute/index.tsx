@@ -8,6 +8,7 @@ import { isPathAuthenticated } from 'utils/auth';
 import { Constants } from 'utils/constants';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { Wrapper } from '../PrivateWrapper';
+import ComponentWithSnackbar from '../SnackbarComponent';
 import { AuthState } from 'types/RootState';
 
 /**
@@ -19,6 +20,7 @@ import { AuthState } from 'types/RootState';
 const PrivateRoute = ({
   component: Component,
   auth,
+  withSnackbar = false,
   ...rest
 }): React.ReactElement => {
   const location = useLocation();
@@ -36,7 +38,11 @@ const PrivateRoute = ({
       render={props => {
         return isAuthenticated ? (
           <Wrapper>
-            <Component {...props} />
+            {withSnackbar ? (
+              <ComponentWithSnackbar component={Component} {...props} />
+            ) : (
+              <Component {...props} />
+            )}{' '}
           </Wrapper>
         ) : (
           <Redirect to={Constants.HOME_URL} />

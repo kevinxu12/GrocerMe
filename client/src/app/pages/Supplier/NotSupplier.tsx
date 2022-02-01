@@ -8,16 +8,32 @@
  * @author Kevin Xu
  */
 import React, { useEffect, useState } from 'react';
-import { Api, parseAxiosSuccessResponse } from 'utils/request';
+import { parseAxiosSuccessResponse } from 'utils/request';
 import { RequestStatus, SupplierRequest } from 'types/rest';
 import Button from '@mui/material/Button';
+import { getErrorMessage } from 'utils/errors';
+import Api from 'utils/api';
 
 /**
  *
+ * @param {Object} root0 Props
+ * @param {(string) => void} root0.setMessage sets the message for the API response snackbar
  * @returns {React.ReactElement} See above
  */
-export const NotSupplier = (): React.ReactElement => {
+export const NotSupplier = ({ setMessage }): React.ReactElement => {
   const [requestState, setRequestState] = useState<RequestStatus | null>(null);
+  /**
+   * When the user clicks to make a new request, we fire an API call to make that request. We set the snackbar model
+   * to the corresponding message
+   */
+  const onClick = async () => {
+    try {
+      await Api.post('/newSupplierRequest');
+      setMessage('Successfully posted a new request');
+    } catch (error) {
+      setMessage(getErrorMessage(error));
+    }
+  };
   useEffect(() => {
     /**
      * fetch whether or not a user has requested to be a supplier.
@@ -38,16 +54,13 @@ export const NotSupplier = (): React.ReactElement => {
   return (
     <div>
       {requestState == null ? (
-        <Button
-          variant="contained"
-          onClick={async () => {
-            await Api.post('/newSupplierRequest');
-          }}
-        >
-          Click Here to Become a Supplier
-        </Button>
+        <div>
+          <Button variant="contained" onClick={onClick}>
+            Click Here to Become a Supplier
+          </Button>
+        </div>
       ) : isAwaiting ? (
-        <div> Already submitted Request. Please wait for a response. </div>
+        <div> Already submitted Request. Please wait for a response </div>
       ) : (
         /* if not awaiting, assume the request is rejected */
         <div>You've already been Rejected. For now, you cannot apply again</div>
