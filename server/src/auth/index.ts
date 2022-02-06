@@ -10,7 +10,7 @@ import User from '@src/models/User';
 import { Types } from 'mongoose';
 import { Profile } from 'passport-google-oauth20';
 import { google } from '@src/config';
-import { logger } from '@src/app';
+import logger from '@src/core/logger';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
