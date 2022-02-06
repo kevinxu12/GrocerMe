@@ -11,7 +11,7 @@ export const COLLECTION_NAME = 'supplierRequest';
 
 export default interface SupplierRequest extends Document {
   requester: User;
-  status: string;
+  status: RequestStatus;
   createdAt: Date;
   updatedAt: Date;
   active: boolean;

@@ -6,7 +6,7 @@ import User, { UserModel } from '@src/models/User';
 import { Types } from 'mongoose';
 import Role, { RoleCode, RoleModel } from '@src/models/Role';
 import { InternalError } from '@src/core/ApiError';
-import { logger } from '@src/app';
+import logger from '@src/core/logger';
 
 /**
  * The User client.
@@ -74,7 +74,6 @@ export default class UserRepo {
         throw new InternalError('Role must be defined');
       }
     }
-
     user.roles = [role._id];
     user.createdAt = user.updatedAt = now;
     const createdUser = await UserModel.create(user);

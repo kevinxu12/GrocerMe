@@ -3,8 +3,8 @@
  * @author Kevin Xu
  */
 import AWS from 'aws-sdk';
-import { logger } from './../app';
-import { aws } from '../config';
+import logger from '@src/core/logger';
+import { aws } from '@src/config';
 
 //configuring the AWS environment
 AWS.config.update({

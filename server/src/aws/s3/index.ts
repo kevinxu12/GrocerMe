@@ -4,7 +4,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const s3 = require('@auth0/s3');
-import { logger } from './../../app';
+import logger from '@src/core/logger';
 import AWS from '../';
 
 /* eslint-disable jsdoc/require-returns-type */

@@ -10,7 +10,7 @@ Disable Captcha temporarily so you can connect the new device/server - https://a
  * We should eventually migrate away from personal accounts on behalf of GrocerMe to an official email account?
  * @author Kevin Xu
  */
-import { logger } from '@src/app';
+import logger from '@src/core/logger';
 import { google } from '@src/config';
 import nodemailer from 'nodemailer';
 import smtpTransport from 'nodemailer-smtp-transport';

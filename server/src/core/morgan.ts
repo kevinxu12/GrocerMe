@@ -12,7 +12,7 @@ import { Morgan } from 'morgan';
  * @param {Logger} logger the WinstonLogger that Morgan writes with
  * @returns {Morgan} middleware object
  */
-export default function (logger: Logger) {
+export function createMorgan(logger: Logger) {
   // Override the stream method by telling
   // Morgan to use our custom logger instead of the console.log.
   const stream: StreamOptions = {

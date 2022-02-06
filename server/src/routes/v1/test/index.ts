@@ -8,7 +8,7 @@ import User from '@src/models/User';
 import { SuccessMsgResponse } from '@src/core/ApiResponse';
 import asyncHandler from '@src/helpers/asyncHandler';
 import { ClientManagerType } from '@src/socket/ClientManager';
-import { logger } from '@src/app';
+import logger from '@src/core/logger';
 import { sendInternalEmail } from '@src/mail';
 const router = express.Router();
 router.get(

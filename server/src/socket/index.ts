@@ -8,7 +8,7 @@ import { createServer } from 'http';
 import { Application } from 'express';
 import { port, front_end_dev_cors_url } from '@src/config';
 import User from '@src/models/User';
-import { logger } from '@src/app';
+import logger from '@src/core/logger';
 
 export type InternalSocketObjType = {
   clientManager: ClientManagerType;

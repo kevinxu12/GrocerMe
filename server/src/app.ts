@@ -11,31 +11,34 @@ import cookieSession from 'cookie-session';
 import cors from 'cors';
 import { front_end_dev_cors_url } from '@src/config';
 import logger from '@src/core/logger';
-export { logger };
 
 import routesV1 from '@src/routes/v1';
 import { initalizeSocket as initializeSocket, InternalSocketObjType } from '@src/socket';
 import passport from 'passport';
 import { initializeS3Client } from '@src/aws/s3';
-import morgan from '@src/core/morgan';
+import { connectDb } from './database';
+import { createMorgan } from '@src/core/morgan';
 
 // initialize the mongo database
-require('./database');
-require('./mail');
-// initialize the s3 client
-const s3client = initializeS3Client();
+connectDb();
+// initialize the S3 client
+initializeS3Client();
 
 const app = express();
 
-// pipe the socket.io and the clientManager into req.app.get('...')
-const { io, clientManager }: InternalSocketObjType = initializeSocket(app);
-app.set('clientManager', clientManager);
-app.set('io', io);
+if (process.env.NODE_ENV !== 'test') {
+  require('./mail'); // this should be changed to initializeMailClient()
+
+  // pipe the socket.io and the clientManager into req.app.get('...')
+  const { io, clientManager }: InternalSocketObjType = initializeSocket(app);
+  app.set('clientManager', clientManager);
+  app.set('io', io);
+}
 
 // use cookies to store logged in user
 app.use(cookieSession({ name: 'google-auth-session', keys: ['key1', 'key2'] }));
 app.use(passport.initialize());
-app.use(morgan(logger));
+app.use(createMorgan(logger));
 app.use(passport.session()); // persistent login sessions
 
 app.use(bodyParser.json({ limit: '10mb' })); // add limit to maximum amount of data stored in req.body
