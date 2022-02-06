@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<PrivateRoute  /> Logged in user should show a snackbar component 1`] = `null`;
-
-exports[`<PrivateRoute  /> Logged in user should stay at the current page 1`] = `null`;
-
-exports[`<PrivateRoute  /> Not logged in user should reroute to the home page 1`] = `null`;

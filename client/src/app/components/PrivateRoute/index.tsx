@@ -25,9 +25,9 @@ const PrivateRoute = ({
 }): React.ReactElement => {
   const location = useLocation();
   const path = location.pathname;
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    isPathAuthenticated(path, auth.roles),
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return isPathAuthenticated(path, auth.roles);
+  });
   useDeepCompareEffect(() => {
     setIsAuthenticated(isPathAuthenticated(path, auth.roles));
     // eslint-disable-next-line react-hooks/exhaustive-deps

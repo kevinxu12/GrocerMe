@@ -1,4 +1,7 @@
 
+/**
+ * These should be changed to include mounts in the future?
+ */
 import * as React from 'react';
 import { initialState } from 'store/auth/reducer';
 import PublicRoute from '..';

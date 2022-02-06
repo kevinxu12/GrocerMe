@@ -6,10 +6,14 @@
 import { Role, RoleCode } from 'types/rest';
 import { Constants } from './constants';
 
-const ALL_PATHS = [Constants.TEST_SOCKET_URL, Constants.SUPPLIER_HOME];
-const ADMIN_PATHS = [Constants.ADMIN_HOME, ...ALL_PATHS];
-const CONSUMER_PATHS = [Constants.USER_HOME, ...ALL_PATHS];
-const SUPPLIER_PATHS = [Constants.USER_HOME, ...ALL_PATHS];
+const ALL_PATHS = [
+  Constants.HOME_URL,
+  Constants.TEST_SOCKET_URL,
+  Constants.SUPPLIER_HOME,
+];
+const ADMIN_PATHS = [Constants.ADMIN_HOME];
+const CONSUMER_PATHS = [Constants.USER_HOME];
+const SUPPLIER_PATHS = [Constants.USER_HOME];
 const role_path_object = {
   ADMIN: ADMIN_PATHS,
   CONSUMER: CONSUMER_PATHS,
@@ -29,7 +33,9 @@ export const isPathAuthenticated = (path: string, roles: Role[]): boolean => {
     .map((role: Role) => role.code);
   // Admin, Supplier
   const all_paths = role_codes.map(code => role_path_object[code]);
-  const all_available_paths: string[] = [].concat(...all_paths);
+  const all_available_paths: string[] = ALL_PATHS.concat(
+    [].concat(...all_paths),
+  );
   return all_available_paths.includes(path);
 };
 

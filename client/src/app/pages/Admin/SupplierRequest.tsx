@@ -9,7 +9,6 @@ import Api from 'utils/api';
 import { parseAxiosSuccessResponse } from 'utils/request';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { getErrorMessage } from 'utils/errors';
 
 /**
  * Render a Component where you can manage SupplierRequests

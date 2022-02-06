@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RefreshRoute  /> Logged in user should see state update 1`] = `
+exports[`<RefreshComponent  /> Logged in user should see state update 1`] = `
 .c0 {
   height: 100%;
   width: 100%;
@@ -17,7 +17,7 @@ exports[`<RefreshRoute  /> Logged in user should see state update 1`] = `
 </div>
 `;
 
-exports[`<RefreshRoute  /> No Logged in user should return nearly 1`] = `
+exports[`<RefreshComponent  /> No Logged in user should return nearly 1`] = `
 .c0 {
   height: 100%;
   width: 100%;

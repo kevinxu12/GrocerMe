@@ -2,7 +2,7 @@
  * @file Helper related to unit testing with jest
  */
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 import configureStore from 'redux-mock-store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, RenderResult } from '@testing-library/react';
@@ -77,6 +77,26 @@ export class MockStoreWrapper<T> {
       </Provider>
     );
     return render(jsx);
+  }
+
+  /**
+   * Wraps a component with a Provider and Router
+   *
+   * @param {React.ReactElement} component Component to be wrapped
+   * @param {T} state Optional state to create store with
+   * @returns {ReactElement} testing library render
+   */
+  public genComponentWithRouterProvider(
+    component: React.ReactElement,
+    state: T = this.state,
+  ): React.ReactElement {
+    const store = this.generateStore(state);
+    const jsx = (
+      <Provider store={store}>
+        <Router>{component}</Router>
+      </Provider>
+    );
+    return jsx;
   }
 
   /**

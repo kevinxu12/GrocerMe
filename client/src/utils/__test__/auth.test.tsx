@@ -18,4 +18,9 @@ describe('check auth helpers', () => {
     const path = Constants.ADMIN_HOME;
     expect(isPathAuthenticated(path, roles)).toEqual(false);
   });
+  it('should check isAuthenticated correctly returns false for admin role', () => {
+    const roles = [];
+    const path = Constants.HOME_URL;
+    expect(isPathAuthenticated(path, roles)).toEqual(true);
+  });
 });
