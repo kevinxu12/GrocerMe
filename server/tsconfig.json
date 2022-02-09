@@ -25,6 +25,7 @@
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "types": ["node"],
+  "include": ["src/**/*", "tests"],
   "exclude": [".templates", ".env"]
 }

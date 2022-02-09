@@ -34,6 +34,7 @@ export type MailOptions = {
 
 /**
  * Sends an email to a specified user, with specified subject and text
+ * Returns true if in testing env
  *
  * @param {MailOptions} options Mail options to send an email with
  * @returns {Promise} an asynchronous send email feature

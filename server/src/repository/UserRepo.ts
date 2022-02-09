@@ -65,7 +65,13 @@ export default class UserRepo {
   public static async create(user: User, roleCode: string): Promise<User> {
     const now = new Date();
 
-    let role = await RoleModel.findOne({ code: roleCode }).lean<Role>().exec();
+    let role = await RoleModel.findOneAndUpdate({
+      query: { code: roleCode },
+      update: { $setOnInsert: { code: roleCode, status: true } },
+      options: { upsert: true, new: true, setDefaultsOnInsert: true },
+    })
+      .lean<Role>()
+      .exec();
     if (!role) {
       if (roleCode in RoleCode) {
         role = await RoleModel.create({ code: roleCode } as Role);
@@ -74,7 +80,7 @@ export default class UserRepo {
         throw new InternalError('Role must be defined');
       }
     }
-    user.roles = [role._id];
+    user.roles = [role];
     user.createdAt = user.updatedAt = now;
     const createdUser = await UserModel.create(user);
     return createdUser;

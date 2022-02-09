@@ -2,13 +2,22 @@
  * @file Mongoose model for a User
  * @author Kevin Xu
  */
-import { model, Schema, Document } from 'mongoose';
+import mongoose, { model, Schema, Document } from 'mongoose';
 import Role from './Role';
 
 export const DOCUMENT_NAME = 'User';
 export const COLLECTION_NAME = 'users';
 
-export default interface User extends Document {
+export default interface User {
+  _id?: mongoose.Types.ObjectId;
+  name: string;
+  email: string;
+  roles: Role[];
+  createdAt?: Date;
+  updatedAt?: Date;
+  firstTime: boolean;
+}
+export interface UserDocument extends Document {
   name: string;
   email: string;
   roles: Role[];
@@ -48,10 +57,12 @@ const schema = new Schema(
     createdAt: {
       type: Date,
       required: true,
+      default: Date.now(),
     },
     updatedAt: {
       type: Date,
       required: true,
+      default: Date.now(),
     },
   },
   {
@@ -59,4 +70,4 @@ const schema = new Schema(
   },
 );
 
-export const UserModel = model<User>(DOCUMENT_NAME, schema, COLLECTION_NAME);
+export const UserModel = model<UserDocument>(DOCUMENT_NAME, schema, COLLECTION_NAME);

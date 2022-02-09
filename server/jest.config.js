@@ -9,5 +9,6 @@ module.exports = {
   moduleNameMapper: {
     '@src/(.*)': '<rootDir>/src/$1',
   },
+  testTimeout: 30000,
   collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!**/node_modules/**'],
 };

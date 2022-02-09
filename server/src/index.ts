@@ -3,7 +3,7 @@
  * @author Kevin Xu
  */
 import path from 'path';
-import app from './app';
+import app from './fullApp';
 import express from 'express';
 
 app.use(express.static(path.resolve(__dirname, '../../client/build')));

@@ -5,13 +5,11 @@
 import mongoose from 'mongoose';
 import logger from '@src/core/logger';
 import { db } from '@src/config';
-
 /**
  *
  */
 export const connectDb = async () => {
   const dbURI = `mongodb+srv://${db.user}:${db.password}@${db.host_name}.vs8ch.mongodb.net/${db.name}?retryWrites=true&w=majority`;
-
   const options = {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -28,15 +26,13 @@ export const connectDb = async () => {
   logger.debug(dbURI);
 
   // Create the database connection
-  mongoose
-    .connect(dbURI, options)
-    .then(() => {
-      logger.info('Mongoose connection done');
-    })
-    .catch((e) => {
-      logger.info('Mongoose connection error');
-      logger.error(e);
-    });
+  try {
+    await mongoose.connect(dbURI, options); // https://github.com/facebook/jest/issues/11665
+    logger.info('Mongoose connection done');
+  } catch (error) {
+    logger.info('Mongoose connection error');
+    logger.error(error);
+  }
 
   // CONNECTION EVENTS
   // When successfully connected
@@ -60,4 +56,12 @@ export const connectDb = async () => {
       process.exit(0);
     });
   });
+};
+
+/**
+ *
+ */
+export const disconnectDb = async () => {
+  await mongoose.connection.dropDatabase();
+  await mongoose.connection.close();
 };
