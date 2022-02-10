@@ -3,14 +3,25 @@
  * @author Kevin Xu
  */
 import { RequestStatus } from '@src/helpers/model';
-import { model, Schema, Document } from 'mongoose';
+import mongoose, { model, Schema, Document } from 'mongoose';
 import User from './User';
 
 export const DOCUMENT_NAME = 'SupplierRequest';
 export const COLLECTION_NAME = 'supplierRequest';
 
-export default interface SupplierRequest extends Document {
-  requester: User;
+export default interface SupplierRequest {
+  _id?: mongoose.Types.ObjectId;
+  requester: User; // we make this optional because it makes testing easier.
+  status: RequestStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  active: boolean;
+  email: string;
+  approvedBy?: string;
+}
+
+export interface SupplierRequestDocument extends Document {
+  requester: User; // we make this optional because it makes testing easier.
   status: RequestStatus;
   createdAt: Date;
   updatedAt: Date;
@@ -55,4 +66,8 @@ const schema = new Schema({
   },
 });
 
-export const SupplierRequestModel = model<SupplierRequest>(DOCUMENT_NAME, schema, COLLECTION_NAME);
+export const SupplierRequestModel = model<SupplierRequestDocument>(
+  DOCUMENT_NAME,
+  schema,
+  COLLECTION_NAME,
+);

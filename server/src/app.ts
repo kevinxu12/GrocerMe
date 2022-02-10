@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /**
- * @file Main backend App
+ * @file Main backend App for our project
  * @author Kevin Xu
  */
 // Note that the module alias probably won't work with Jest. We will need relative file paths with Jest.
@@ -13,27 +13,13 @@ import { front_end_dev_cors_url } from '@src/config';
 import logger from '@src/core/logger';
 
 import routesV1 from '@src/routes/v1';
-import { initalizeSocket as initializeSocket, InternalSocketObjType } from '@src/socket';
 import passport from 'passport';
-import { initializeS3Client } from '@src/aws/s3';
-import { connectDb } from './database';
 import { createMorgan } from '@src/core/morgan';
+import { connectDb } from './database';
 
 // initialize the mongo database
-connectDb();
-// initialize the S3 client
-initializeS3Client();
-
+process.env.NODE_ENV !== 'test' && connectDb();
 const app = express();
-
-if (process.env.NODE_ENV !== 'test') {
-  require('./mail'); // this should be changed to initializeMailClient()
-
-  // pipe the socket.io and the clientManager into req.app.get('...')
-  const { io, clientManager }: InternalSocketObjType = initializeSocket(app);
-  app.set('clientManager', clientManager);
-  app.set('io', io);
-}
 
 // use cookies to store logged in user
 app.use(cookieSession({ name: 'google-auth-session', keys: ['key1', 'key2'] }));
