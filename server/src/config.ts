@@ -6,7 +6,9 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
-export const environment = process.env.NODE_ENV || process.env.IS_STAGING || 'development';
+export const environment =
+  process.env.NODE_ENV || process.env.IS_STAGING || process.env.IS_PROD || 'development';
+console.log(environment);
 export const port = process.env.PORT || 'frontend';
 export const front_end_dev_cors_url = process.env.FRONT_END_DEV_CORS_URL;
 

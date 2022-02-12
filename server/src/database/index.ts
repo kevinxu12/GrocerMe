@@ -23,8 +23,6 @@ export const connectDb = async () => {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
   };
 
-  logger.debug(dbURI);
-
   // Create the database connection
   try {
     await mongoose.connect(dbURI, options); // https://github.com/facebook/jest/issues/11665

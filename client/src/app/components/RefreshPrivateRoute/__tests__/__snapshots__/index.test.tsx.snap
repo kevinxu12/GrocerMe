@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RefreshPrivateRoute  /> Logged in user should see state update 1`] = `
+.c0 {
+  height: 100%;
+  width: 100%;
+  margin-left: 20%;
+  margin-top: 4rem;
+}
+
+<div
+  class="c0"
+>
+  <div>
+     Test 
+  </div>
+</div>
+`;
+
+exports[`<RefreshPrivateRoute  /> No Logged in user should return nearly 1`] = `
+.c0 {
+  height: 100%;
+  width: 100%;
+  margin-left: 20%;
+  margin-top: 4rem;
+}
+
+<div
+  class="c0"
+>
+  <div>
+     Test 
+  </div>
+</div>
+`;

@@ -40,6 +40,10 @@ export type MailOptions = {
  * @returns {Promise} an asynchronous send email feature
  */
 export async function sendInternalEmail(options: MailOptions) {
+  if (process.env.NODE_ENV === 'test') {
+    logger.info('Skip sending an email, because we are in a test environment');
+    return;
+  }
   return new Promise((resolve, reject) =>
     transporter.sendMail(options, function (error, info) {
       if (error) {

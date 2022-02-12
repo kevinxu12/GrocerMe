@@ -25,6 +25,7 @@
       "@src/*": ["src/*"]
     }
   },
+  "skipLibCheck": true,
   "types": ["node"],
   "include": ["src/**/*", "tests"],
   "exclude": [".templates", ".env"]

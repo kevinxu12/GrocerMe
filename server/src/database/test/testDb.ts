@@ -4,15 +4,17 @@
  */
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server-core';
-import { mockSupplierRequest_1, mockUser_1 } from '@src/repository/mocks/data';
+import { mockAdminRole, mockSupplierRequest_1, mockUser_1 } from '@src/repository/mocks/data';
 import User, { UserModel } from '@src/models/User';
 import { SupplierRequestModel } from '@src/models/SupplierRequest';
+import { RoleModel } from '@src/models/Role';
 
 /**
  * Seeds the database (aka. initializes the in-memory database with test data);
  *
  */
 export async function seedDatabase() {
+  await RoleModel.insertMany([mockAdminRole]);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mockUsers = [mockUser_1];
   const users = (await UserModel.insertMany(mockUsers)) as User[];
@@ -64,8 +66,9 @@ export const removeAllFromCollections = async () => {
 };
 
 /**
+ * Create an instance of the Mongo Memory Server
  *
- * @returns
+ * @returns {any} MongoMemory Server
  */
 export const createServer = async () => {
   return await MongoMemoryServer.create();
@@ -75,8 +78,9 @@ export const createServer = async () => {
  * Db set up for integration tests
  * Still need to think about whether every route file should integration test everything... Is this boot up and down expensive?
  *
+ * @param {boolean} withSeed with database seeding or not
  */
-export const setUpDb = () => {
+export const setUpDb = (withSeed = true) => {
   let mongoServer: MongoMemoryServer;
   beforeAll(async () => {
     mongoServer = await createServer();
@@ -87,7 +91,9 @@ export const setUpDb = () => {
   });
 
   beforeEach(async () => {
-    await seedDatabase();
+    if (withSeed) {
+      await seedDatabase();
+    }
   });
 
   // Seed Data

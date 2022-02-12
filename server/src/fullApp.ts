@@ -3,10 +3,7 @@
  */
 import app from './app';
 import { initalizeSocket as initializeSocket, InternalSocketObjType } from '@src/socket';
-import { initializeS3Client } from '@src/aws/s3';
-
-// initialize the S3 client
-initializeS3Client();
+require('@src/aws/s3');
 
 // skip cause of a issue with jest testing
 require('./mail');

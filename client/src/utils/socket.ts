@@ -4,10 +4,9 @@
  */
 import { io, Socket } from 'socket.io-client';
 import { socket_url } from './config';
-import { Constants } from './constants';
 
 export const socket =
-  io(socket_url || Constants.DEFAULT_DEV_URL, {
+  io(socket_url, {
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionDelayMax: 5000,
@@ -15,6 +14,10 @@ export const socket =
   }) || null;
 
 /**
+ * For now we don't really need this helper
+ * But if for some reason we don't want to use socket.on(..., handler)
+ * And want 'await socket.on(message)' we can use this
+ *
  * @param { Socket } socket the socket we are wrapping
  * @param {string} event socket event message string to listen for
  * @returns {Promise} data

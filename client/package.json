@@ -5,10 +5,12 @@
   "dependencies": {
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
+    "@mui/icons-material": "5.3.1",
     "@mui/material": "5.3.1",
     "@reduxjs/toolkit": "1.7.1",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",
+    "@types/enzyme": "3.10.11",
     "@types/fontfaceobserver": "0.0.6",
     "@types/jest": "27.4.0",
     "@types/node": "14.6.4",
@@ -29,6 +31,7 @@
     "chalk": "4.1.1",
     "cra-template-rb": "1.2.2",
     "cross-env": "7.0.3",
+    "enzyme": "3.11.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-react-app": "7.0.0",
     "eslint-plugin-prettier": "3.4.0",
@@ -83,7 +86,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --detectOpenHandles",
     "test:update": "react-scripts test -u",
     "eject": "react-scripts eject",
     "test:generators": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/testing/generators/test-generators.ts",
@@ -144,8 +147,11 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "7.16.7",
+    "@wojtekmaj/enzyme-adapter-react-17": "0.6.6",
     "eslint-plugin-jsdoc": "37.5.1",
     "jest": "27.4.5",
+    "jest-environment-enzyme": "7.1.2",
+    "jest-enzyme": "7.1.2",
     "lint-staged": "12.1.4"
   }
 }

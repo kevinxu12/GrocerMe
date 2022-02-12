@@ -1,7 +1,12 @@
 // the mock for this class should be below all other mock imports
+/**
+ * @file Unit tests for the admin route
+ * @author Kevin Xu
+ */
+
 import { mockSupplierRequest_2, mockUser_1, mockUser_2 } from '@src/repository/mocks/data';
 import { mockFindSupplierRequestByEmail} from '@src/repository/mocks/AdminRepoMock';
-import { newSupplierRequest } from '@src/routes/v1/admin/Admin';
+import { newSupplierRequest } from '@src/routes/v1/admin/logic';
 import { ForbiddenError } from '@src/core/ApiError';
 describe('Supplier Requests', () => {
 

@@ -8,6 +8,8 @@ type ErrorWithMessage = {
   message: string;
 };
 
+const ERROR_PREFIX = 'Error: ';
+
 /**
  * Checks if is an error with a message
  *
@@ -46,5 +48,15 @@ function toErrorWithMessage(maybeError: unknown): ErrorWithMessage {
  * @returns {string} error message
  */
 export function getErrorMessage(error: unknown): string {
-  return toErrorWithMessage(error).message;
+  return ERROR_PREFIX + toErrorWithMessage(error).message;
+}
+
+/**
+ * Check if an erorr message string candidate is actually an error message string
+ *
+ * @param {string} maybeErrorMessage a string message that might be an error message
+ * @returns {boolean} whether or not the string is an error message
+ */
+export function isErrorMessage(maybeErrorMessage: string): boolean {
+  return maybeErrorMessage.startsWith(ERROR_PREFIX);
 }

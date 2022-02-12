@@ -13,7 +13,6 @@ import { environment, front_end_dev_cors_url } from '@src/config';
  */
 export default function generateClientUrl(relative_path: string) {
   // if dev, generate a CORS url
-  if (environment === 'staging') return relative_path;
   if (environment === 'development') return front_end_dev_cors_url + relative_path;
   return relative_path;
 }

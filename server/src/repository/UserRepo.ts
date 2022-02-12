@@ -32,9 +32,10 @@ export default class UserRepo {
    *
    * @param {string} email email to match and update by
    * @param {any} new_attrs attributes to override
+   * @returns {Promise} the Updated user object
    */
-  public static async updateByEmail(email: string, new_attrs: any) {
-    await UserModel.findOneAndUpdate(
+  public static async updateByEmail(email: string, new_attrs: any): Promise<User | null> {
+    return await UserModel.findOneAndUpdate(
       { email: email },
       { $set: new_attrs },
       { new: true, runValidators: true },

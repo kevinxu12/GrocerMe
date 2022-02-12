@@ -8,6 +8,7 @@ import { RoleCode } from 'types/rest';
 import { isRoleCodeIncluded } from 'utils/auth';
 import { Constants } from 'utils/constants';
 import useDeepCompareEffect from 'use-deep-compare-effect';
+import { initialState } from 'store/auth/reducer';
 
 /**
  * @param {...any} root0 props to pass to component if authenticated
@@ -16,11 +17,15 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
  * @returns {React.ElementType} either a Redirect or the component passed in props
  */
 const PublicRoute = ({ component: Component, auth, ...rest }) => {
-  const [isAuthenticated, setisAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuthenticated, setisAuthenticated] = useState<boolean>(
+    auth.username !== initialState.username,
+  );
+  const [isAdmin, setIsAdmin] = useState<boolean>(() =>
+    isRoleCodeIncluded(RoleCode.ADMIN, auth.roles),
+  );
 
   useDeepCompareEffect(() => {
-    setisAuthenticated(auth.username !== '');
+    setisAuthenticated(auth.username !== initialState.username);
     setIsAdmin(isRoleCodeIncluded(RoleCode.ADMIN, auth.roles));
   }, [auth.roles, auth.username]);
 

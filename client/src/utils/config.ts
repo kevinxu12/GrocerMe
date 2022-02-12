@@ -7,11 +7,23 @@
  * - server_url should depend on the environment i.e (dev, staging, prod). ^ See above
  */
 export const API_PREFIX = '/api';
-export const environment = process.env.NODE_ENV;
-export const socket_url =
-  process.env.REACT_APP_PUBLIC_SERVER_DEV_URL || 'http://localhost:8080';
+export const environment =
+  process.env.NODE_ENV ||
+  process.env.IS_STAGING ||
+  process.env.IS_PROD ||
+  'development';
 
-const server_url = process.env.REACT_APP_PUBLIC_SERVER_DEV_URL; // by default dev url
+export const socket_url =
+  environment === 'development'
+    ? process.env.REACT_APP_PUBLIC_SERVER_DEV_URL || 'http://localhost:8080'
+    : '/';
+
+const server_url =
+  environment === 'development'
+    ? process.env.REACT_APP_PUBLIC_SERVER_DEV_URL || ''
+    : ''; // by default dev url
+console.log(server_url);
+console.log(socket_url);
 const server_api_url = server_url + API_PREFIX;
 const calculated_configs = {
   server_url,

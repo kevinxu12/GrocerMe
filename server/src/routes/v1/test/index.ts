@@ -16,7 +16,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const test_payload = { hi: 'hi' };
     const clientManager: ClientManagerType = req.app.get('clientManager');
-    const client: Socket | null = clientManager.getClientByUser(req.user as User | undefined);
+    const client: Socket | null = clientManager.getClientByEmail((req.user as User).email);
     if (client) {
       client.emit('test', test_payload);
       logger.info('Successfully emitted a test payload');
@@ -40,5 +40,17 @@ router.get(
     new SuccessMsgResponse('Test email success').send(res);
   }),
 );
+
+// /**
+//  * This can do anything
+//  */
+// router.get(
+//   '/misc',
+//   asyncHandler(async (req, res) => {
+//     // await RoleRepo.create(RoleCode.ADMIN);
+//     // await RoleRepo.create(RoleCode.SUPPLIER);
+//     // new SuccessMsgResponse('Test email success').send(res);
+//   }),
+// );
 
 export default router;
