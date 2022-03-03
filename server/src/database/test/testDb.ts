@@ -4,7 +4,12 @@
  */
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server-core';
-import { mockAdminRole, mockSupplierRequest_1, mockUser_1 } from '@src/repository/mocks/data';
+import {
+  mockAdminRole,
+  mockSupplierRole,
+  mockSupplierRequest_1,
+  mockUser_1,
+} from '@src/repository/mocks/data';
 import User, { UserModel } from '@src/models/User';
 import { SupplierRequestModel } from '@src/models/SupplierRequest';
 import { RoleModel } from '@src/models/Role';
@@ -14,7 +19,7 @@ import { RoleModel } from '@src/models/Role';
  *
  */
 export async function seedDatabase() {
-  await RoleModel.insertMany([mockAdminRole]);
+  await RoleModel.insertMany([mockAdminRole, mockSupplierRole]);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mockUsers = [mockUser_1];
   const users = (await UserModel.insertMany(mockUsers)) as User[];
