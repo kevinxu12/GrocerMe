@@ -51,12 +51,12 @@ export async function acceptSupplierRequestLogic(
   if (!existingUser) {
     throw new InternalError("For some reason user for the supplier request doesn't exist");
   }
-  const adminRole = await RoleRepo.findByRoleCode(RoleCode.ADMIN);
-  if (!adminRole) {
-    throw new InternalError("For some reason, admin role doesn't exist in db");
+  const supplierRole = await RoleRepo.findByRoleCode(RoleCode.SUPPLIER);
+  if (!supplierRole) {
+    throw new InternalError("For some reason, supplier role doesn't exist in db");
   }
   const newUser = await UserRepo.updateByEmail(requester_email, {
-    roles: [...existingUser?.roles, adminRole],
+    roles: [...existingUser?.roles, supplierRole],
   });
   if (!newUser) {
     throw new InternalError('For some reason, update failed and user is not found');
