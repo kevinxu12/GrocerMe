@@ -3,13 +3,12 @@
  * @author Kevin Xu
  */
 import { compose } from '@reduxjs/toolkit';
-import SnackbarComponent from 'app/components/SnackbarComponent';
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectRoles } from 'store/auth/selectors';
 import { Role } from 'types/rest';
-import { Supplier } from './Supplier';
+import { Route } from './Route';
 
 export interface SupplierHomePropTypes {
   roles: Role[];
@@ -20,10 +19,8 @@ export interface SupplierHomePropTypes {
  * @param {Role[]} roles the roles of the logged in user
  * @returns {React.ReactElement} a Router to the correct component depending no role
  */
-const SupplierRoute = ({
-  roles,
-}: SupplierHomePropTypes): React.ReactElement => {
-  return <SnackbarComponent roles={roles} component={Supplier} />;
+const Supplier = ({ roles }: SupplierHomePropTypes): React.ReactElement => {
+  return <Route roles={roles} />;
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -31,4 +28,4 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps, null);
-export default compose(withConnect, memo)(SupplierRoute);
+export default compose(withConnect, memo)(Supplier);

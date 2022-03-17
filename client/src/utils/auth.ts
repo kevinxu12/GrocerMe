@@ -3,7 +3,6 @@
  * @author Kevin Xu
  */
 
-import { isFulfilled } from '@reduxjs/toolkit';
 import { Role, RoleCode } from 'types/rest';
 import { Constants } from './constants';
 

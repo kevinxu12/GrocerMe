@@ -17,13 +17,11 @@ export const socket_url =
   environment === 'development'
     ? process.env.REACT_APP_PUBLIC_SERVER_DEV_URL || 'http://localhost:8080'
     : '/';
-
+export const maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 const server_url =
   environment === 'development'
     ? process.env.REACT_APP_PUBLIC_SERVER_DEV_URL || ''
     : ''; // by default dev url
-console.log(server_url);
-console.log(socket_url);
 const server_api_url = server_url + API_PREFIX;
 const calculated_configs = {
   server_url,
