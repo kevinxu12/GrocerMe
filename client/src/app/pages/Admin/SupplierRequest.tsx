@@ -2,9 +2,17 @@
  * @file SupplierRequests Dashboard
  * @author Kevin Xu
  */
-import { IconButton } from '@mui/material';
+import {
+  Typography,
+  Card,
+  CardActions,
+  CardContent,
+  IconButton,
+  Stack,
+  Grid,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { SupplierRequest } from 'types/rest';
+import { RequestStatus, SupplierRequest } from 'types/rest';
 import Api from 'utils/api';
 import { parseAxiosSuccessResponse } from 'utils/request';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -64,32 +72,72 @@ export const SupplierRequestDashboard = ({
     };
     fetchSupplierRequests();
   }, []);
+  const awaitingSupplierRequests = supplierRequests.filter(
+    (a: SupplierRequest) => a.status === RequestStatus.AWAITING,
+  );
+  const pastSupplierRequests = supplierRequests.filter(
+    (a: SupplierRequest) => a.status !== RequestStatus.AWAITING,
+  );
   return (
     <div>
-      {' '}
-      {supplierRequests.map(({ email }) => (
-        <div>
-          <div> {email}</div>
-          <IconButton
-            aria-label="check-circle"
-            color="success"
-            onClick={() => {
-              onAcceptSupplierRequest(email);
-            }}
-          >
-            <CheckCircleIcon />
-          </IconButton>
-          <IconButton
-            aria-label="check-circle"
-            color="error"
-            onClick={() => {
-              onRejectSupplierRequest(email);
-            }}
-          >
-            <CancelIcon />
-          </IconButton>
-        </div>
-      ))}{' '}
+      <Grid container spacing={3}>
+        <Grid item xs={8}>
+          <Typography variant="h5" component="div" sx={{ mb: 3 }}>
+            All Supplier Requests
+          </Typography>
+          <Stack spacing={1}>
+            {awaitingSupplierRequests.map(({ email }) => (
+              <Card sx={{ width: '50%' }}>
+                <CardContent>
+                  <Typography variant="h6" component="div">
+                    Request From
+                  </Typography>
+                  <Typography variant="body2">{email}</Typography>
+                </CardContent>
+                <CardActions>
+                  <IconButton
+                    aria-label="check-circle"
+                    color="success"
+                    onClick={() => {
+                      onAcceptSupplierRequest(email);
+                    }}
+                  >
+                    <CheckCircleIcon />
+                  </IconButton>
+                  <IconButton
+                    aria-label="check-circle"
+                    color="error"
+                    onClick={() => {
+                      onRejectSupplierRequest(email);
+                    }}
+                  >
+                    <CancelIcon />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            ))}{' '}
+          </Stack>
+        </Grid>
+        <Grid item xs={4}>
+          <Typography variant="h5" component="div" sx={{ mb: 3 }}>
+            Past Supplier Requests
+          </Typography>
+          <Stack spacing={1}>
+            {pastSupplierRequests.map(({ email, status }) => (
+              <Card sx={{ width: '50%' }}>
+                <CardContent>
+                  <Typography variant="h6" component="div">
+                    Request From
+                  </Typography>
+                  <Typography variant="body2">
+                    {email} was met with status {status}
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))}{' '}
+          </Stack>
+        </Grid>
+      </Grid>
     </div>
   );
 };

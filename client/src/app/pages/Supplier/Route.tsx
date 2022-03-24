@@ -13,8 +13,8 @@ import { parseAxiosSuccessResponse } from 'utils/request';
 import { RequestStatus, RoleCode, SupplierRequest } from 'types/rest';
 import Api from 'utils/api';
 import { isRoleCodeIncluded } from 'utils/auth';
-import { Home } from './Home';
-import { SupplierRequestComponent } from './SupplierRequest';
+import { Home } from './Existing/Home';
+import { SupplierRequestComponent } from './Prospective/SupplierRequest';
 import SnackbarComponent from 'app/components/SnackbarComponent';
 import { Role } from 'types/rest';
 

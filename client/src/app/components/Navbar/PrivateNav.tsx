@@ -3,10 +3,7 @@
  * @author Kevin Xu
  */
 import React, { ComponentType, memo } from 'react';
-import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import * as AiIcons from 'react-icons/ai';
-import styled from 'styled-components/macro';
-import './custom.scss';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { logoutWithThunk } from 'store/auth/thunk';
@@ -18,6 +15,13 @@ import { isRoleCodeIncluded } from 'utils/auth';
 import { StyledConstants } from 'styles/StyleConstants';
 import { Link } from 'react-router-dom';
 import { Constants } from 'utils/constants';
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
 
 interface PrivateNavDispatchType {
   onLogout: () => void;
@@ -38,31 +42,55 @@ const PrivateNav = ({
 }: PrivateNavPropsType): React.ReactElement => {
   const isAdmin = isRoleCodeIncluded(RoleCode.ADMIN, roles);
   return (
-    <Sidebar>
-      <ProSidebar>
-        <Menu>
-          <MenuItem icon={<AiIcons.AiFillHome />}>Home</MenuItem>
-          {isAdmin ? (
-            <MenuItem icon={<AiIcons.AiFillCrown />}>
-              Admin Dashboard <Link to={Constants.ADMIN_HOME} />{' '}
-            </MenuItem>
-          ) : (
-            <div />
-          )}
-          <MenuItem icon={<AiIcons.AiFillDashboard />}>
-            Supplier Home <Link to={Constants.SUPPLIER_HOME} />
-          </MenuItem>
-          <MenuItem
-            icon={<AiIcons.AiOutlineLogout />}
-            onClick={async () => {
-              await onLogout();
-            }}
-          >
-            Logout
-          </MenuItem>
-        </Menu>
-      </ProSidebar>
-    </Sidebar>
+    <Drawer
+      variant="persistent"
+      anchor="left"
+      sx={{
+        width: StyledConstants.SIDE_BAR_WIDTH,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: StyledConstants.SIDE_BAR_WIDTH,
+          boxSizing: 'border-box',
+        },
+      }}
+      open={true}
+    >
+      <List sx={{ mt: 3, height: '100%' }}>
+        <ListItem button component={Link} to={Constants.USER_HOME}>
+          <ListItemIcon>
+            <AiIcons.AiFillHome />
+          </ListItemIcon>
+          <ListItemText primary={'Home'} />
+        </ListItem>
+        {isAdmin ? (
+          <ListItem button component={Link} to={Constants.ADMIN_HOME}>
+            <ListItemIcon>
+              <AiIcons.AiFillCrown />
+            </ListItemIcon>
+            <ListItemText primary={'Admin'} />
+          </ListItem>
+        ) : (
+          <div />
+        )}
+        <ListItem button component={Link} to={Constants.SUPPLIER_HOME}>
+          <ListItemIcon>
+            <AiIcons.AiFillDashboard />
+          </ListItemIcon>
+          <ListItemText primary={'Supplier'} />
+        </ListItem>
+        <ListItem
+          button
+          onClick={async () => {
+            await onLogout();
+          }}
+        >
+          <ListItemIcon>
+            <AiIcons.AiOutlineLogout />
+          </ListItemIcon>
+          <ListItemText primary={'Logout'} />
+        </ListItem>
+      </List>
+    </Drawer>
   );
 };
 
@@ -92,14 +120,3 @@ function mapDispatchToProps(
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose<ComponentType>(withConnect, memo)(PrivateNav);
-
-const Sidebar = styled.nav`
-  width: ${StyledConstants.SIDE_BAR_WIDTH};
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  overscroll: hidden;
-  position: fixed;
-  top: 0;
-  left: 0%;
-`;

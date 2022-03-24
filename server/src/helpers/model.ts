@@ -6,3 +6,10 @@ export enum RequestStatus {
   ACCEPTED = 'ACCEPTED',
   AWAITING = 'AWAITING',
 }
+
+export enum ItemRequestStatus {
+  REJECTED = 'REJECTED',
+  ACCEPTED = 'ACCEPTED',
+  AWAITING = 'AWAITING',
+  SOLD = 'SOLD',
+}

@@ -1,6 +1,8 @@
 /**
- * @file Autocomplete
+ * @file Autocomplete Component with the Google MAPS api
+ * @author Kevin Xu
  */
+/* eslint-disable */
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -16,13 +18,6 @@ import { maps_api_key } from 'utils/config';
 // You need to create a new one for your application.
 const GOOGLE_MAPS_API_KEY = maps_api_key;
 
-/**
- *
- * @param src
- * @param position
- * @param id
- * @returns
- */
 function loadScript(src: string, position: HTMLElement | null, id: string) {
   if (!position) {
     return;
@@ -53,14 +48,9 @@ interface PlaceType {
 interface GoogleMapsPropsType {
   setDescription: (string) => void;
 }
-/**
- *
- * @param root0
- * @param root0.setDescription
- * @returns
- */
+
 export default function GoogleMaps({
-  setDescription,
+  setDescription, ...props
 }: GoogleMapsPropsType): React.ReactElement {
   const [value, setValue] = React.useState<PlaceType | null>(null);
   const [inputValue, setInputValue] = React.useState('');
@@ -156,7 +146,13 @@ export default function GoogleMaps({
         setInputValue(newInputValue);
       }}
       renderInput={params => (
-        <TextField {...params} label="Add a location" fullWidth sx={{ m: 1 }} />
+        <TextField
+          {...params}
+          label="Add a location"
+          required
+          fullWidth
+          sx={{ backgroundColor: 'white', mb: 1 }}
+        />
       )}
       renderOption={(props, option) => {
         const matches =

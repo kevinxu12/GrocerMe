@@ -13,18 +13,21 @@ class Api {
    * Wrapper around axios.get
    *
    * @param {string} url the raw url string
+   * @param {Function} query Optional query to add to url
    * @param {Function} cb Optional callback to run on error
    * @param {string} success_message Success message
    * @returns {AxiosResponse} axiosResponse
    */
   public static async get(
     url: string,
+    query: any = {},
     cb?: Function,
     success_message?: string,
   ) {
     try {
       const res = await axios.get(generateServerUrl(url), {
         withCredentials: true,
+        params: query,
       });
       if (cb && success_message) {
         await cb(success_message);
@@ -65,6 +68,7 @@ class Api {
       }
       return res;
     } catch (error) {
+      console.log(error);
       if (cb) {
         cb(getErrorMessage(error));
       } else {

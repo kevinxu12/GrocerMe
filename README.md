@@ -58,6 +58,8 @@ GOOGLE_CALLBACK_URL=/google/callback
 GOOGLE_MAIL_NAME=
 GOOGLE_MAIL_PASSWORD=
 
+REACT_APP_GOOGLE_MAPS_API_KEY=
+
 ```
 
 - Create a `.env` file in `client` in the `main` branch with the following lines of code

@@ -2,7 +2,7 @@
  * @file Mock data used in unit, db, and integration tests
  * @author Kevin Xu
  */
-import { RequestStatus } from '@src/helpers/model';
+import { ItemRequestStatus, RequestStatus } from '@src/helpers/model';
 import ItemRequest from '@src/models/ItemRequest';
 import Role, { RoleCode } from '@src/models/Role';
 import SupplierRequest from '@src/models/SupplierRequest';
@@ -24,6 +24,7 @@ export const ITEM_REQUEST_2_ID = USER_2_ID;
 export const TEST_DESCRIPTION = 'test description';
 export const TEST_TITLE = 'test title';
 export const TEST_AMOUNT = 1;
+export const TEST_LOCATION = 'test location';
 
 export const INJECTED_USER_EMAIL = 'test';
 export const INJECTED_USER_ID = new mongoose.Types.ObjectId();
@@ -102,12 +103,13 @@ export const mockItemRequest_1 = {
   email: USER_2_EMAIL,
   active: true,
   requester: mockUser_2,
-  status: RequestStatus.AWAITING,
+  status: ItemRequestStatus.AWAITING,
   createdAt: date,
   updatedAt: date,
   amount: TEST_AMOUNT,
   description: TEST_DESCRIPTION,
   title: TEST_TITLE,
+  location: TEST_LOCATION,
 } as ItemRequest;
 
 export const mockItemRequest_2 = {
@@ -115,10 +117,11 @@ export const mockItemRequest_2 = {
   email: USER_2_EMAIL,
   active: true,
   requester: mockUser_2,
-  status: RequestStatus.AWAITING,
+  status: ItemRequestStatus.AWAITING,
   createdAt: date,
   updatedAt: date,
   amount: TEST_AMOUNT,
   description: TEST_DESCRIPTION,
+  location: TEST_LOCATION,
   title: TEST_TITLE,
 } as ItemRequest;
