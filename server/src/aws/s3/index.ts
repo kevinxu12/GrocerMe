@@ -4,6 +4,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const s3 = require('@auth0/s3');
+import { image_bucket_name } from '@src/config';
 import logger from '@src/core/logger';
 import AWS from '../';
 
@@ -22,5 +23,57 @@ const options = {
   multipartUploadSize: 15728640, // this is the default (15 MB)
 };
 const client = s3.createClient(options);
+/**
+ * Uploads a PNG image to S3
+ *
+ * @param {string} imageName image name
+ * @param {string | null} base64Image base64 image string
+ * @param {string} type Image file type
+ * @returns {Promise} signed url of the uploaded image
+ */
+export async function uploadImage(
+  imageName: string,
+  base64Image: string | null,
+  type = 'image/png',
+): Promise<string | null> {
+  if (base64Image) {
+    const params = {
+      ACL: 'public-read',
+      Bucket: image_bucket_name,
+      Key: `${imageName}`,
+      Body: Buffer.from(base64Image.replace(/^data:image\/\w+;base64,/, ''), 'base64'),
+      ContentType: type,
+      ContentEncoding: 'base64',
+    };
+    const data = await promiseUpload(params);
+    return data.Location;
+    // const signedParams = {
+    //   Bucket: image_bucket_name,
+    //   Key: `${imageName}`,
+    // }
+    // const signedUrl = await awsS3Client.getSignedUrlPromise('getObject', signedParams);
+    // return signedUrl;
+  }
+  return null;
+}
 logger.info('S3 client successfully instantiated');
 export default client;
+
+/**
+ * Upload to S3 in a promise format
+ *
+ * @param {AWS.S3.PutObjectRequest} params S3 bucket params
+ * @returns {Promise} data/err S3 response object
+ */
+function promiseUpload(params: AWS.S3.PutObjectRequest): Promise<AWS.S3.ManagedUpload.SendData> {
+  return new Promise(function (resolve, reject) {
+    awsS3Client.upload(params, function (err: any, data: AWS.S3.ManagedUpload.SendData) {
+      if (err) {
+        // eslint-disable-next-line prettier/prettier
+                reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+}

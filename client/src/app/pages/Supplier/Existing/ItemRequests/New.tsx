@@ -1,5 +1,7 @@
 /**
- * @file Form Component
+ * @file Form Component to Make New Item Request
+ * TO DO - we should find a way to upload phone numbers
+ * @author Kevin Xu
  */
 import React, { useRef, useState } from 'react';
 import Box from '@mui/material/Box';
@@ -21,7 +23,8 @@ const DEFAULT_ITEM_STATE = {
   description: '',
   location: '',
   date: null,
-  pictures: [],
+  image: null,
+  imageName: '',
 };
 interface ItemState {
   title: string;
@@ -29,7 +32,8 @@ interface ItemState {
   description: string;
   location: string;
   date: Date | null;
-  pictures: File[];
+  image: string | ArrayBuffer | null;
+  imageName: string;
 }
 interface NewItemRequestPropTypes {
   setMessage: setMessageSnackbarType;
@@ -50,12 +54,14 @@ export default function New({
   const [pictures, setPictures] = useState<File[] | []>([]);
   /**
    * Handle submitting a new item request
-   * TO DO - convert handleSUbmit into multi-form data and pipe the pictures and date in.
    *
    * @param {React.FormEvent<HTMLElement>} ev click event
    */
-  const handleSubmit = (ev: React.FormEvent<HTMLElement>) => {
+  const handleSubmit = async (ev: React.FormEvent<HTMLElement>) => {
     ev.preventDefault();
+    const file = pictures[0];
+    ref.current.image = await convertToBase64(file);
+    ref.current.imageName = file.name;
     Api.post(
       '/newItemRequest',
       ref.current as ItemState,
@@ -63,6 +69,29 @@ export default function New({
       'Successfully submitted a request for this item to be sold',
     );
   };
+
+  /**
+   * This should be abstracted to a helper later, and shouldn't be in the New class
+   *
+   * @param {File} file image file
+   * @returns {Promise} Base64 string of the image
+   */
+  const convertToBase64 = (
+    file: File,
+  ): Promise<string | ArrayBuffer | null> => {
+    /** */
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      /**
+       *
+       */
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+    });
+  };
+
   /**
    * @param {File[]} picture pictures dropped in by the image component
    */

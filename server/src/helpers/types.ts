@@ -13,7 +13,8 @@ export interface ItemRequestParams {
   title: string;
   location: string;
   date?: Date | null;
-  pictures?: File[];
+  image: string | null;
+  imageName: string;
 }
 export interface ItemRequestParamsWithUser extends ItemRequestParams {
   user: User;
@@ -27,4 +28,5 @@ export interface SearchFilters {
   query: string;
   pageSize?: number;
   page?: number;
+  additionalParams: any;
 }

@@ -4,7 +4,7 @@
  * @author Kevin Xu
  */
 
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { IconButton, Paper, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 /**
@@ -16,7 +16,7 @@ import SearchIcon from '@mui/icons-material/Search';
  * @returns {React.ReactElement} Search Component
  */
 export const Search = ({ handleSearch }): React.ReactElement => {
-  const searchRef = useRef<String>('');
+  const [search, setSearch] = useState<String>('');
   return (
     <div>
       <Paper
@@ -25,16 +25,13 @@ export const Search = ({ handleSearch }): React.ReactElement => {
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          inputRef={input => {
-            if (input) {
-              searchRef.current = input.value;
-            }
-          }}
+          value={search}
+          onChange={e => setSearch(e.target.value)}
           placeholder="Search For Products"
-          onKeyDown={(e: React.KeyboardEvent) => {
+          onKeyPress={(e: React.KeyboardEvent) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              handleSearch(searchRef.current);
+              handleSearch(search);
             }
           }}
           inputProps={{ 'aria-label': 'search products' }}
