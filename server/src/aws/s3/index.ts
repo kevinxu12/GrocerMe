@@ -4,7 +4,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const s3 = require('@auth0/s3');
-import { image_bucket_name } from '@src/config';
+import { environment, image_bucket_name } from '@src/config';
 import logger from '@src/core/logger';
 import AWS from '../';
 
@@ -37,8 +37,9 @@ export async function uploadImage(
   type = 'image/png',
 ): Promise<string | null> {
   if (base64Image) {
-    const params = {
-      ACL: 'public-read',
+    const acl = environment === 'test' ? 'private' : 'public-read';
+    const params: AWS.S3.PutObjectRequest = {
+      ACL: acl,
       Bucket: image_bucket_name,
       Key: `${imageName}`,
       Body: Buffer.from(base64Image.replace(/^data:image\/\w+;base64,/, ''), 'base64'),
