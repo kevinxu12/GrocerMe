@@ -8,6 +8,7 @@ import { ItemRequestFilters, ItemRequestParamsWithUser, SearchFilters } from '@s
 import ItemRequest, { ItemRequestModel } from '@src/models/ItemRequest';
 import UserRepo from './UserRepo';
 import { Types } from 'mongoose';
+import { ItemRequestStatus } from '@src/helpers/model';
 const DEFAULT_PAGE_SIZE = 10;
 /**
  * Item Class
@@ -20,9 +21,16 @@ export default class ItemRepo {
    * @returns {Promise} The item requests that match the search
    */
   public static async search(params: SearchFilters): Promise<ItemRequest[] | null> {
-    console.log(params);
-    const { query, pageSize = DEFAULT_PAGE_SIZE, page = 1 } = params;
-    return await ItemRequestModel.find({ $text: { $search: query as string } })
+    const {
+      query,
+      pageSize = DEFAULT_PAGE_SIZE,
+      page = 1,
+      additionalParams = { status: ItemRequestStatus.ACCEPTED },
+    } = params;
+    return await ItemRequestModel.find({
+      ...additionalParams,
+      $text: { $search: query as string },
+    })
       .skip(pageSize * (page - 1))
       .limit(pageSize)
       .populate({ path: 'requester' })
@@ -75,10 +83,12 @@ export default class ItemRepo {
    * Create a new item
    *
    * @param {ItemRequestParamsWithUser} itemRequest item to create
+   * @param {string} imageUrl the url of the image
    * @returns {Promise} Item that is created or null
    */
   public static async createNewItemRequest(
     itemRequest: ItemRequestParamsWithUser,
+    imageUrl: string | null = '',
   ): Promise<ItemRequest | null> {
     const { user, title, amount, description, location } = itemRequest;
     // this should all be some middleware
@@ -93,6 +103,7 @@ export default class ItemRepo {
       location,
       title,
       description,
+      imageUrl,
     });
   }
 }

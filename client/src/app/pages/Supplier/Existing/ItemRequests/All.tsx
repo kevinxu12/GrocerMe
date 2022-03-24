@@ -1,9 +1,18 @@
 /**
  * @file Display's a supplier's existing Item Requests
+ * @author Kevin Xu
+ *
  * Maybe we want to memoize this?
  */
 
-import { Typography, Stack, Card, Box, CardContent } from '@mui/material';
+import {
+  Typography,
+  Stack,
+  Card,
+  Box,
+  CardContent,
+  CardMedia,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { ItemRequest } from 'types/rest';
 import Api from 'utils/api';
@@ -33,17 +42,31 @@ export const All = (): React.ReactElement => {
       <Typography variant="h5" gutterBottom component="div">
         See the status of all product requests here
       </Typography>
-      <Box sx={{ width: '70%' }}>
+      <Box sx={{ width: '30%' }}>
         <Stack spacing={2}>
           {itemRequests.map((data: ItemRequest) => {
             return (
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" sx={{ mb: 1.5 }} component="div">
-                    {data.title}
-                  </Typography>
-                  <Typography variant="body2">{data.status}</Typography>
-                </CardContent>
+              <Card sx={{ display: 'flex' }}>
+                {data.imageUrl && (
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      resizeMode: 'contain',
+                      height: '80%',
+                      width: '100px',
+                    }}
+                    image={data.imageUrl}
+                    alt={data.title}
+                  />
+                )}
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <CardContent>
+                    <Typography variant="h5" sx={{ mb: 1.5 }} component="div">
+                      {data.title}
+                    </Typography>
+                    <Typography variant="body2">{data.status}</Typography>
+                  </CardContent>
+                </Box>
               </Card>
             );
           })}

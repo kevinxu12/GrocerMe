@@ -3,6 +3,7 @@
  * @author Kevin Xu
  */
 
+import { uploadImage } from '@src/aws/s3';
 import { ForbiddenError, InternalError } from '@src/core/ApiError';
 import { generateItemAcceptanceEmailOptions } from '@src/helpers/mail';
 import { ItemRequestStatus } from '@src/helpers/model';
@@ -23,7 +24,10 @@ export async function newItemRequest(data: ItemRequestParamsWithUser): Promise<I
   if (data.user === null) {
     throw new ForbiddenError('User login expired');
   }
-  const itemRequest = await ItemRepo.createNewItemRequest(data);
+  const base64Image = data.image;
+  const imageName = data.imageName;
+  const imageURL = await uploadImage(imageName, base64Image);
+  const itemRequest = await ItemRepo.createNewItemRequest(data, imageURL);
   return itemRequest;
 }
 

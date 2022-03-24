@@ -10,7 +10,8 @@ export const environment =
   process.env.NODE_ENV || process.env.IS_STAGING || process.env.IS_PROD || 'development';
 export const port = process.env.PORT || 'frontend';
 export const front_end_dev_cors_url = process.env.FRONT_END_DEV_CORS_URL;
-
+// for now, we have one bucket for testing and staging and production
+export const image_bucket_name: string = process.env.IMAGES_BUCKET_ARN || 'default';
 export const db = {
   name: process.env.DB_NAME || '',
   host: process.env.DB_HOST || '',
