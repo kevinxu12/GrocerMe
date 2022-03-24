@@ -7,7 +7,7 @@
 
  import { setUpDb } from '@src/database/test/testDb';
 import AdminRepo from '../AdminRepo';
-import { injectedUser, mockUser_1, TEST_AMOUNT, TEST_DESCRIPTION, TEST_TITLE } from '../mocks/data';
+import { injectedUser, mockUser_1, TEST_AMOUNT, TEST_DESCRIPTION, TEST_LOCATION, TEST_TITLE } from '../mocks/data';
 import { RequestStatus } from '@src/helpers/model';
 import UserRepo from '../UserRepo';
 import { RoleCode } from '@src/models/Role';
@@ -24,8 +24,10 @@ import ItemRepo from '../ItemRepo';
         expect(updatedUser?.name).toBe(RANDOM_NAME);
         const newUser = await UserRepo.create(injectedUser, RoleCode.ADMIN);
         expect(newUser.roles.length).toBe(1);
-        const newItemRequest = await ItemRepo.createNewItemRequest({user: newUser, amount: TEST_AMOUNT, description: TEST_DESCRIPTION, title: TEST_TITLE});
+        const newItemRequest = await ItemRepo.createNewItemRequest({user: newUser, amount: TEST_AMOUNT, description: TEST_DESCRIPTION, title: TEST_TITLE, location: TEST_LOCATION });
         expect(newItemRequest?.requester).toStrictEqual(newUser?._id);
+        const itemSearchResults = await ItemRepo.search({query: TEST_DESCRIPTION, pageSize: 20, page: 1});
+        expect(itemSearchResults?.length).toStrictEqual(2);
      });
  });
  

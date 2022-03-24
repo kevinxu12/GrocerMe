@@ -1,5 +1,6 @@
 /**
  * @file Component for HomePage
+ * We shoud move the landing / home page out using Material UI instead of Hardcoded Components
  * @author Kevin Xu
  */
 import React from 'react';

@@ -9,7 +9,7 @@ import { RequestStatus } from '@src/helpers/model';
 import SupplierRequest from '@src/models/SupplierRequest';
 import User from '@src/models/User';
 import AdminRepo from '@src/repository/AdminRepo';
-import express from 'express';
+import express, { Request } from 'express';
 import * as Logic from './logic';
 
 const router = express.Router();
@@ -17,7 +17,7 @@ const router = express.Router();
 router.get(
   '/allSupplierRequests',
   asyncHandler(async (req, res) => {
-    const allRequests = await AdminRepo.findAllSupplierRequests({ status: RequestStatus.AWAITING });
+    const allRequests = await AdminRepo.findAllSupplierRequests();
     return new SuccessResponse<SupplierRequest[] | null>(
       'Found all supplier requests',
       allRequests as SupplierRequest[],
@@ -52,7 +52,7 @@ router.get(
 
 router.post(
   '/acceptSupplierRequest',
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req: Request<unknown, unknown, { email: string }>, res) => {
     const requester_email = req.body.email;
     const supplierRequest = await Logic.acceptSupplierRequestLogic(requester_email);
     return new SuccessResponse<SupplierRequest | null>(
@@ -64,7 +64,7 @@ router.post(
 
 router.post(
   '/rejectSupplierRequest',
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req: Request<unknown, unknown, { email: string }>, res) => {
     const supplierRequest = await AdminRepo.updateByEmail(req.body.email, {
       status: RequestStatus.REJECTED,
     });

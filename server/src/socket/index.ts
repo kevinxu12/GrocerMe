@@ -31,9 +31,10 @@ export function initalizeSocket(app: Application) {
     },
   });
   const clientManager = ClientManager();
-
+  httpServer.listen(port);
+  logger.info(`Socket listening to ${port}`);
   io.on('connection', function (client: Socket) {
-    logger.info('client connected...', client.id);
+    logger.info('client connected...' + client.id);
     // in the future we'll need a client manager like `
     clientManager.addClient(client);
 
@@ -43,7 +44,5 @@ export function initalizeSocket(app: Application) {
     });
   });
 
-  httpServer.listen(port);
-  logger.info(`Socket listening to ${port}`);
   return { clientManager, io };
 }

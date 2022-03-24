@@ -3,7 +3,7 @@
  * In the future, we should have the item request and the supplier request extend off of a generic request interface
  * @author Kevin Xu
  */
-import { RequestStatus } from '@src/helpers/model';
+import { ItemRequestStatus } from '@src/helpers/model';
 import mongoose, { model, Schema, Document } from 'mongoose';
 import User from './User';
 
@@ -13,13 +13,14 @@ export const COLLECTION_NAME = 'ItemRequest';
 export default interface ItemRequest {
   _id?: mongoose.Types.ObjectId;
   requester: User; // we make this optional because it makes testing easier.
-  status: RequestStatus;
+  status: ItemRequestStatus;
   createdAt: Date;
   updatedAt: Date;
   active: boolean;
   email: string;
   amount: number;
   description: string;
+  location: string;
   title: string;
   approvedBy?: string;
   imageUrl?: string;
@@ -27,13 +28,14 @@ export default interface ItemRequest {
 
 export interface ItemRequestDocument extends Document {
   requester: User; // we make this optional because it makes testing easier.
-  status: RequestStatus;
+  status: ItemRequestStatus;
   createdAt: Date;
   updatedAt: Date;
   active: boolean;
   email: string;
   amount: number;
   description: string;
+  location: string;
   title: string;
   approvedBy?: string;
   imageUrl?: string;
@@ -50,15 +52,19 @@ const schema = new Schema({
     required: true,
     default: Date.now(),
   },
+  location: {
+    type: String,
+    required: true,
+  },
   updatedAt: {
     type: Date,
     required: true,
     default: Date.now(),
   },
   status: {
-    type: RequestStatus,
+    type: ItemRequestStatus,
     required: true,
-    default: RequestStatus.AWAITING,
+    default: ItemRequestStatus.AWAITING,
   },
   active: {
     type: Boolean,
@@ -89,5 +95,5 @@ const schema = new Schema({
     type: String,
   },
 });
-
+schema.index({ title: 'text', description: 'text', location: 'text', email: 'text' });
 export const ItemRequestModel = model<ItemRequestDocument>(DOCUMENT_NAME, schema, COLLECTION_NAME);

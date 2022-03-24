@@ -12,6 +12,7 @@ export const socket =
     reconnectionDelayMax: 5000,
     reconnectionAttempts: 5,
   }) || null;
+console.log(socket);
 
 /**
  * For now we don't really need this helper

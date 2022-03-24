@@ -1,6 +1,6 @@
 /**
  * @file Test Db
- * TO DO: Maye, drop all collections and seeding
+ * TO DO: Maybe, drop all collections and seeding
  */
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server-core';
@@ -9,10 +9,12 @@ import {
   mockSupplierRole,
   mockSupplierRequest_1,
   mockUser_1,
+  mockItemRequest_1,
 } from '@src/repository/mocks/data';
-import User, { UserModel } from '@src/models/User';
+import { UserModel } from '@src/models/User';
 import { SupplierRequestModel } from '@src/models/SupplierRequest';
 import { RoleModel } from '@src/models/Role';
+import { ItemRequestModel } from '@src/models/ItemRequest';
 
 /**
  * Seeds the database (aka. initializes the in-memory database with test data);
@@ -22,12 +24,12 @@ export async function seedDatabase() {
   await RoleModel.insertMany([mockAdminRole, mockSupplierRole]);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mockUsers = [mockUser_1];
-  const users = (await UserModel.insertMany(mockUsers)) as User[];
-  const user_1 = users[0];
+  await UserModel.insertMany(mockUsers);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mockSupplierRequests = [mockSupplierRequest_1];
-  mockSupplierRequests[0].requester = user_1;
   await SupplierRequestModel.insertMany(mockSupplierRequests);
+  const mockItemRequests = [mockItemRequest_1];
+  await ItemRequestModel.insertMany(mockItemRequests);
 }
 
 /**

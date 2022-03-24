@@ -1,13 +1,15 @@
 /**
- * @file Test
+ * @file A component to request to be a supplier
+ * @author Kevin Xu
  */
 import React from 'react';
 import { Typography } from '@mui/material';
 import Api from 'utils/api';
 import Button from '@mui/material/Button';
+import { setMessageSnackbarType } from 'types';
 
 interface SupplierRequestComponentPropTypes {
-  setMessage: (string) => void;
+  setMessage: setMessageSnackbarType;
 }
 
 /**

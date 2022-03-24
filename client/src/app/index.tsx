@@ -26,6 +26,15 @@ import SupplierRouter from './pages/Supplier';
 import './app.css';
 import { AdminDashboard } from './pages/Admin';
 import RefreshPrivateRoute from './components/RefreshPrivateRoute';
+import { Box } from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledBox = styled(Box)({
+  backgroundColor: 'rgba(243, 239, 107, 0.3)',
+  height: '100vh',
+  display: 'flex',
+  overflow: 'auto',
+});
 
 /**
  * @returns {React.ReactElement} Frontend App for the project
@@ -48,29 +57,31 @@ export function App() {
               path={Constants.HOME_URL}
               component={HomePage}
             />
-            <PrivateRoute
-              auth={auth}
-              exact
-              path={Constants.TEST_SOCKET_URL}
-              component={TestSocketPage}
-            />
-            <PrivateRoute
-              auth={auth}
-              exact
-              path={Constants.SUPPLIER_HOME}
-              component={SupplierRouter}
-            />
-            <PrivateRoute
-              auth={auth}
-              exact
-              path={Constants.ADMIN_HOME}
-              component={AdminDashboard}
-            />
-            <RefreshPrivateRoute
-              exact
-              path={Constants.USER_HOME}
-              component={Dashboard}
-            />
+            <StyledBox>
+              <PrivateRoute
+                auth={auth}
+                exact
+                path={Constants.TEST_SOCKET_URL}
+                component={TestSocketPage}
+              />
+              <PrivateRoute
+                auth={auth}
+                exact
+                path={Constants.SUPPLIER_HOME}
+                component={SupplierRouter}
+              />
+              <PrivateRoute
+                auth={auth}
+                exact
+                path={Constants.ADMIN_HOME}
+                component={AdminDashboard}
+              />
+              <RefreshPrivateRoute
+                exact
+                path={Constants.USER_HOME}
+                component={Dashboard}
+              />
+            </StyledBox>
             <Route component={NotFoundPage} />
           </Switch>
           <GlobalStyle />

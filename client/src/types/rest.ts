@@ -52,3 +52,18 @@ export enum RequestStatus {
   ACCEPTED = 'ACCEPTED',
   AWAITING = 'AWAITING',
 }
+
+export interface ItemRequest {
+  _id: string;
+  requester: User; // we make this optional because it makes testing easier.
+  status: RequestStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  active: boolean;
+  email: string;
+  amount: number;
+  description: string;
+  title: string;
+  approvedBy?: string;
+  imageUrl?: string;
+}
