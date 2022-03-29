@@ -53,10 +53,16 @@ export enum RequestStatus {
   AWAITING = 'AWAITING',
 }
 
+export enum ItemRequestStatus {
+  REJECTED = 'REJECTED',
+  ACCEPTED = 'ACCEPTED',
+  AWAITING = 'AWAITING',
+  SOLD = 'SOLD',
+}
 export interface ItemRequest {
   _id: string;
   requester: User; // we make this optional because it makes testing easier.
-  status: RequestStatus;
+  status: ItemRequestStatus;
   createdAt: Date;
   updatedAt: Date;
   active: boolean;

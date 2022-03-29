@@ -1,154 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Navbar  /> should match snapshot for Navbar 1`] = `
-.c1 {
-  width: 30%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  font-size: 1.2rem;
-  font-weight: 400;
-  font-size: 32px;
-  -webkit-letter-spacing: -1.28px;
-  -moz-letter-spacing: -1.28px;
-  -ms-letter-spacing: -1.28px;
-  letter-spacing: -1.28px;
-}
-
-.c3 {
-  width: 70%;
-  height: 10%;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  margin-left: 45%;
-  margin-bottom: 1px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: -1rem;
-}
-
-.c5 {
-  font-family: Inter;
-  cursor: pointer;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 18px;
-  -webkit-letter-spacing: -0.36px;
-  -moz-letter-spacing: -0.36px;
-  -ms-letter-spacing: -0.36px;
-  letter-spacing: -0.36px;
-  font-weight: 500;
-  margin-left: 40px;
-}
-
-.c5:hover {
-  opacity: 0.8;
-}
-
-.c5:active {
-  opacity: 0.4;
-}
-
-.c0 {
-  height: 4rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  background-color: 'rgba(250, 250, 250, 1)' position:fixed;
-  top: 0;
-  margin-left: 1%;
-  width: 100%;
-  z-index: 2;
-}
-
-.c0 .sc-jSFjdj {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
 <div>
-  <header
-    class="c0"
-  >
+  <div>
     <div
-      class="c1"
+      class="MuiBox-root css-s0fkkd"
     >
-      <h1
-        class="c2"
+      <header
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorTransparent MuiAppBar-positionStatic css-s31e50-MuiPaper-root-MuiAppBar-root"
       >
-        Grocer + Me
-      </h1>
+        <div
+          class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1t29gy6-MuiToolbar-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-yurbhn-MuiSvgIcon-root"
+            data-testid="LocalGroceryStoreIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+            />
+          </svg>
+          <div
+            class="MuiTypography-root MuiTypography-h4 css-1yb0leh-MuiTypography-root"
+          >
+            Grocer Me
+          </div>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1q7t4er-MuiTypography-root"
+          >
+            About Us
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          >
+            Contact Us
+          </p>
+        </div>
+      </header>
     </div>
-    <div
-      class="c3"
-    >
-      <nav
-        class="c4"
-      >
-        <a
-          class="c5"
-        >
-          About us
-        </a>
-        <a
-          class="c5"
-        >
-          Buy
-        </a>
-        <a
-          class="c5"
-        >
-          Sell
-        </a>
-        <a
-          class="c5"
-        >
-          Careers
-        </a>
-        <a
-          class="c5"
-        >
-          Request early access
-        </a>
-      </nav>
-    </div>
-  </header>
+  </div>
 </div>
 `;

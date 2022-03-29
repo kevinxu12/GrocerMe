@@ -5,8 +5,15 @@
  */
 
 import React from 'react';
-import { Typography, Card, Box, CardContent, CardMedia } from '@mui/material';
-import { ItemRequest } from 'types/rest';
+import {
+  Typography,
+  Card,
+  Box,
+  CardContent,
+  CardMedia,
+  Chip,
+} from '@mui/material';
+import { ItemRequest, ItemRequestStatus } from 'types/rest';
 export interface ProductCardPropTypes {
   data: ItemRequest;
 }
@@ -40,6 +47,9 @@ export const ProductCard = ({
             {data.title}
           </Typography>
           <Typography variant="body2">{data.status}</Typography>
+          {data.status === ItemRequestStatus.SOLD && (
+            <Chip label="Sold Out" variant="outlined" />
+          )}
         </CardContent>
       </Box>
     </Card>

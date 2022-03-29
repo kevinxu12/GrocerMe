@@ -3,63 +3,59 @@
  * @author Kevin Xu
  */
 import * as React from 'react';
-import styled from 'styled-components/macro';
+// import styled from 'styled-components/macro';
 import { StyledConstants } from 'styles/StyleConstants';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import Link from '@mui/material/Link';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Slide from '@mui/material/Slide';
+import { Constants } from 'utils/constants';
 
 /**
  * @returns {React.ReactElement} Component for public navbar
  */
 export function PublicNav(): React.ReactElement {
+  const trigger = useScrollTrigger();
   return (
-    <NavLinks>
-      <Wrapper>
-        <Item>About us</Item>
-        <Item>Buy</Item>
-        <Item>Sell</Item>
-        <Item>Careers</Item>
-        <Item>Request early access</Item>
-      </Wrapper>
-    </NavLinks>
+    <div>
+      <Box
+        sx={{
+          flexGrow: 1,
+          fontFamily: StyledConstants.INTER,
+        }}
+      >
+        <Slide appear={false} direction="down" in={!trigger}>
+          <AppBar position="static" color="transparent">
+            <Toolbar>
+              <LocalGroceryStoreIcon sx={{ mr: 2 }} />
+              <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                Grocer Me
+              </Typography>
+              <Link
+                underline="none"
+                href={Constants.ABOUT}
+                color="inherit"
+                variant="subtitle1"
+                sx={{ marginRight: '2%' }}
+              >
+                About Us
+              </Link>
+              <Link
+                underline="none"
+                href={Constants.CONTACT_US}
+                color="inherit"
+                variant="subtitle1"
+              >
+                Contact Us
+              </Link>
+            </Toolbar>
+          </AppBar>
+        </Slide>
+      </Box>
+    </div>
   );
 }
-
-const NavLinks = styled.div`
-  width: 70%;
-  height: 10%;
-  align-self: center;
-  margin-left: 45%;
-  margin-bottom: 1px;
-  display: flex;
-  align-items: flex-start;
-`;
-
-const Wrapper = styled.nav`
-  display: flex;
-  margin-right: -1rem;
-`;
-
-const Item = styled.a`
-  color: ${p => p.theme.grey};
-  font-family: ${StyledConstants.INTER};
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  font-size: ${StyledConstants.FONT_SIZE_M};
-  letter-spacing: -0.36px;
-  font-weight: 500;
-  margin-left: 40px;
-  &:hover {
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-  }
-`;
-
-export const InterMediumMineShaft18px = `
-  color: ${p => p.theme.grey};
-  font-family: ${StyledConstants.INTER};
-  font-size: ${StyledConstants.FONT_SIZE_M}
-  font-weight: 500;
-  font-style: normal;
-`;

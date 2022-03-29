@@ -6,7 +6,12 @@
 import { Role, RoleCode } from 'types/rest';
 import { Constants } from './constants';
 
-const NO_ROLE_PATHS = [Constants.HOME_URL, Constants.TEST_SOCKET_URL];
+export const NO_ROLE_PATHS = [
+  Constants.HOME_URL,
+  Constants.TEST_SOCKET_URL,
+  Constants.ABOUT,
+  Constants.CONTACT_US,
+];
 const ALL_ROLE_PATHS = [Constants.SUPPLIER_HOME, Constants.USER_HOME];
 const ADMIN_PATHS = [Constants.ADMIN_HOME];
 const CONSUMER_PATHS = [];
