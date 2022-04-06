@@ -24,4 +24,9 @@ describe('check auth helpers', () => {
     const path = Constants.HOME_URL;
     expect(isPathAuthenticated(path, roles)).toEqual(true);
   });
+  it('should check isAuthenticated correctly returns true for no role', () => {
+    const roles = [RoleCode.CONSUMER];
+    const path = '/match/12312424'
+    expect(isPathAuthenticated(path, roles)).toEqual(true);
+  });
 });

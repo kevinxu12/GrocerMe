@@ -86,8 +86,8 @@ export const SupplierRequestDashboard = ({
             All Supplier Requests
           </Typography>
           <Stack spacing={1}>
-            {awaitingSupplierRequests.map(({ email }) => (
-              <Card sx={{ width: '50%' }}>
+            {awaitingSupplierRequests.map(({ email }, index) => (
+              <Card key={index} sx={{ width: '50%' }}>
                 <CardContent>
                   <Typography variant="h6" component="div">
                     Request From
@@ -123,8 +123,8 @@ export const SupplierRequestDashboard = ({
             Past Supplier Requests
           </Typography>
           <Stack spacing={1}>
-            {pastSupplierRequests.map(({ email, status }) => (
-              <Card sx={{ width: '50%' }}>
+            {pastSupplierRequests.map(({ email, status }, index: number) => (
+              <Card key={index} sx={{ width: '50%' }}>
                 <CardContent>
                   <Typography variant="h6" component="div">
                     Request From

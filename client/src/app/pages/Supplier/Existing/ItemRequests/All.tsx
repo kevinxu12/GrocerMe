@@ -75,6 +75,8 @@ export const All = (): React.ReactElement => {
                         '- The product will not be available for sale to all customers'}
                       {data.status === ItemRequestStatus.AWAITING &&
                         '- The product is awaiting approval from an admin.'}
+                      {data.status === ItemRequestStatus.SOLD &&
+                        '- The product is fully sold. We have taken it off the market.'}
                     </Typography>
                   </CardContent>
                 </Box>

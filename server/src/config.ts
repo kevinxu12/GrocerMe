@@ -8,7 +8,7 @@ require('dotenv').config();
 
 export const environment =
   process.env.NODE_ENV || process.env.IS_STAGING || process.env.IS_PROD || 'development';
-export const port = process.env.PORT || 'frontend';
+export const port = process.env.PORT || '8080';
 export const front_end_dev_cors_url = process.env.FRONT_END_DEV_CORS_URL;
 // for now, we have one bucket for testing and staging and production
 let image_bucket_name: string = process.env.IMAGES_BUCKET_NAME || 'default';

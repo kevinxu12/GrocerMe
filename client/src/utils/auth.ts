@@ -7,14 +7,17 @@ import { Role, RoleCode } from 'types/rest';
 import { Constants } from './constants';
 
 export const NO_ROLE_PATHS = [
-  Constants.HOME_URL,
   Constants.TEST_SOCKET_URL,
   Constants.ABOUT,
   Constants.CONTACT_US,
 ];
 const ALL_ROLE_PATHS = [Constants.SUPPLIER_HOME, Constants.USER_HOME];
 const ADMIN_PATHS = [Constants.ADMIN_HOME];
-const CONSUMER_PATHS = [Constants.ITEM_PURCHASE];
+const CONSUMER_PATHS = [
+  Constants.ITEM_PURCHASE,
+  Constants.MATCH,
+  Constants.ALL_MATCHES,
+];
 const SUPPLIER_PATHS = [];
 const role_path_object = {
   ADMIN: ADMIN_PATHS,
@@ -34,6 +37,9 @@ export const isPathAuthenticated = (
   roles: RoleCode[],
 ): boolean => {
   // Admin, Supplier
+  if (path === Constants.HOME_URL) {
+    return true;
+  }
   let all_paths = roles.map((role: string) => role_path_object[role]);
   if (roles.length > 0) {
     all_paths = all_paths.concat(ALL_ROLE_PATHS);
@@ -44,7 +50,7 @@ export const isPathAuthenticated = (
   const unique_all_permissioned_paths = all_permissioned_paths.filter(
     (available_path: string) => path.indexOf(available_path) === 0,
   );
-  return unique_all_permissioned_paths.includes(path);
+  return unique_all_permissioned_paths.length > 0;
 };
 
 /**

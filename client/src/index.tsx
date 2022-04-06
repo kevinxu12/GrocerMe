@@ -25,7 +25,7 @@ import { configureAppStore } from 'store/configureStore';
 
 // Initialize languages
 import './locales/i18n';
-import { SocketProvider } from 'context/SocketContext';
+// import { SocketProvider } from 'context/SocketContext';
 
 const store = configureAppStore();
 const persistor = persistStore(store);

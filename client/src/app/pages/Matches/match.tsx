@@ -48,6 +48,7 @@ const Match = ({ username }): React.ReactElement => {
      * @param {MatchParams} id the id object to fetch item request for
      */
     const fetchMatchById = async (id: MatchParams): Promise<void> => {
+      console.log(id);
       if (Object.keys(id).length === 0) {
         console.log(`No Params found for Item Request ${id}`);
         return;

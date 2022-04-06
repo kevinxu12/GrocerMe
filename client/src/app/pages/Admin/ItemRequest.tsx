@@ -77,9 +77,9 @@ export const ItemRequestDashboard = ({ setMessage }): React.ReactElement => {
         See the status of all product requests here
       </Typography>
       <Stack spacing={1}>
-        {itemRequests.map((data: ItemRequest) => {
+        {itemRequests.map((data: ItemRequest, index: number) => {
           return (
-            <Card sx={{ width: '50%' }}>
+            <Card key={index} sx={{ width: '50%' }}>
               <CardContent>
                 <Typography variant="h5" sx={{ mb: 1.5 }} component="div">
                   {data.title}

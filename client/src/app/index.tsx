@@ -14,7 +14,7 @@ import { GlobalStyle } from './../styles/global-styles';
 import { themes } from './../styles/themes/themes';
 import { HomePage } from './pages/Landing/loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
-import TestSocketPage from './pages/TestSocketPage';
+// import TestSocketPage from './pages/TestSocketPage';
 import { NavBar } from './components/Navbar';
 import { Constants } from 'utils/constants';
 import { Dashboard } from './pages/Consumer/loadable';
@@ -65,12 +65,12 @@ export function App() {
               ]}
             >
               <StyledBox>
-                <PrivateRoute
+                {/* <PrivateRoute
                   auth={auth}
                   exact
                   path={Constants.TEST_SOCKET_URL}
                   component={TestSocketPage}
-                />
+                /> */}
                 <PrivateRoute
                   auth={auth}
                   exact
@@ -110,7 +110,7 @@ export function App() {
             </Route>
             <PublicRoute
               auth={auth}
-              exact
+              exact={true}
               path={Constants.HOME_URL}
               component={HomePage}
             />
