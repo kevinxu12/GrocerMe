@@ -6,7 +6,7 @@
 import React, { useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import GoogleMaps from 'app/components/AutoComplete';
+import GoogleMaps, { PlaceType } from 'app/components/AutoComplete';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Api from 'utils/api';
@@ -21,16 +21,21 @@ const DEFAULT_ITEM_STATE = {
   title: '',
   amount: 0,
   description: '',
-  location: '',
+  location: { description: '', place_id: '' },
   date: null,
   image: null,
   imageName: '',
 };
+
+interface LocationObject {
+  description: string;
+  place_id: string;
+}
 interface ItemState {
   title: string;
   amount: number;
   description: string;
-  location: string;
+  location: LocationObject;
   date: Date | null;
   image: string | ArrayBuffer | null;
   imageName: string;
@@ -59,9 +64,14 @@ export default function New({
    */
   const handleSubmit = async (ev: React.FormEvent<HTMLElement>) => {
     ev.preventDefault();
+    if (pictures.length === 0) {
+      setMessage('Please upload a picture');
+      return;
+    }
     const file = pictures[0];
     ref.current.image = await convertToBase64(file);
     ref.current.imageName = file.name;
+    console.log(ref.current);
     Api.post(
       '/newItemRequest',
       ref.current as ItemState,
@@ -158,9 +168,12 @@ export default function New({
               </LocalizationProvider>
 
               <GoogleMaps
-                setDescription={data => {
+                setInfo={(data: PlaceType) => {
                   if (data) {
-                    ref.current.location = data.description;
+                    ref.current.location = {
+                      description: data.description,
+                      place_id: data.place_id,
+                    };
                   }
                 }}
               />

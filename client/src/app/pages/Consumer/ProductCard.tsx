@@ -12,8 +12,12 @@ import {
   CardContent,
   CardMedia,
   Chip,
+  CardActions,
+  Link,
 } from '@mui/material';
 import { ItemRequest, ItemRequestStatus } from 'types/rest';
+import { Constants } from 'utils/constants';
+import { calculateAmountRemaining } from 'utils/logic';
 export interface ProductCardPropTypes {
   data: ItemRequest;
 }
@@ -27,6 +31,8 @@ export interface ProductCardPropTypes {
 export const ProductCard = ({
   data,
 }: ProductCardPropTypes): React.ReactElement => {
+  const customMatchLink: string = Constants.ITEM_PURCHASE + '/' + data._id;
+  const amountLeft = calculateAmountRemaining(data);
   return (
     <Card sx={{ display: 'flex', width: '50%' }}>
       {data.imageUrl && (
@@ -36,9 +42,11 @@ export const ProductCard = ({
             resizeMode: 'contain',
             height: '80%',
             width: '100px',
+            m: 2,
           }}
           image={data.imageUrl}
           alt={data.title}
+          loading="lazy"
         />
       )}
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -46,11 +54,15 @@ export const ProductCard = ({
           <Typography variant="h5" sx={{ mb: 1.5 }} component="div">
             {data.title}
           </Typography>
-          <Typography variant="body2">{data.status}</Typography>
+          <Typography variant="body2">Sold by {data.requester.name}</Typography>
+          <Typography variant="body2">Buy up to {amountLeft} units</Typography>
           {data.status === ItemRequestStatus.SOLD && (
             <Chip label="Sold Out" variant="outlined" />
           )}
         </CardContent>
+        <CardActions>
+          <Link href={customMatchLink}>Match</Link>
+        </CardActions>
       </Box>
     </Card>
   );

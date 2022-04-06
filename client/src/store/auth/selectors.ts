@@ -11,7 +11,7 @@
  * @author Kevin Xu
  */
 import { createSelector } from 'reselect';
-import { Role } from 'types/rest';
+import { RoleCode } from 'types/rest';
 import { AuthState, RootState } from './../../types/RootState';
 import { initialState } from './reducer';
 
@@ -38,6 +38,9 @@ const makeSelectUsername = () =>
  * @returns {Function} createSelector for roles attribute
  */
 const makeSelectRoles = () =>
-  createSelector(selectAuth, (authState: AuthState): Role[] => authState.roles);
+  createSelector(
+    selectAuth,
+    (authState: AuthState): RoleCode[] => authState.roles,
+  );
 
 export { selectAuth, makeSelectUsername, makeSelectRoles };

@@ -9,7 +9,6 @@ import { Constants } from 'utils/constants';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { Wrapper } from '../PrivateWrapper';
 import ComponentWithSnackbar from '../SnackbarComponent';
-import { AuthState } from 'types/RootState';
 
 /**
  * @param {...any} root0 props to pass to component if authenticated
@@ -25,9 +24,7 @@ const PrivateRoute = ({
 }): React.ReactElement => {
   const location = useLocation();
   const path = location.pathname;
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return isPathAuthenticated(path, auth.roles);
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
   useDeepCompareEffect(() => {
     setIsAuthenticated(isPathAuthenticated(path, auth.roles));
     // eslint-disable-next-line react-hooks/exhaustive-deps

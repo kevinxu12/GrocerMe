@@ -7,7 +7,10 @@ import { ForbiddenError } from '@src/core/ApiError';
 import SupplierRequest from '@src/models/SupplierRequest';
 import User from '@src/models/User';
 import AdminRepo from '@src/repository/AdminRepo';
-import { generateAcceptanceEmailOptions } from '@src/helpers/mail';
+import {
+  generateSupplierRequestAcceptanceEmailOptions,
+  generateSupplierRequestRejectionEmailOptions,
+} from '@src/helpers/mail';
 // import { emitPayloadFromReqToUser } from '@src/helpers/socket';
 import { sendInternalEmail } from '@src/mail';
 import { RoleCode } from '@src/models/Role';
@@ -64,6 +67,22 @@ export async function acceptSupplierRequestLogic(
   // // emitting the socket
   // emitPayloadFromReqToUser(req, requester_email, { roles: newUser.roles });
   // sending the acceptance email
-  await sendInternalEmail(generateAcceptanceEmailOptions(requester_email));
+  await sendInternalEmail(generateSupplierRequestAcceptanceEmailOptions(requester_email));
+  return supplierRequest;
+}
+
+/**
+ * Rejects a supplier request
+ *
+ * @param {string} requester_email  the email to apply logic to
+ * @returns {Promise} the modified supplier request
+ */
+export async function rejectSupplierRequestLogic(
+  requester_email: string,
+): Promise<SupplierRequest | null> {
+  const supplierRequest = await AdminRepo.updateByEmail(requester_email, {
+    status: RequestStatus.REJECTED,
+  });
+  await sendInternalEmail(generateSupplierRequestRejectionEmailOptions(requester_email));
   return supplierRequest;
 }

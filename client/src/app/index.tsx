@@ -14,7 +14,6 @@ import { GlobalStyle } from './../styles/global-styles';
 import { themes } from './../styles/themes/themes';
 import { HomePage } from './pages/Landing/loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
-import PublicRoute from './components/PublicRoute';
 import TestSocketPage from './pages/TestSocketPage';
 import { NavBar } from './components/Navbar';
 import { Constants } from 'utils/constants';
@@ -28,9 +27,13 @@ import { AdminDashboard } from './pages/Admin';
 import RefreshPrivateRoute from './components/RefreshPrivateRoute';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
+import { ItemPurchase } from './pages/Consumer/ItemPurchase';
+import PublicRoute from './components/PublicRoute';
+import { Home as MatchesHome } from './pages/Matches'; // TO DO - import from loadables
+import Match from './pages/Matches/match'; // TO DO - import from loadables.
 
 const StyledBox = styled(Box)({
-  backgroundColor: 'rgba(243, 239, 107, 0.3)',
+  backgroundColor: '#D3D3D3',
   height: '100vh',
   display: 'flex',
   overflow: 'auto',
@@ -51,37 +54,66 @@ export function App() {
         <NavBar />
         <ThemeProvider theme={theme}>
           <Switch>
+            <Route
+              path={[
+                Constants.USER_HOME,
+                Constants.ADMIN_HOME,
+                Constants.SUPPLIER_HOME,
+                Constants.ITEM_PURCHASE_WITH_PARAMS,
+                Constants.ALL_MATCHES,
+                Constants.MATCH_WITH_PARAMS,
+              ]}
+            >
+              <StyledBox>
+                <PrivateRoute
+                  auth={auth}
+                  exact
+                  path={Constants.TEST_SOCKET_URL}
+                  component={TestSocketPage}
+                />
+                <PrivateRoute
+                  auth={auth}
+                  exact
+                  path={Constants.SUPPLIER_HOME}
+                  component={SupplierRouter}
+                />
+                <PrivateRoute
+                  auth={auth}
+                  exact
+                  path={Constants.ADMIN_HOME}
+                  component={AdminDashboard}
+                />
+                <PrivateRoute
+                  auth={auth}
+                  exact
+                  path={Constants.ITEM_PURCHASE_WITH_PARAMS}
+                  component={ItemPurchase}
+                />
+                <PrivateRoute
+                  auth={auth}
+                  exact
+                  path={Constants.ALL_MATCHES}
+                  component={MatchesHome}
+                />
+                <PrivateRoute
+                  auth={auth}
+                  exact
+                  path={Constants.MATCH_WITH_PARAMS}
+                  component={Match}
+                />
+                <RefreshPrivateRoute
+                  exact
+                  path={Constants.USER_HOME}
+                  component={Dashboard}
+                />
+              </StyledBox>
+            </Route>
             <PublicRoute
               auth={auth}
               exact
               path={Constants.HOME_URL}
               component={HomePage}
             />
-            <StyledBox>
-              <PrivateRoute
-                auth={auth}
-                exact
-                path={Constants.TEST_SOCKET_URL}
-                component={TestSocketPage}
-              />
-              <PrivateRoute
-                auth={auth}
-                exact
-                path={Constants.SUPPLIER_HOME}
-                component={SupplierRouter}
-              />
-              <PrivateRoute
-                auth={auth}
-                exact
-                path={Constants.ADMIN_HOME}
-                component={AdminDashboard}
-              />
-              <RefreshPrivateRoute
-                exact
-                path={Constants.USER_HOME}
-                component={Dashboard}
-              />
-            </StyledBox>
             <Route component={NotFoundPage} />
           </Switch>
           <GlobalStyle />

@@ -2,7 +2,7 @@
  * @file Auth Actions
  * @author Kevin Xu
  */
-import { Role } from 'types/rest';
+import { RoleCode } from 'types/rest';
 import { ChangeAuthAction, LogoutAction } from './../../types/actions';
 import { CHANGE_AUTH, LOGOUT } from './constants';
 /**
@@ -10,12 +10,12 @@ import { CHANGE_AUTH, LOGOUT } from './constants';
  *
  * @param  {object} props props
  * @param {string} props.username The new email of the logged-in user
- * @param {Role[]} props.roles Te new roles of the logged-in user
+ * @param {RoleCode[]} props.roles Te new roles of the logged-in user
  * @returns {object} An action object with a type of CHANGE_AUTH
  */
 export const changeAuth = (props: {
   username: string;
-  roles?: Role[];
+  roles?: RoleCode[];
 }): ChangeAuthAction => ({
   type: CHANGE_AUTH,
   payload: {

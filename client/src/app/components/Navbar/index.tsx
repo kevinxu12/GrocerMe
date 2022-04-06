@@ -3,10 +3,7 @@
  * @author Kevin Xu
  */
 import * as React from 'react';
-import styled from 'styled-components/macro';
-import { StyledConstants } from 'styles/StyleConstants';
 import { PublicNav } from './PublicNav';
-import { PageWrapper } from '../PageWrapper';
 import { useSelector } from 'react-redux';
 import { RootState } from 'types';
 import PrivateNav from './PrivateNav';

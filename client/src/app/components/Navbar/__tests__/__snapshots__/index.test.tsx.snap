@@ -4,10 +4,10 @@ exports[`<Navbar  /> should match snapshot for Navbar 1`] = `
 <div>
   <div>
     <div
-      class="MuiBox-root css-s0fkkd"
+      class="MuiBox-root css-13esamp"
     >
       <header
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorTransparent MuiAppBar-positionStatic css-s31e50-MuiPaper-root-MuiAppBar-root"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorTransparent MuiAppBar-positionStatic css-v526sl-MuiPaper-root-MuiAppBar-root"
       >
         <div
           class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1t29gy6-MuiToolbar-root"
@@ -24,20 +24,22 @@ exports[`<Navbar  /> should match snapshot for Navbar 1`] = `
             />
           </svg>
           <div
-            class="MuiTypography-root MuiTypography-h4 css-1yb0leh-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 css-1f8a19r-MuiTypography-root"
           >
             Grocer Me
           </div>
-          <p
-            class="MuiTypography-root MuiTypography-body1 css-1q7t4er-MuiTypography-root"
+          <a
+            class="MuiTypography-root MuiTypography-subtitle1 MuiLink-root MuiLink-underlineNone css-7ix31g-MuiTypography-root-MuiLink-root"
+            href="/about"
           >
             About Us
-          </p>
-          <p
-            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          </a>
+          <a
+            class="MuiTypography-root MuiTypography-subtitle1 MuiLink-root MuiLink-underlineNone css-1gb0og0-MuiTypography-root-MuiLink-root"
+            href="/contact_us"
           >
             Contact Us
-          </p>
+          </a>
         </div>
       </header>
     </div>

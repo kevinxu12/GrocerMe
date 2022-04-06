@@ -41,22 +41,25 @@ interface StructuredFormatting {
   secondary_text: string;
   main_text_matched_substrings: readonly MainTextMatchedSubstrings[];
 }
-interface PlaceType {
+export interface PlaceType {
   description: string;
+  place_id: string;
   structured_formatting: StructuredFormatting;
 }
 interface GoogleMapsPropsType {
-  setDescription: (string) => void;
+  setInfo: (PlaceType) => void;
 }
 
 export default function GoogleMaps({
-  setDescription, ...props
+  setInfo, ...props
 }: GoogleMapsPropsType): React.ReactElement {
   const [value, setValue] = React.useState<PlaceType | null>(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState<readonly PlaceType[]>([]);
   const loaded = React.useRef(false);
 
+  // TO DO - fetch latitude longitude and migrate to javascript Maps library
+  // TO DO - probably want maps api in a context provider
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
@@ -138,9 +141,10 @@ export default function GoogleMaps({
       filterSelectedOptions
       value={value}
       onChange={(event: any, newValue: PlaceType | null) => {
+        console.log(newValue);
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
-        setDescription(newValue);
+        setInfo(newValue);
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);

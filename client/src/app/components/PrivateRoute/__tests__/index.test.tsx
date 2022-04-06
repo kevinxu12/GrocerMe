@@ -19,7 +19,7 @@ describe('<PrivateRoute  />', () => {
       const auth = initialState;
       const jsx = mockStoreWrapper.genComponentWithRouterProvider(<PrivateRoute auth = {auth} component = {TestComponent} />, {auth});
       const res = mount(jsx);
-      expect(isPathAuthenticated).toBeCalledTimes(2);// once on render, once on useEffect
+      expect(isPathAuthenticated).toBeCalledTimes(1);// once on useEffect
       expect(res.find(Redirect).exists()).toBeTruthy();
     });
 
@@ -31,7 +31,7 @@ describe('<PrivateRoute  />', () => {
       expect(res.find(Redirect).exists()).toBeFalsy();
       expect(res.find(TestComponent).exists()).toBeTruthy();
       expect(res.find(SnackbarComponent).exists()).toBeFalsy();
-      expect(isPathAuthenticated).toBeCalledTimes(2); // once on render, once on useEffect
+      expect(isPathAuthenticated).toBeCalledTimes(1); // once on useEffect
     });
     it('Logged in user should show a snackbar component', () => {
       (isPathAuthenticated as jest.Mock).mockImplementation(() => true);
@@ -41,6 +41,6 @@ describe('<PrivateRoute  />', () => {
       expect(res.find(Redirect).exists()).toBeFalsy();
       expect(res.find(TestComponent).exists()).toBeTruthy();
       expect(res.find(SnackbarComponent).exists()).toBeTruthy();
-      expect(isPathAuthenticated).toBeCalledTimes(2); // once on render, once on useEffect
+      expect(isPathAuthenticated).toBeCalledTimes(1); // once on useEffect
     });
   });

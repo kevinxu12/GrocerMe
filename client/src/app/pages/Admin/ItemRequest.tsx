@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { ItemRequest } from 'types/rest';
+import { ItemRequest, ItemRequestStatus } from 'types/rest';
 import Api from 'utils/api';
 import { parseAxiosSuccessResponse } from 'utils/request';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -32,9 +32,10 @@ export const ItemRequestDashboard = ({ setMessage }): React.ReactElement => {
      * Fetches all the item requests
      */
     const fetchItemRequests = async () => {
-      const response = await Api.get('/allItemRequests');
+      const response = await Api.get('/allItemRequests', {
+        status: ItemRequestStatus.AWAITING,
+      });
       const itemRequests = parseAxiosSuccessResponse<ItemRequest[]>(response);
-      console.log(itemRequests);
       if (itemRequests) {
         setItemRequests(itemRequests);
       }
@@ -56,16 +57,18 @@ export const ItemRequestDashboard = ({ setMessage }): React.ReactElement => {
     );
   };
   /**
-   * @param {string} _id the mongoose object id of the request to accept
+   * @param {ItemRequest} request the item request object
    */
-  const onRejectItemRequest = async (_id: string) => {
+  const onRejectItemRequest = async (request: ItemRequest) => {
     await Api.post(
       '/rejectItemRequest',
-      { _id },
+      { ...request },
       setMessage,
       'Successfully rejected item request',
     );
-    setItemRequests(itemRequests.filter((a: ItemRequest) => a._id !== _id));
+    setItemRequests(
+      itemRequests.filter((a: ItemRequest) => a._id !== request._id),
+    );
   };
 
   return (
@@ -97,7 +100,7 @@ export const ItemRequestDashboard = ({ setMessage }): React.ReactElement => {
                   aria-label="check-circle"
                   color="error"
                   onClick={() => {
-                    onRejectItemRequest(data._id);
+                    onRejectItemRequest(data);
                   }}
                 >
                   <CancelIcon />
