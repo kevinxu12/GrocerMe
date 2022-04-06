@@ -11,10 +11,10 @@
  describe('Items basic route', () => {
     const request = supertest(app);
     setUpDb();
-    it('Test all item requests', async () => {
+    it('Test all item requests. Should return 0, because we fetch only unaccepted requests', async () => {
         const endpoint = '/api/allItemRequests';
         const response = await request.get(endpoint);
         expect(response.status).toBe(200);
-        expect(response.body.data.length).toBe(1);
+        expect(response.body.data.length).toBe(0);
     });
 });

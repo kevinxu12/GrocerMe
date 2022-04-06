@@ -5,13 +5,13 @@
 import React, { ComponentType, Dispatch, memo, useState } from 'react';
 import changeAuth, { logout } from 'store/auth/actions';
 import { createStructuredSelector } from 'reselect';
-import { Role, User } from 'types/rest';
+import { Role, RoleCode, User } from 'types/rest';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { Redirect, Route, useHistory, useLocation } from 'react-router-dom';
 import { ChangeAuthAction, LogoutAction } from 'types/actions';
 import { Wrapper } from 'app/components/PrivateWrapper';
-import { useSocket } from 'context/SocketContext';
+// import { useSocket } from 'context/SocketContext';
 import { parseAxiosSuccessResponse } from 'utils/request';
 import Api from 'utils/api';
 import { isPathAuthenticated } from 'utils/auth';
@@ -20,10 +20,10 @@ import { makeSelectRoles, makeSelectUsername } from 'store/auth/selectors';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
 interface RefreshPropsType {
-  changeAuth: (email: string, roles?: Role[]) => void;
+  changeAuth: (email: string, roles?: RoleCode[]) => void;
   logout: () => void;
   component: React.ElementType;
-  roles: Role[];
+  roles: RoleCode[];
   username: string;
 }
 
@@ -34,7 +34,7 @@ interface RefreshPropsType {
  * @param {React.ReactElement} props.component the component the wrapper wraps
  * @param {Function} props.changeAuth check if logged in, if so store email into redux
  * @param {Function} props.logout logout the user from redux
- * @param {Role[]} props.roles roles we read from the selector
+ * @param {RoleCode[]} props.roles roles we read from the selector
  * @param {string} props.username username frmo the selector
  * @returns {React.ReactElement} Dashboard Component
  */
@@ -47,7 +47,7 @@ export const RefreshPrivateRoute = ({
   ...rest
 }: RefreshPropsType): React.ReactElement => {
   const history = useHistory();
-  const socket = useSocket();
+  // const socket = useSocket();
   const location = useLocation();
   const path = location.pathname;
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -63,9 +63,10 @@ export const RefreshPrivateRoute = ({
         history.push('/');
         return;
       }
-      changeAuth(user.email, user.roles);
-      socket.emit('login', user);
-      setIsAuthenticated(isPathAuthenticated(path, user.roles));
+      const new_roles = user.roles.map((role: Role) => role.code);
+      changeAuth(user.email, new_roles);
+      // socket.emit('login', user);
+      setIsAuthenticated(isPathAuthenticated(path, new_roles));
     }
     checkLogin();
   }, [roles]);
@@ -110,7 +111,7 @@ function mapDispatchToProps(
      * @param {string} email the email of the logged-in user
      * @param {Role[]} roles the optional-roles of the logged-in user
      */
-    changeAuth: (email: string, roles?: Role[]) => {
+    changeAuth: (email: string, roles?: RoleCode[]) => {
       dispatch(changeAuth({ username: email, roles }));
     },
     /**

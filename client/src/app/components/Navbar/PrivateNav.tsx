@@ -1,5 +1,6 @@
 /**
  * @file Component for Navbar shown for logged-in users
+ * TO DO - update suppliers and consumers with sub menus that show matches
  * @author Kevin Xu
  */
 import React, { ComponentType, memo } from 'react';
@@ -10,7 +11,7 @@ import { logoutWithThunk } from 'store/auth/thunk';
 import { GenericThunkDispatch } from 'types/actions';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectRoles } from 'store/auth/selectors';
-import { Role, RoleCode } from 'types/rest';
+import { RoleCode } from 'types/rest';
 import { isRoleCodeIncluded } from 'utils/auth';
 import { StyledConstants } from 'styles/StyleConstants';
 import { Link } from 'react-router-dom';
@@ -27,13 +28,13 @@ interface PrivateNavDispatchType {
   onLogout: () => void;
 }
 interface PrivateNavPropsType extends PrivateNavDispatchType {
-  roles: Role[];
+  roles: RoleCode[];
 }
 
 /**
  * @param {object} props props passed
  * @param {Function} props.onLogout logout function
- * @param {Role[]} props.roles the roles of the currently logged in user
+ * @param {RoleCode[]} props.roles the roles of the currently logged in user
  * @returns {React.ElementType} Private Navbar Component
  */
 const PrivateNav = ({
@@ -77,6 +78,12 @@ const PrivateNav = ({
             <AiIcons.AiFillDashboard />
           </ListItemIcon>
           <ListItemText primary={'Supplier'} />
+        </ListItem>
+        <ListItem button component={Link} to={Constants.ALL_MATCHES}>
+          <ListItemIcon>
+            <AiIcons.AiFillCustomerService />
+          </ListItemIcon>
+          <ListItemText primary={'Match'} />
         </ListItem>
         <ListItem
           button

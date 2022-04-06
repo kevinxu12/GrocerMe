@@ -17,7 +17,7 @@ export const socket_url =
   environment === 'development'
     ? process.env.REACT_APP_PUBLIC_SERVER_DEV_URL || 'http://localhost:8080'
     : '/';
-export const maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+export const maps_api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'N/A';
 const server_url =
   environment === 'development'
     ? process.env.REACT_APP_PUBLIC_SERVER_DEV_URL || ''

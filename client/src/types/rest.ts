@@ -6,12 +6,12 @@
 export interface Role {
   _id?: string;
   status: boolean;
-  code: string;
+  code: RoleCode;
 }
 
 export interface User {
   _id: string;
-  first_time: boolean;
+  firstTime: boolean;
   roles: Role[];
   name: string;
   email: string;
@@ -47,23 +47,48 @@ export enum RoleCode {
   ADMIN = 'ADMIN',
 }
 
+export interface LocationObject {
+  description: string;
+  place_id: string;
+}
+
 export enum RequestStatus {
   REJECTED = 'REJECTED',
   ACCEPTED = 'ACCEPTED',
   AWAITING = 'AWAITING',
 }
 
+export enum ItemRequestStatus {
+  REJECTED = 'REJECTED',
+  ACCEPTED = 'ACCEPTED',
+  AWAITING = 'AWAITING',
+  SOLD = 'SOLD',
+}
 export interface ItemRequest {
   _id: string;
   requester: User; // we make this optional because it makes testing easier.
-  status: RequestStatus;
+  status: ItemRequestStatus;
   createdAt: Date;
   updatedAt: Date;
   active: boolean;
   email: string;
   amount: number;
   description: string;
+  location: LocationObject;
   title: string;
   approvedBy?: string;
+  amountSold: number;
   imageUrl?: string;
+}
+
+export interface ItemMatchRequest {
+  _id: string;
+  requester: User; // we make this optional because it makes testing easier.
+  status: RequestStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  requesterEmail: string;
+  supplierEmail: string;
+  item: ItemRequest;
+  amount: number;
 }

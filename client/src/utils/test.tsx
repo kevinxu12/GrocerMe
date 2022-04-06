@@ -15,15 +15,14 @@ import { AuthState } from 'types/RootState';
 /**
  * Generates a mock state for our auth reducer
  *
- * @param {RoleCode[]} codes the list of RoleCodes our mock logged in user has
+ * @param {RoleCode[]} roles the list of RoleCodes our mock logged in user has
  * @param {string} username the username of our mocked logged in user
  * @returns {AuthState} the mock auth state
  */
 export const generateAuthState = (
-  codes: RoleCode[],
+  roles: RoleCode[],
   username: string = Constants.TEST_USERNAME,
 ): AuthState => {
-  const roles = codes.map((code: RoleCode) => ({ status: true, code }));
   return {
     username: Constants.TEST_USERNAME,
     roles: roles,

@@ -27,7 +27,7 @@ const transporter = nodemailer.createTransport(
   }),
 );
 export type MailOptions = {
-  to: string;
+  to: string | string[];
   subject: string;
   text: string;
 };

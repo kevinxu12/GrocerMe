@@ -119,6 +119,7 @@ exports[`<Landing  /> Landing Page default 1`] = `
       >
         <img
           alt="IMG"
+          loading="lazy"
           src="https://i.ibb.co/Hp5G1G4/blob-shape-1.png"
         />
       </div>

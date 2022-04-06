@@ -6,7 +6,6 @@
 import { InternalError } from '@src/core/ApiError';
 import { ItemRequestFilters, ItemRequestParamsWithUser, SearchFilters } from '@src/helpers/types';
 import ItemRequest, { ItemRequestModel } from '@src/models/ItemRequest';
-import UserRepo from './UserRepo';
 import { Types } from 'mongoose';
 import { ItemRequestStatus } from '@src/helpers/model';
 const DEFAULT_PAGE_SIZE = 10;
@@ -79,6 +78,20 @@ export default class ItemRepo {
       .lean<ItemRequest[]>()
       .exec();
   }
+
+  /**
+   * Find item request by Id
+   *
+   * @param {Types.ObjectId} _id the mongo id of the item request
+   * @returns {Promise} the item requests that match the given email
+   */
+  public static async findItemRequestById(_id: Types.ObjectId): Promise<ItemRequest | null> {
+    return ItemRequestModel.findOne({ _id })
+      .populate({ path: 'requester' })
+      .lean<ItemRequest>()
+      .exec();
+  }
+
   /**
    * Create a new item
    *
@@ -91,13 +104,13 @@ export default class ItemRepo {
     imageUrl: string | null = '',
   ): Promise<ItemRequest | null> {
     const { user, title, amount, description, location } = itemRequest;
+    console.log(location);
     // this should all be some middleware
-    const maybeMatchedUser = await UserRepo.findByEmail(user.email);
-    if (maybeMatchedUser === null) {
+    if (user._id === null) {
       throw new InternalError('User doesnt exist in db, but exists in session');
     }
     return await ItemRequestModel.create({
-      requester: maybeMatchedUser._id,
+      requester: user._id,
       email: user.email,
       amount,
       location,

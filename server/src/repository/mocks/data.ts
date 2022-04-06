@@ -1,8 +1,10 @@
 /**
  * @file Mock data used in unit, db, and integration tests
+ * TO DO - sync data with match requests, following behind on work
  * @author Kevin Xu
  */
 import { ItemRequestStatus, RequestStatus } from '@src/helpers/model';
+import { LocationObject } from '@src/helpers/types';
 import ItemRequest from '@src/models/ItemRequest';
 import Role, { RoleCode } from '@src/models/Role';
 import SupplierRequest from '@src/models/SupplierRequest';
@@ -24,7 +26,13 @@ export const ITEM_REQUEST_2_ID = USER_2_ID;
 export const TEST_DESCRIPTION = 'test description';
 export const TEST_TITLE = 'test title';
 export const TEST_AMOUNT = 1;
-export const TEST_LOCATION = 'test location';
+export const TEST_LOCATION_DESCRIPTION = 'test location';
+export const TEST_PLACE_ID = 'test place id';
+
+export const TEST_LOCATION_OBJECT = {
+  description: TEST_LOCATION_DESCRIPTION,
+  place_id: TEST_PLACE_ID,
+};
 
 export const INJECTED_USER_EMAIL = 'test';
 export const INJECTED_USER_ID = new mongoose.Types.ObjectId();
@@ -103,13 +111,14 @@ export const mockItemRequest_1 = {
   email: USER_2_EMAIL,
   active: true,
   requester: mockUser_2,
-  status: ItemRequestStatus.AWAITING,
+  status: ItemRequestStatus.ACCEPTED,
   createdAt: date,
   updatedAt: date,
   amount: TEST_AMOUNT,
   description: TEST_DESCRIPTION,
+  amountSold: 0,
   title: TEST_TITLE,
-  location: TEST_LOCATION,
+  location: TEST_LOCATION_OBJECT as LocationObject,
 } as ItemRequest;
 
 export const mockItemRequest_2 = {
@@ -117,11 +126,12 @@ export const mockItemRequest_2 = {
   email: USER_2_EMAIL,
   active: true,
   requester: mockUser_2,
-  status: ItemRequestStatus.AWAITING,
+  status: ItemRequestStatus.ACCEPTED,
   createdAt: date,
   updatedAt: date,
   amount: TEST_AMOUNT,
+  amountSold: 0,
   description: TEST_DESCRIPTION,
-  location: TEST_LOCATION,
+  location: TEST_LOCATION_OBJECT,
   title: TEST_TITLE,
 } as ItemRequest;

@@ -33,15 +33,15 @@ const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
-    <SocketProvider>
-      <PersistGate loading={null} persistor={persistor}>
-        <HelmetProvider>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        </HelmetProvider>
-      </PersistGate>
-    </SocketProvider>
+    {/* <SocketProvider> */}
+    <PersistGate loading={null} persistor={persistor}>
+      <HelmetProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </HelmetProvider>
+    </PersistGate>
+    {/* </SocketProvider> */}
   </Provider>,
   MOUNT_NODE,
 );

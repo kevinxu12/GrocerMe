@@ -20,7 +20,7 @@ export function HomePage() {
       <OverlapGroup3>
         <OverlapGroup1>
           <BlobShape1>
-            <img src={Constants.BLOB_PNG_URL} alt="IMG" />
+            <img loading="lazy" src={Constants.BLOB_PNG_URL} alt="IMG" />
           </BlobShape1>
         </OverlapGroup1>
         <Heading>

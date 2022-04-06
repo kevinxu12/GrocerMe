@@ -44,6 +44,8 @@ const authReducer = (
       case LOGOUT:
         console.log('Calling logout, clearing state');
         return initialState;
+      default:
+        return state;
     }
   });
 };

@@ -6,10 +6,15 @@
 import { Role, RoleCode } from 'types/rest';
 import { Constants } from './constants';
 
-const NO_ROLE_PATHS = [Constants.HOME_URL, Constants.TEST_SOCKET_URL];
+export const NO_ROLE_PATHS = [
+  Constants.HOME_URL,
+  Constants.TEST_SOCKET_URL,
+  Constants.ABOUT,
+  Constants.CONTACT_US,
+];
 const ALL_ROLE_PATHS = [Constants.SUPPLIER_HOME, Constants.USER_HOME];
 const ADMIN_PATHS = [Constants.ADMIN_HOME];
-const CONSUMER_PATHS = [];
+const CONSUMER_PATHS = [Constants.ITEM_PURCHASE];
 const SUPPLIER_PATHS = [];
 const role_path_object = {
   ADMIN: ADMIN_PATHS,
@@ -24,19 +29,22 @@ const role_path_object = {
  * @param {Role[]} roles the roles a user is permissioned to
  * @returns {boolean} whether the path is authenticated depending on the roles
  */
-export const isPathAuthenticated = (path: string, roles: Role[]): boolean => {
-  const role_codes = roles
-    .filter((role: Role) => role.status)
-    .map((role: Role) => role.code);
+export const isPathAuthenticated = (
+  path: string,
+  roles: RoleCode[],
+): boolean => {
   // Admin, Supplier
-  let all_paths = role_codes.map(code => role_path_object[code]);
+  let all_paths = roles.map((role: string) => role_path_object[role]);
   if (roles.length > 0) {
     all_paths = all_paths.concat(ALL_ROLE_PATHS);
   }
-  const all_available_paths: string[] = NO_ROLE_PATHS.concat(
+  const all_permissioned_paths: string[] = NO_ROLE_PATHS.concat(
     [].concat(...all_paths),
   );
-  return all_available_paths.includes(path);
+  const unique_all_permissioned_paths = all_permissioned_paths.filter(
+    (available_path: string) => path.indexOf(available_path) === 0,
+  );
+  return unique_all_permissioned_paths.includes(path);
 };
 
 /**
@@ -48,11 +56,11 @@ export const isPathAuthenticated = (path: string, roles: Role[]): boolean => {
  */
 export const isRoleCodeIncluded = (
   roleCode: RoleCode,
-  roles: Role[] | null,
+  roles: RoleCode[] | null,
 ): boolean => {
   if (!roles) {
     return false;
   }
-  const matching_role = roles.filter((role: Role) => role.code === roleCode);
+  const matching_role = roles.filter((role: RoleCode) => role === roleCode);
   return matching_role.length > 0;
 };
